@@ -7,6 +7,4 @@ export 'http_config.dart';
 export 'http_exceptions.dart';
 export 'http_parse.dart';
 export 'http_response.dart';
-export 'http_transformer.dart';
-export 'log_interceptor.dart';
 export 'package:dio/dio.dart';

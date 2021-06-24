@@ -1,12 +1,22 @@
 
 
+import 'dart:io';
+
 import 'dio_new.dart';
+
+
+/// Response 解析
+abstract class HttpTransformer {
+  HttpResponse parse(Response response);
+}
 
 class HttpClient {
   late AppDio _dio;
 
   HttpClient({BaseOptions? options, HttpConfig? dioConfig})
       : _dio = AppDio(options: options, dioConfig: dioConfig);
+
+
 
   Future<HttpResponse> get(String uri,
       {Map<String, dynamic>? queryParameters,
@@ -143,3 +153,4 @@ class HttpClient {
     }
   }
 }
+

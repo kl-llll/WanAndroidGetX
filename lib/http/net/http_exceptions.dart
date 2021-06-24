@@ -9,9 +9,7 @@ class HttpException implements Exception {
 
   HttpException([this._msg, this._code]);
 
-  String toString() {
-    return "code:$code--msg=$msg";
-  }
+
 }
 
 /// 客户端请求错误
@@ -22,8 +20,6 @@ class BadRequestException extends HttpException {
 class BadServiceException extends HttpException {
   BadServiceException({String? message, int? code}) : super(message, code);
 }
-
-
 
 class UnknownException extends HttpException {
   UnknownException([String? message]) : super(message);
@@ -37,7 +33,6 @@ class NetworkException extends HttpException {
   NetworkException({String? message, int? code}) : super(message, code);
 }
 
-/// 401
 class UnauthorisedException extends HttpException {
   UnauthorisedException({String? message, int? code = 401}) : super(message);
 }

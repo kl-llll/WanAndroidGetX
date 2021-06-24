@@ -1,15 +1,17 @@
+import 'package:wan_android_getx/utils/log_utils.dart';
+
 import 'dio_new.dart';
 
 class DefaultHttpTransformer extends HttpTransformer {
   @override
   HttpResponse parse(Response response) {
-    if (response.data["code"] == 200) {
+
+    if (response.data["errorCode"] == 0) {
       return HttpResponse.success(response.data["data"]);
     } else {
       return HttpResponse.failure(
-          errorMsg: response.data["msg"], errorCode: response.data["code"]);
+          errorMsg: response.data["errorMsg"], errorCode: response.data["errorCode"]);
     }
-    // return HttpResponse.success(response.data["data"]);
   }
 
   /// 单例对象

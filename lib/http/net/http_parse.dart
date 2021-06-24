@@ -1,8 +1,9 @@
 // 成功回调
 import 'dart:io';
 
-import 'dio_new.dart';
+import 'package:wan_android_getx/utils/log_utils.dart';
 
+import 'dio_new.dart';
 
 HttpResponse handleResponse(Response? response,
     {HttpTransformer? httpTransformer}) {

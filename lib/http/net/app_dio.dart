@@ -1,9 +1,12 @@
 
+import 'dart:io';
+
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'dio_new.dart';
 
@@ -18,6 +21,10 @@ class AppDio with DioMixin implements Dio {
       receiveTimeout: dioConfig?.receiveTimeout,
     );
     this.options = options;
+
+
+
+
 
     // DioCacheManager
     final cacheOptions = CacheOptions(
@@ -36,12 +43,19 @@ class AppDio with DioMixin implements Dio {
     }
 
     if (kDebugMode) {
-      interceptors.add(DioLogInterceptor());
+      interceptors.add((PrettyDioLogger(
+          requestBody: true,
+          responseBody: true,
+          responseHeader: true,
+          error: true,
+          compact: true,
+          maxWidth: 90)));
     }
     if (dioConfig?.interceptors?.isNotEmpty ?? false) {
       interceptors.addAll(interceptors);
     }
     httpClientAdapter = DefaultHttpClientAdapter();
+
     if (dioConfig?.proxy?.isNotEmpty ?? false) {
       setProxy(dioConfig!.proxy!);
     }
@@ -54,6 +68,10 @@ class AppDio with DioMixin implements Dio {
       client.findProxy = (uri) {
         // proxy all request to localhost:8888
         return "PROXY $proxy";
+      };
+
+      client.badCertificateCallback=(cert, host, port){
+        return true;
       };
       // you can also create a HttpClient to dio
       // return HttpClient();

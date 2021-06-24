@@ -30,18 +30,24 @@ dependencies:
   get: 4.1.4
   # 网络请求 https://pub.flutter-io.cn/packages/dio
   dio: ^4.0.0
-  # Dart 中 http 请求的 cookie 管理器 https://pub.flutter-io.cn/packages/cookie_jar
+#  # 检测网络连接 https://pub.flutter-io.cn/packages/connectivity_plus
+#  connectivity_plus: ^1.0.4
+  # Dart 中http请求的cookie管理器 https://pub.flutter-io.cn/packages/cookie_jar
   cookie_jar: ^3.0.1
   # Dio HTTP 缓存拦截器 https://pub.flutter-io.cn/packages/dio_cache_interceptor
   dio_cache_interceptor: ^2.3.1
   # Dio的 cookie 管理器 https://pub.flutter-io.cn/packages/dio_cookie_manager
   dio_cookie_manager: ^2.0.0
+  # 用于在文件系统上查找常用位置 https://pub.flutter-io.cn/packages/path_provider
+  path_provider: ^2.0.2
   # 好看的log https://pub.flutter-io.cn/packages/logger
   logger: ^1.0.0
   # 数据存储 https://pub.flutter-io.cn/packages/shared_preferences
   shared_preferences: ^2.0.6
   # 封装好的网络日志 https://pub.flutter-io.cn/packages/pretty_dio_logger
   pretty_dio_logger: ^1.1.1
+  # 屏幕适配方案 https://pub.flutter-io.cn/packages/flutter_screenutil
+  flutter_screenutil: ^5.0.0+2
 
   flutter_smart_dialog: any
 
