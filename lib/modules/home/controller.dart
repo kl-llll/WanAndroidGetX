@@ -6,7 +6,7 @@ class HomeController extends GetxController {
   var _api = Get.find<HomeApi>();
 
   void logout() async {
-
     _api.logout().then((value) => Get.offNamed(Routes.SPLASH));
   }
+
 }

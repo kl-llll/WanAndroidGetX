@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'controller.dart';
 
 class LoginPage extends StatelessWidget {
+
   final LoginController controller = Get.put(LoginController());
 
   @override

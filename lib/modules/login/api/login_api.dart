@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wan_android_getx/http/net/dio_new.dart';
 import 'package:wan_android_getx/utils/log_utils.dart';
@@ -14,8 +15,8 @@ class LoginApi {
       Log.d(appResponse.data);
       return appResponse.data;
     } else {
-      Log.e(appResponse.error);
-      // Get.snackbar("提示", appResponse.error);
+      Log.e(appResponse.error!.msg);
+      Get.snackbar("提示", appResponse.error!.msg,colorText: Colors.red);
     }
   }
 }
