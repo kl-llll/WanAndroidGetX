@@ -20,6 +20,10 @@ class HomePage extends StatelessWidget {
           onPressed: () => controller.logout(),
           child: Text("退出登录"),
         ),
+        TextButton(
+          onPressed: () => controller.getUserInfo(),
+          child: Text("获取积分"),
+        ),
       ],
     ));
   }

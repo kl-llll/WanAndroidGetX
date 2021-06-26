@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wan_android_getx/http/net/dio_new.dart';
-import 'package:wan_android_getx/utils/log_utils.dart';
+import 'package:wan_android_getx/utils/log_util.dart';
 
 class LoginApi {
   final HttpClient _dio = Get.find<HttpClient>();

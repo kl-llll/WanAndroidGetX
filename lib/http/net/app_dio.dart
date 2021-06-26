@@ -22,10 +22,6 @@ class AppDio with DioMixin implements Dio {
     );
     this.options = options;
 
-
-
-
-
     // DioCacheManager
     final cacheOptions = CacheOptions(
       // A default store is required for interceptor.
@@ -44,7 +40,9 @@ class AppDio with DioMixin implements Dio {
 
     if (kDebugMode) {
       interceptors.add((PrettyDioLogger(
+        request: true,
           requestBody: true,
+          requestHeader: true,
           responseBody: true,
           responseHeader: true,
           error: true,

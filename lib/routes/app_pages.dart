@@ -19,11 +19,11 @@ abstract class AppPages {
       name: Routes.SPLASH,
       page: () => SplashPage(),
     ),
-    GetPage(
-      name: Routes.HOME,
-      page: () => HomePage(),
-      binding: HomeBinding(),
-    ),
+    // GetPage(
+    //   name: Routes.HOME,
+    //   page: () => HomePage(),
+    //   binding: HomeBinding(),
+    // ),
     GetPage(
       name: Routes.MAIN,
       page: () => MainPage(),

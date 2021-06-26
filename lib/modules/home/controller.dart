@@ -9,4 +9,10 @@ class HomeController extends GetxController {
     _api.logout().then((value) => Get.offNamed(Routes.SPLASH));
   }
 
+  void getUserInfo() async{
+
+    _api.getUserInfo();
+
+  }
+
 }

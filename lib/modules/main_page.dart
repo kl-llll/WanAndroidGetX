@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:wan_android_getx/modules/login/page.dart';
+import 'package:wan_android_getx/utils/toast_util.dart';
 
 import 'home/page.dart';
 
@@ -43,32 +42,33 @@ class _MainPage1State extends State<MainPage> {
     );
   }
 
-  int _lastWantToPop = 0;
+  DateTime? _lastTime;
 
-  Future<bool> doubleBackExit() async {
-    final int now = DateTime.now().millisecondsSinceEpoch;
-    if (now - _lastWantToPop > 800) {
-      Get.snackbar("提示", '再按一次退出应用');
-      _lastWantToPop = DateTime.now().millisecondsSinceEpoch;
-      return false;
+  Future<bool> _isExit() async {
+    if (_lastTime == null ||
+        DateTime.now().difference(_lastTime!) > Duration(milliseconds: 1000)) {
+      _lastTime = DateTime.now();
+      showToast("在按一次退出应用");
+      return Future.value(false);
     } else {
-      Get.back();
-      return true;
+      return Future.value(true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: _bottomNavigation(),
-      body: WillPopScope(
-        onWillPop: doubleBackExit,
-        child: PageView(
-          physics: NeverScrollableScrollPhysics(),
-          children: _pages,
-          controller: _pageController,
+      body: SafeArea(
+        child: WillPopScope(
+          onWillPop: _isExit,
+          child: PageView(
+            physics: NeverScrollableScrollPhysics(),
+            children: _pages,
+            controller: _pageController,
+          ),
         ),
       ),
+      bottomNavigationBar: _bottomNavigation(),
     );
   }
 }

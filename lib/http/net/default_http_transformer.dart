@@ -1,16 +1,27 @@
-import 'package:wan_android_getx/utils/log_utils.dart';
+import 'package:get/get.dart' as getx;
+import 'package:wan_android_getx/bean/response_data_model.dart';
+import 'package:wan_android_getx/routes/app_pages.dart';
 
 import 'dio_new.dart';
 
 class DefaultHttpTransformer extends HttpTransformer {
+
+
+
   @override
   HttpResponse parse(Response response) {
 
-    if (response.data["errorCode"] == 0) {
+    var res=ResponseData.fromJson(response.data);
+
+    if (res.errorCode == 0) {
       return HttpResponse.success(response.data["data"]);
     } else {
+      if (response.data["errorCode"] == -1001) {
+        getx.Get.toNamed(Routes.LOGIN);
+      }
       return HttpResponse.failure(
-          errorMsg: response.data["errorMsg"], errorCode: response.data["errorCode"]);
+          errorMsg: response.data["errorMsg"],
+          errorCode: response.data["errorCode"]);
     }
   }
 

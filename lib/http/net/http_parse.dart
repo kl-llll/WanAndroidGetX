@@ -1,7 +1,7 @@
 // 成功回调
 import 'dart:io';
 
-import 'package:wan_android_getx/utils/log_utils.dart';
+import 'package:wan_android_getx/utils/log_util.dart';
 
 import 'dio_new.dart';
 
