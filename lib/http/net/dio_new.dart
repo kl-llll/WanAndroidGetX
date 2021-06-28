@@ -1,4 +1,3 @@
-library dio_new;
 
 export 'app_dio.dart';
 export 'default_http_transformer.dart';

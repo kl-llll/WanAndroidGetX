@@ -52,6 +52,8 @@ dependencies:
   #  flutter_svg: ^0.22.0
   # 方便使用的toast https://pub.flutter-io.cn/packages/oktoast
   oktoast: ^3.0.0
+  # 持久化 多样式的底部导航栏 https://pub.flutter-io.cn/packages/persistent_bottom_nav_bar
+  persistent_bottom_nav_bar: ^4.0.2
 
 dev_dependencies:
   flutter_test:
@@ -65,3 +67,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+  fonts:
+    - family: IconFont
+      fonts:
+        - asset: assets/fonts/iconfont.ttf

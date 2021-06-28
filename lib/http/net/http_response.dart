@@ -27,3 +27,7 @@ class HttpResponse {
     this.ok = false;
   }
 }
+
+extension HttpExtension on HttpResponse{
+
+}

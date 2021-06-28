@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:wan_android_getx/const/colors.dart';
 import 'package:wan_android_getx/utils/toast_util.dart';
 
 import 'home/page.dart';
@@ -10,35 +13,97 @@ class MainPage extends StatefulWidget {
 
 class _MainPage1State extends State<MainPage> {
   late PageController _pageController;
+  late PersistentTabController _controller;
+
   int _pageIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
+    _controller = PersistentTabController(initialIndex: 0);
   }
 
-  final _tabs = [
-    BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: "登录"),
-    BottomNavigationBarItem(icon: Icon(Icons.home_rounded), label: "首页"),
-  ];
-
-  final List<Widget> _pages = [
+  List<Widget> _buildScreens = [
+    HomePage(),
+    HomePage(),
+    HomePage(),
     HomePage(),
     HomePage(),
   ];
 
-  Widget _bottomNavigation() {
-    return BottomNavigationBar(
-      items: _tabs,
-      currentIndex: _pageIndex,
-      type: BottomNavigationBarType.fixed,
-      onTap: (index) {
-        setState(() {
-          _pageIndex = index;
-          _pageController.jumpToPage(_pageIndex);
-        });
-      },
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.home,size: 20),
+        title: "首页",
+        activeColorPrimary: ResourceColors.adaptiveDefaultColor,
+        inactiveColorPrimary: ResourceColors.adaptiveSecondColor,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(IconData(0xe64f,fontFamily: "IconFont"),size: 23,),
+        title: "公众号",
+        activeColorPrimary: ResourceColors.adaptiveDefaultColor,
+        inactiveColorPrimary: ResourceColors.adaptiveSecondColor,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.circle_grid_3x3,size: 20),
+        title: "体系",
+        activeColorPrimary: ResourceColors.adaptiveDefaultColor,
+        inactiveColorPrimary: ResourceColors.adaptiveSecondColor,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.book,size: 20),
+        title: "项目",
+        activeColorPrimary: ResourceColors.adaptiveDefaultColor,
+        inactiveColorPrimary: ResourceColors.adaptiveSecondColor,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(CupertinoIcons.person,size: 20),
+        title: "我的",
+        activeColorPrimary: ResourceColors.adaptiveDefaultColor,
+        inactiveColorPrimary: ResourceColors.adaptiveSecondColor,
+      ),
+    ];
+  }
+
+  Widget _persistentTabView() {
+    return PersistentTabView(
+      context,
+      controller: _controller,
+      screens: _buildScreens,
+      items: _navBarsItems(),
+      confineInSafeArea: true,
+      backgroundColor: ResourceColors.adaptiveBackgroundColor,
+      // Default is Colors.white.
+      handleAndroidBackButtonPress: true,
+      // Default is true.
+      resizeToAvoidBottomInset: true,
+      // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
+      stateManagement: true,
+      // Default is true.
+      hideNavigationBarWhenKeyboardShows: true,
+      // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
+      decoration: NavBarDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        colorBehindNavBar: Colors.white,
+      ),
+      onWillPop: (context)=>_isExit(),
+      popAllScreensOnTapOfSelectedTab: true,
+      popActionScreens: PopActionScreensType.all,
+      itemAnimationProperties: ItemAnimationProperties(
+        // Navigation Bar's items animation properties.
+        duration: Duration(milliseconds: 200),
+        curve: Curves.ease,
+      ),
+      screenTransitionAnimation: ScreenTransitionAnimation(
+        // Screen transition animation on change of selected tab.
+        animateTabTransition: true,
+        curve: Curves.ease,
+        duration: Duration(milliseconds: 200),
+      ),
+      navBarStyle:
+          NavBarStyle.style12, // Choose the nav bar style with this property.
     );
   }
 
@@ -59,16 +124,17 @@ class _MainPage1State extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: WillPopScope(
-          onWillPop: _isExit,
-          child: PageView(
-            physics: NeverScrollableScrollPhysics(),
-            children: _pages,
-            controller: _pageController,
-          ),
-        ),
+        child: _persistentTabView(),
+        // WillPopScope(
+        //   onWillPop: _isExit,
+        //   child: PageView(
+        //     physics: NeverScrollableScrollPhysics(),
+        //     children: _buildScreens,
+        //     controller: _pageController,
+        //   ),
+        // ),
       ),
-      bottomNavigationBar: _bottomNavigation(),
+      // bottomNavigationBar: _persistentTabView(),
     );
   }
 }

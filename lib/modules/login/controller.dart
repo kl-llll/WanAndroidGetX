@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:wan_android_getx/modules/login/api/login_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wan_android_getx/routes/app_pages.dart';
+import 'package:wan_android_getx/bean/login_model.dart';
+import 'package:wan_android_getx/modules/login/api/login_api.dart';
 import 'package:wan_android_getx/utils/extension/get_extension.dart';
 
 class LoginController extends GetxController {
@@ -17,21 +17,18 @@ class LoginController extends GetxController {
     var userPwd = userPwdController.value.text.trim();
 
     if (userName.isEmpty) {
-      Get.showCustomSnackbar("请输入账户名");
-
+      GetExtension(Get).showCustomSnackbar("请输入账户名");
       return;
     }
 
     if (userPwd.isEmpty) {
-      Get.showCustomSnackbar("请输入账户名");
+      GetExtension(Get).showCustomSnackbar("请输入密码");
 
       return;
     }
 
-    var data = await _api.login(userName, userPwd);
-
-    if (data != null) {
-      Get.offNamed(Routes.HOME);
-    }
+    try {
+      LoginModel model = await _api.login(userName, userPwd);
+    } catch (e) {}
   }
 }

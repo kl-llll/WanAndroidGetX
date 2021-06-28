@@ -56,6 +56,7 @@ HttpException _parseException(Exception error) {
       case DioErrorType.response:
         try {
           int? errCode = error.response?.statusCode;
+
           switch (errCode) {
             case 400:
               return BadRequestException(message: "请求语法错误", code: errCode);
