@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wan_android_getx/utils/log_util.dart';
 
 import 'controller.dart';
 
@@ -14,7 +15,7 @@ class _QuestionPageState extends State<QuestionPage> with AutomaticKeepAliveClie
   @override
     Widget build(BuildContext context) {
     super.build(context);
-    return Container();
+    return Container(color: Colors.blue,);
     }
 
   @override

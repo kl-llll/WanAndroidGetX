@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wan_android_getx/utils/log_util.dart';
 
 import 'controller.dart';
 
@@ -9,12 +10,12 @@ class HotPage extends StatefulWidget {
 }
 
 class _HotPageState extends State<HotPage> with AutomaticKeepAliveClientMixin {
-  final controller = Get.find<HotController>();
+  final controller = Get.put(HotController());
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Container();
+    return Container(color: Colors.amber,);
   }
 
   @override

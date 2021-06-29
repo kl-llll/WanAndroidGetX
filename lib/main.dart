@@ -15,6 +15,8 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
     statusBarColor: Colors.transparent,
   ));
+
+
   runApp(MyApp());
 }
 
@@ -34,6 +36,7 @@ class MyApp extends StatelessWidget {
               maxWidth: MediaQuery.of(c).size.width,
               maxHeight: MediaQuery.of(c).size.height));
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             // Global GestureDetector that will dismiss the keyboard
             body: GestureDetector(
               onTap: () {

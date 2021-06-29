@@ -7,17 +7,18 @@ class AppTheme {
     final Color currentColor = ResourceColors.defaultLightColor;
     final Color backgroundColor = ResourceColors.backgroundLightColor;
     return ThemeData.light().copyWith(
+      primaryColor: currentColor,
+      primaryColorDark: ResourceColors.secondDarkColor,
       accentColor: currentColor,
       toggleableActiveColor: currentColor,
       indicatorColor: currentColor,
-      appBarTheme: AppBarTheme(
-        brightness: Brightness.light,
-        elevation: 0,
-      ),
+      cardColor: backgroundColor,
+      scaffoldBackgroundColor: backgroundColor,
       buttonColor: currentColor,
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: currentColor,
       ),
+      backgroundColor: backgroundColor,
       colorScheme: ColorScheme(
         primary: currentColor,
         primaryVariant: currentColor,
@@ -45,17 +46,18 @@ class AppTheme {
     final Color currentColor = ResourceColors.defaultDarkColor;
     final Color backgroundColor = ResourceColors.backgroundDarkColor;
     return ThemeData.dark().copyWith(
+      primaryColor: currentColor,
       accentColor: currentColor,
+      primaryColorDark: ResourceColors.secondLightColor,
       toggleableActiveColor: currentColor,
+      cardColor: backgroundColor,
       indicatorColor: currentColor,
-      appBarTheme: AppBarTheme(
-        brightness: Brightness.light,
-        elevation: 0,
-      ),
+      scaffoldBackgroundColor: backgroundColor,
       buttonColor: currentColor,
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: currentColor,
       ),
+      backgroundColor: backgroundColor,
       colorScheme: ColorScheme(
         primary: currentColor,
         primaryVariant: currentColor,

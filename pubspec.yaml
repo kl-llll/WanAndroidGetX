@@ -54,6 +54,10 @@ dependencies:
   oktoast: ^3.0.0
   # 持久化 多样式的底部导航栏 https://pub.flutter-io.cn/packages/persistent_bottom_nav_bar
   persistent_bottom_nav_bar: ^4.0.2
+  # 拟态  https://pub.dev/packages/flutter_neumorphic
+  flutter_neumorphic: ^3.1.0
+  # 浮动搜索栏 https://pub.flutter-io.cn/packages/material_floating_search_bar
+  material_floating_search_bar: ^0.3.4
 
 dev_dependencies:
   flutter_test:
