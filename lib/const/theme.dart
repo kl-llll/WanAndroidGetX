@@ -3,22 +3,54 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 
 class AppTheme {
+
+  ThemeGroup _currentThemeGroup = defaultThemeGroup;
+
+  ThemeGroup get currentThemeGroup => _currentThemeGroup;
+
   ThemeData get lightTheme {
-    final Color currentColor = ResourceColors.defaultLightColor;
-    final Color backgroundColor = ResourceColors.backgroundLightColor;
+    final Color currentColor = currentThemeGroup.lightThemeColor;
+    final Color primaryColor = currentThemeGroup.lightPrimaryColor;
+    final Color backgroundColor = currentThemeGroup.lightBackgroundColor;
+    final Color iconColor = currentThemeGroup.lightIconUnselectedColor;
+    final Color dividerColor = currentThemeGroup.lightDividerColor;
+    final Color primaryTextColor = currentThemeGroup.lightPrimaryTextColor;
+    final Color secondaryTextColor = currentThemeGroup.lightSecondaryTextColor;
     return ThemeData.light().copyWith(
-      primaryColor: currentColor,
-      primaryColorDark: ResourceColors.secondDarkColor,
+      brightness: Brightness.light,
+      primaryColor: primaryColor,
+      primaryColorBrightness: Brightness.light,
+      primaryColorLight: primaryColor,
+      primaryColorDark: backgroundColor,
       accentColor: currentColor,
+      shadowColor: primaryTextColor,
+      accentColorBrightness: Brightness.light,
+      canvasColor: backgroundColor,
+      dividerColor: dividerColor,
+      scaffoldBackgroundColor: backgroundColor,
+      bottomAppBarColor: primaryColor,
+      cardColor: primaryColor,
+      highlightColor: Colors.transparent,
+      splashFactory: const NoSplashFactory(),
       toggleableActiveColor: currentColor,
       indicatorColor: currentColor,
-      cardColor: backgroundColor,
-      scaffoldBackgroundColor: backgroundColor,
+      appBarTheme: AppBarTheme(
+        brightness: Brightness.light,
+        elevation: 0,
+        color: primaryColor,
+      ),
       buttonColor: currentColor,
+      iconTheme: IconThemeData(color: iconColor),
+      primaryIconTheme: IconThemeData(color: secondaryTextColor),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
+        foregroundColor: primaryColor,
         backgroundColor: currentColor,
       ),
-      backgroundColor: backgroundColor,
+      tabBarTheme: TabBarTheme(
+        indicatorSize: TabBarIndicatorSize.tab,
+        labelColor: primaryTextColor,
+        unselectedLabelColor: primaryTextColor,
+      ),
       colorScheme: ColorScheme(
         primary: currentColor,
         primaryVariant: currentColor,
@@ -26,13 +58,27 @@ class AppTheme {
         secondaryVariant: currentColor,
         surface: Colors.white,
         background: backgroundColor,
-        error: currentColor,
+        error: defaultLightColor,
         onPrimary: currentColor,
         onSecondary: currentColor,
         onSurface: currentColor,
         onBackground: backgroundColor,
-        onError: currentColor,
+        onError: defaultLightColor,
         brightness: Brightness.light,
+      ),
+      textTheme: TextTheme(
+        bodyText1: TextStyle(color: secondaryTextColor),
+        bodyText2: TextStyle(color: primaryTextColor),
+        button: TextStyle(color: primaryTextColor),
+        caption: TextStyle(color: secondaryTextColor),
+        subtitle1: TextStyle(color: secondaryTextColor),
+        headline1: TextStyle(color: secondaryTextColor),
+        headline2: TextStyle(color: secondaryTextColor),
+        headline3: TextStyle(color: secondaryTextColor),
+        headline4: TextStyle(color: secondaryTextColor),
+        headline5: TextStyle(color: primaryTextColor),
+        headline6: TextStyle(color: primaryTextColor),
+        overline: TextStyle(color: primaryTextColor),
       ),
       textSelectionTheme: TextSelectionThemeData(
         cursorColor: currentColor,
@@ -43,35 +89,76 @@ class AppTheme {
   }
 
   ThemeData get darkTheme {
-    final Color currentColor = ResourceColors.defaultDarkColor;
-    final Color backgroundColor = ResourceColors.backgroundDarkColor;
+    final Color currentColor = currentThemeGroup.darkThemeColor;
+    final Color primaryColor = currentThemeGroup.darkPrimaryColor;
+    final Color backgroundColor = currentThemeGroup.darkBackgroundColor;
+    final Color iconColor = currentThemeGroup.darkIconUnselectedColor;
+    final Color dividerColor = currentThemeGroup.darkDividerColor;
+    final Color primaryTextColor = currentThemeGroup.darkPrimaryTextColor;
+    final Color secondaryTextColor = currentThemeGroup.darkSecondaryTextColor;
     return ThemeData.dark().copyWith(
-      primaryColor: currentColor,
+      brightness: Brightness.dark,
+      primaryColor: primaryColor,
+      primaryColorBrightness: Brightness.dark,
+      primaryColorLight: backgroundColor,
+      primaryColorDark: primaryColor,
       accentColor: currentColor,
-      primaryColorDark: ResourceColors.secondLightColor,
-      toggleableActiveColor: currentColor,
-      cardColor: backgroundColor,
-      indicatorColor: currentColor,
+      shadowColor: primaryTextColor,
+      accentColorBrightness: Brightness.dark,
+      canvasColor: backgroundColor,
+      dividerColor: dividerColor,
       scaffoldBackgroundColor: backgroundColor,
+      bottomAppBarColor: primaryColor,
+      cardColor: primaryColor,
+      highlightColor: Colors.transparent,
+      splashFactory: const NoSplashFactory(),
+      toggleableActiveColor: currentColor,
+      indicatorColor: currentColor,
+      appBarTheme: const AppBarTheme(
+        brightness: Brightness.dark,
+        elevation: 0,
+        color: Colors.black,
+      ),
       buttonColor: currentColor,
+      iconTheme: IconThemeData(color: iconColor),
+      primaryIconTheme: IconThemeData(color: secondaryTextColor),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
+        foregroundColor: Colors.black,
         backgroundColor: currentColor,
       ),
-      backgroundColor: backgroundColor,
+      tabBarTheme: TabBarTheme(
+        indicatorSize: TabBarIndicatorSize.tab,
+        labelColor: primaryTextColor,
+        unselectedLabelColor: primaryTextColor,
+      ),
       colorScheme: ColorScheme(
         primary: currentColor,
         primaryVariant: currentColor,
         secondary: currentColor,
         secondaryVariant: currentColor,
-        surface: Colors.white,
+        surface: primaryColor,
         background: backgroundColor,
-        error: currentColor,
+        error: defaultLightColor,
         onPrimary: currentColor,
         onSecondary: currentColor,
         onSurface: currentColor,
         onBackground: backgroundColor,
-        onError: currentColor,
-        brightness: Brightness.light,
+        onError: defaultLightColor,
+        brightness: Brightness.dark,
+      ),
+      textTheme: TextTheme(
+        bodyText1: TextStyle(color: secondaryTextColor),
+        bodyText2: TextStyle(color: primaryTextColor),
+        button: TextStyle(color: primaryTextColor),
+        caption: TextStyle(color: secondaryTextColor),
+        subtitle1: TextStyle(color: secondaryTextColor),
+        headline1: TextStyle(color: secondaryTextColor),
+        headline2: TextStyle(color: secondaryTextColor),
+        headline3: TextStyle(color: secondaryTextColor),
+        headline4: TextStyle(color: secondaryTextColor),
+        headline5: TextStyle(color: primaryTextColor),
+        headline6: TextStyle(color: primaryTextColor),
+        overline: TextStyle(color: primaryTextColor),
       ),
       textSelectionTheme: TextSelectionThemeData(
         cursorColor: currentColor,
@@ -80,6 +167,7 @@ class AppTheme {
       ),
     );
   }
+
 }
 
 class NoSplashFactory extends InteractiveInkFeatureFactory {

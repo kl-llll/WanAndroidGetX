@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:wan_android_getx/modules/home/hot/page.dart';
 import 'package:wan_android_getx/modules/home/question/page.dart';
 import 'package:wan_android_getx/modules/home/square/page.dart';
-import 'package:wan_android_getx/utils/log_util.dart';
+import 'package:wan_android_getx/const/constants.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,9 +14,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  var searchBarController = Get.find<FloatingSearchBarController>();
+
   late TabController _tabController;
   final List<String> titleList = ["广场", "热门", "问答"];
-  var _searchBarController = Get.find<FloatingSearchBarController>();
 
   @override
   void initState() {
@@ -31,95 +29,151 @@ class _HomePageState extends State<HomePage>
   PreferredSizeWidget? _buildTabBar() {
     return PreferredSize(
       child: Container(
-        height: 70.h,
-        color: Theme.of(context).primaryColor,
+        height: 80.h,
+        color: context.accentColor,
         padding: EdgeInsets.only(
-            top: MediaQuery.of(context).padding.top + 10.h,
-            left: 30.w,
-            right: 30.w,
-            bottom: 5.h),
-        child: Stack(
+            top: context.mediaQueryPadding.top + 10.h,
+            bottom: 10.h,
+            left: 15.w,
+            right: 15.w),
+        child: Row(
           children: [
-            Neumorphic(
-              style: NeumorphicStyle(
-                border: NeumorphicBorder(
-                  color: Colors.white38,
-                  width: 0.1,
-                ),
-                shape: NeumorphicShape.convex,
-                boxShape:
-                    NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
-                depth: -1.5,
-                lightSource: LightSource.topLeft,
-                color: Theme.of(context).primaryColor,
-                intensity: 0.8,
-              ),
-              child: Container(),
-            ),
-            TabBar(
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelColor: Theme.of(context).primaryColor,
-              labelStyle:
-                  TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
-              unselectedLabelColor: Colors.white.withAlpha(180),
-              unselectedLabelStyle: TextStyle(fontSize: 13.sp),
-              indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Theme.of(context).backgroundColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black38,
-                    blurRadius: 8,
-                    offset: Offset(0, 5), // changes position of shadow
-                  ),
+            Container(
+              width: 230.w,
+              child: Stack(
+                children: [
+                  _neumorphic(),
+                  _topTabBar(),
                 ],
               ),
-              controller: _tabController,
-              tabs: titleList.map((e) {
-                return Tab(
-                  text: e,
-                );
-              }).toList(),
+            ),
+            _openSearch(),
+          ],
+        ),
+      ),
+      preferredSize: Size(100.w, 80.h),
+    );
+  }
+
+  GestureDetector _openSearch() {
+    return GestureDetector(
+      onTap: () {
+        if (!searchBarController.isVisible) {
+          searchBarController.show();
+          searchBarController.open();
+        }
+      },
+      child: Container(
+        alignment: Alignment.center,
+        margin: EdgeInsets.only(left: 15.w),
+        width: 85.w,
+        height: 80.h,
+        decoration: BoxDecoration(
+            color: context.canvasColor,
+            borderRadius: BorderRadius.circular(15)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text("123"),
+            Icon(
+              CupertinoIcons.search,
+              color: context.accentColor,
             ),
           ],
         ),
       ),
-      preferredSize: Size(double.infinity, 150.h),
+    );
+  }
+
+  TabBar _topTabBar() {
+    return TabBar(
+      indicatorSize: TabBarIndicatorSize.tab,
+      labelColor: context.accentColor,
+      labelStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
+      unselectedLabelColor: Colors.white.withAlpha(180),
+      unselectedLabelStyle: TextStyle(fontSize: 13.sp),
+      indicator: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: context.canvasColor,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black38,
+            blurRadius: 8,
+            offset: Offset(0, 5), // changes position of shadow
+          ),
+        ],
+      ),
+      controller: _tabController,
+      tabs: titleList.map(
+        (e) {
+          return Tab(
+            text: e,
+          );
+        },
+      ).toList(),
+    );
+  }
+
+  Neumorphic _neumorphic() {
+    return Neumorphic(
+      style: NeumorphicStyle(
+        border: NeumorphicBorder(
+          color: Colors.white38,
+          width: 0.1,
+        ),
+        shape: NeumorphicShape.convex,
+        boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
+        depth: -1.5,
+        lightSource: LightSource.topLeft,
+        color: context.accentColor,
+        intensity: 0.8,
+      ),
+      child: Container(),
     );
   }
 
   Widget buildFloatingSearchBar() {
-    final isPortrait =
-        MediaQuery.of(context).orientation == Orientation.portrait;
 
     return FloatingSearchBar(
       hint: 'Search...',
-      scrollPadding: EdgeInsets.only(top: 16.h, bottom: 56.h),
+      scrollPadding: EdgeInsets.only(top: 16.h, bottom: 35.h),
       transitionDuration: const Duration(milliseconds: 800),
       transitionCurve: Curves.easeInOut,
       physics: const BouncingScrollPhysics(),
-      axisAlignment: isPortrait ? 0.0 : -1.0,
       openAxisAlignment: 0.0,
-      width: isPortrait ? 600 : 500,
       debounceDelay: const Duration(milliseconds: 500),
-      borderRadius: BorderRadius.circular(20),
-      controller: _searchBarController,
+      borderRadius: BorderRadius.circular(15),
+      showAfter: Duration(days: 999),
+      controller: searchBarController,
       onQueryChanged: (query) {
         // Call your model, bloc, controller here.
+      },
+      onFocusChanged: (focus){
+        if(!focus){
+          searchBarController.close();
+          searchBarController.hide();
+        }
       },
       // Specify a custom transition to be used for
       // animating between opened and closed stated.
       transition: CircularFloatingSearchBarTransition(),
       actions: [
         FloatingSearchBarAction(
-          showIfOpened: false,
+          showIfOpened: true,
           child: CircularButton(
-            icon: const Icon(CupertinoIcons.search),
+            icon:  Icon(CupertinoIcons.search,color: context.accentColor,),
             onPressed: () {},
           ),
         ),
-        FloatingSearchBarAction.searchToClear(
-          showIfClosed: false,
+        FloatingSearchBarAction(
+          showIfOpened: true,
+          child: CircularButton(
+            icon:  Icon(CupertinoIcons.clear,color: context.accentColor,),
+            onPressed: () {
+              searchBarController.close();
+              searchBarController.hide();
+            },
+          ),
         ),
       ],
       builder: (context, transition) {
@@ -144,19 +198,18 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
-      child: Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        appBar: _buildTabBar(),
-        body: Stack(children: [
-          Padding(
-            padding: EdgeInsets.only(top: 50.h),
-            child: TabBarView(
+      child: Stack(
+        alignment: AlignmentDirectional.topEnd,
+        children: [
+          Scaffold(
+            appBar: _buildTabBar(),
+            body: TabBarView(
               controller: _tabController,
               children: [SquarePage(), HotPage(), QuestionPage()],
             ),
           ),
           buildFloatingSearchBar(),
-        ]),
+        ],
       ),
     );
   }

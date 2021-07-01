@@ -1,11 +1,8 @@
+
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-import 'package:wan_android_getx/const/colors.dart';
-import 'package:wan_android_getx/utils/toast_util.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:wan_android_getx/const/constants.dart';
 
 import 'home/page.dart';
 import 'login/page.dart';
@@ -43,8 +40,8 @@ class _MainPage1State extends State<MainPage> {
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.home, size: 20),
         title: "首页",
-        activeColorPrimary: Theme.of(context).primaryColor,
-        inactiveColorPrimary: ResourceColors.adaptiveSecondColor,
+        activeColorPrimary: context.accentColor,
+        inactiveColorPrimary: context.iconColor,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(
@@ -52,26 +49,26 @@ class _MainPage1State extends State<MainPage> {
           size: 23,
         ),
         title: "公众号",
-        activeColorPrimary: Theme.of(context).primaryColor,
-        inactiveColorPrimary: ResourceColors.adaptiveSecondColor,
+        activeColorPrimary: context.accentColor,
+        inactiveColorPrimary:context.iconColor,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.circle_grid_3x3, size: 20),
         title: "体系",
-        activeColorPrimary: Theme.of(context).primaryColor,
-        inactiveColorPrimary: ResourceColors.adaptiveSecondColor,
+        activeColorPrimary: context.accentColor,
+        inactiveColorPrimary: context.iconColor,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.book, size: 20),
         title: "项目",
-        activeColorPrimary: Theme.of(context).primaryColor,
-        inactiveColorPrimary: ResourceColors.adaptiveSecondColor,
+        activeColorPrimary: context.accentColor,
+        inactiveColorPrimary: context.iconColor,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.person, size: 20),
         title: "我的",
-        activeColorPrimary: Theme.of(context).primaryColor,
-        inactiveColorPrimary: ResourceColors.adaptiveSecondColor,
+        activeColorPrimary: context.accentColor,
+        inactiveColorPrimary: context.iconColor,
       ),
     ];
   }
@@ -86,7 +83,7 @@ class _MainPage1State extends State<MainPage> {
       padding: NavBarPadding.only(left: 35.w, right: 35.w, bottom: 10.h),
       confineInSafeArea: true,
       // backgroundColor: ResourceColors.adaptiveBackgroundColor,
-      backgroundColor: Theme.of(context).cardColor,
+      backgroundColor:context.canvasColor,
       // Default is Colors.white.
       handleAndroidBackButtonPress: true,
       // Default is true.
@@ -103,7 +100,7 @@ class _MainPage1State extends State<MainPage> {
           boxShadow: [
             BoxShadow(
                 offset: Offset(0, 0.5), //x,y轴
-                color: Theme.of(context).primaryColorDark, //投影颜色
+                color: context.shadowColor, //投影颜色
                 blurRadius: 1 //投影距离
                 )
           ]),
@@ -141,6 +138,7 @@ class _MainPage1State extends State<MainPage> {
       }
     }else{
       _searchBarController.close();
+      _searchBarController.hide();
       return Future.value(false);
     }
 

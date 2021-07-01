@@ -16,7 +16,6 @@ void main() async {
     statusBarColor: Colors.transparent,
   ));
 
-
   runApp(MyApp());
 }
 
@@ -24,28 +23,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OKToast(
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: Routes.SPLASH,
-        getPages: AppPages.pages,
-        theme: AppTheme().lightTheme,
-        darkTheme: AppTheme().darkTheme,
-        defaultTransition: Transition.fade,
-        builder: (c, w) {
-          ScreenUtil.init(BoxConstraints(
-              maxWidth: MediaQuery.of(c).size.width,
-              maxHeight: MediaQuery.of(c).size.height));
-          return Scaffold(
-            resizeToAvoidBottomInset: false,
-            // Global GestureDetector that will dismiss the keyboard
-            body: GestureDetector(
-              onTap: () {
-                hideKeyboard(c);
-              },
-              child: w,
-            ),
-          );
-        },
+      child: ScreenUtilInit(
+        designSize: Size(360,690),
+        builder: () => GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          initialRoute: Routes.SPLASH,
+          getPages: AppPages.pages,
+          theme: AppTheme().lightTheme,
+          darkTheme: AppTheme().darkTheme,
+          defaultTransition: Transition.fade,
+          builder: (c, w) {
+            return Scaffold(
+              resizeToAvoidBottomInset: false,
+              // Global GestureDetector that will dismiss the keyboard
+              body: GestureDetector(
+                onTap: () {
+                  hideKeyboard(c);
+                },
+                child: w,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

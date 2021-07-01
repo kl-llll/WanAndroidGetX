@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as getx;
 import 'package:wan_android_getx/bean/response_data_model.dart';
-import 'package:wan_android_getx/const/colors.dart';
 import 'package:wan_android_getx/routes/app_pages.dart';
 import 'package:wan_android_getx/utils/log_util.dart';
 import 'package:wan_android_getx/utils/extension/get_extension.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:wan_android_getx/utils/extension/extension.dart';
 import 'dio_new.dart';
 
 class DefaultHttpTransformer extends HttpTransformer {
@@ -25,8 +23,7 @@ class DefaultHttpTransformer extends HttpTransformer {
           content: Text("请重新登录"),
           confirm: TextButton(
             style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all(ResourceColors.adaptiveDefaultColor),
+              backgroundColor: MaterialStateProperty.all(Colors.teal),
               shape: MaterialStateProperty.all(
                 RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),

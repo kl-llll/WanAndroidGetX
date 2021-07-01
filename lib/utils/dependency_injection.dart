@@ -26,6 +26,6 @@ class DependencyInjection {
     // 全局监听搜索框的Controller
     FloatingSearchBarController searchBarController =
         FloatingSearchBarController();
-    Get.put(searchBarController);
+    Get.put<FloatingSearchBarController>(searchBarController);
   }
 }
