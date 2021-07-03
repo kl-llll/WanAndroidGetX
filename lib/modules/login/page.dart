@@ -10,7 +10,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Log.i("login");
     return  Padding(
         padding: EdgeInsets.symmetric(vertical: 16.w, horizontal: 16.w),
         child: Center(

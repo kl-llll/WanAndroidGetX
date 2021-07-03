@@ -17,16 +17,17 @@ class _HomePageState extends State<HomePage>
   var searchBarController = Get.find<FloatingSearchBarController>();
 
   late TabController _tabController;
-  final List<String> titleList = ["广场", "热门", "问答"];
+  final List<String> _titleList = ["广场", "热门", "问答"];
+  final List<Widget> _pageList = [SquarePage(), HotPage(), QuestionPage()];
 
   @override
   void initState() {
     super.initState();
     _tabController =
-        TabController(length: titleList.length, vsync: this, initialIndex: 1);
+        TabController(length: _titleList.length, vsync: this, initialIndex: 1);
   }
 
-  PreferredSizeWidget? _buildTabBar() {
+  PreferredSizeWidget get _buildTabBar {
     return PreferredSize(
       child: Container(
         height: 80.h,
@@ -42,12 +43,12 @@ class _HomePageState extends State<HomePage>
               width: 230.w,
               child: Stack(
                 children: [
-                  _neumorphic(),
-                  _topTabBar(),
+                  _neumorphic,
+                  _topTabBar,
                 ],
               ),
             ),
-            _openSearch(),
+            _openSearch,
           ],
         ),
       ),
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  GestureDetector _openSearch() {
+  GestureDetector get _openSearch {
     return GestureDetector(
       onTap: () {
         if (!searchBarController.isVisible) {
@@ -63,29 +64,36 @@ class _HomePageState extends State<HomePage>
           searchBarController.open();
         }
       },
-      child: Container(
-        alignment: Alignment.center,
+      child: Neumorphic(
         margin: EdgeInsets.only(left: 15.w),
-        width: 85.w,
-        height: 80.h,
-        decoration: BoxDecoration(
+        style: NeumorphicStyle(
+            shape: NeumorphicShape.convex,
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
+            depth: 1.5,
+            lightSource: LightSource.topLeft,
             color: context.canvasColor,
-            borderRadius: BorderRadius.circular(15)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text("123"),
-            Icon(
-              CupertinoIcons.search,
-              color: context.accentColor,
-            ),
-          ],
+            intensity: 0.5,
+            surfaceIntensity: 0.3),
+        child: Container(
+          alignment: Alignment.center,
+          width: 85.w,
+          height: 80.h,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text("123"),
+              Icon(
+                CupertinoIcons.search,
+                color: context.accentColor,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  TabBar _topTabBar() {
+  TabBar get _topTabBar {
     return TabBar(
       indicatorSize: TabBarIndicatorSize.tab,
       labelColor: context.accentColor,
@@ -104,17 +112,15 @@ class _HomePageState extends State<HomePage>
         ],
       ),
       controller: _tabController,
-      tabs: titleList.map(
-        (e) {
-          return Tab(
-            text: e,
-          );
-        },
-      ).toList(),
+      tabs: _titleList.map((e) {
+        return Tab(
+          text: e,
+        );
+      }).toList(),
     );
   }
 
-  Neumorphic _neumorphic() {
+  Neumorphic get _neumorphic {
     return Neumorphic(
       style: NeumorphicStyle(
         border: NeumorphicBorder(
@@ -132,8 +138,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  Widget buildFloatingSearchBar() {
-
+  Widget get buildFloatingSearchBar {
     return FloatingSearchBar(
       hint: 'Search...',
       scrollPadding: EdgeInsets.only(top: 16.h, bottom: 35.h),
@@ -148,8 +153,8 @@ class _HomePageState extends State<HomePage>
       onQueryChanged: (query) {
         // Call your model, bloc, controller here.
       },
-      onFocusChanged: (focus){
-        if(!focus){
+      onFocusChanged: (focus) {
+        if (!focus) {
           searchBarController.close();
           searchBarController.hide();
         }
@@ -161,14 +166,20 @@ class _HomePageState extends State<HomePage>
         FloatingSearchBarAction(
           showIfOpened: true,
           child: CircularButton(
-            icon:  Icon(CupertinoIcons.search,color: context.accentColor,),
+            icon: Icon(
+              CupertinoIcons.search,
+              color: context.accentColor,
+            ),
             onPressed: () {},
           ),
         ),
         FloatingSearchBarAction(
           showIfOpened: true,
           child: CircularButton(
-            icon:  Icon(CupertinoIcons.clear,color: context.accentColor,),
+            icon: Icon(
+              CupertinoIcons.clear,
+              color: context.accentColor,
+            ),
             onPressed: () {
               searchBarController.close();
               searchBarController.hide();
@@ -199,16 +210,15 @@ class _HomePageState extends State<HomePage>
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Stack(
-        alignment: AlignmentDirectional.topEnd,
         children: [
           Scaffold(
-            appBar: _buildTabBar(),
+            appBar: _buildTabBar,
             body: TabBarView(
               controller: _tabController,
-              children: [SquarePage(), HotPage(), QuestionPage()],
+              children: _pageList,
             ),
           ),
-          buildFloatingSearchBar(),
+          buildFloatingSearchBar,
         ],
       ),
     );

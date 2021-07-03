@@ -58,6 +58,8 @@ dependencies:
   flutter_neumorphic: ^3.1.0
   # 浮动搜索栏 https://pub.flutter-io.cn/packages/material_floating_search_bar
   material_floating_search_bar: ^0.3.4
+  # 下拉刷新 https://pub.dev/packages/pull_to_refresh
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:

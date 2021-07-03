@@ -8,7 +8,7 @@ class LoginApi {
 
   Future<LoginModel> login(String username, String password) async {
     HttpResponse appResponse = await _dio.post(_login,
-        queryParameters: {"username": username, "password": password});
+        data:{"username": username, "password": password});
 
     if (appResponse.ok) {
       return LoginModel.fromJson(appResponse.data);

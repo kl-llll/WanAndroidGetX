@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
- const Color defaultLightColor = Color(0xff5a50c6);
- const Color defaultDarkColor = Color(0xff5046b8);
+ const Color defaultLightColor = Color(0xff1e5b88);
+ const Color defaultDarkColor = Color(0xff003962);
 class ThemeGroup {
 
 

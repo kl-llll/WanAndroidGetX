@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -16,74 +15,63 @@ class _MainPage1State extends State<MainPage> {
   late PersistentTabController _controller;
   var _searchBarController = Get.find<FloatingSearchBarController>();
 
+  final List<String> _bottomNavBatTitle = ["首页", "公众号", "体系", "项目", "我的"];
+  final List<Icon> _bottomNavBatIcon = [
+    Icon(CupertinoIcons.home, size: 20),
+    Icon(IconData(0xe64f, fontFamily: "IconFont"), size: 23),
+    Icon(CupertinoIcons.circle_grid_3x3, size: 20),
+    Icon(CupertinoIcons.book, size: 20),
+    Icon(CupertinoIcons.person, size: 20),
+  ];
+
   @override
   void initState() {
     super.initState();
     _controller = PersistentTabController(initialIndex: 0);
   }
 
-  List<Widget> _buildScreens() {
+  List<Widget> get _buildScreens {
     return [
       HomePage(),
       LoginPage(),
       LoginPage(),
       LoginPage(),
       LoginPage(),
-
     ];
   }
 
-  // LoginPage(),
-
-  List<PersistentBottomNavBarItem> _navBarsItems() {
-    return [
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.home, size: 20),
-        title: "首页",
-        activeColorPrimary: context.accentColor,
-        inactiveColorPrimary: context.iconColor,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(
-          IconData(0xe64f, fontFamily: "IconFont"),
-          size: 23,
-        ),
-        title: "公众号",
-        activeColorPrimary: context.accentColor,
-        inactiveColorPrimary:context.iconColor,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.circle_grid_3x3, size: 20),
-        title: "体系",
-        activeColorPrimary: context.accentColor,
-        inactiveColorPrimary: context.iconColor,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.book, size: 20),
-        title: "项目",
-        activeColorPrimary: context.accentColor,
-        inactiveColorPrimary: context.iconColor,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.person, size: 20),
-        title: "我的",
-        activeColorPrimary: context.accentColor,
-        inactiveColorPrimary: context.iconColor,
-      ),
-    ];
+  List<PersistentBottomNavBarItem> get _navBarsItems {
+    List<PersistentBottomNavBarItem> _navBarsItemList = [];
+    _bottomNavBatTitle.asMap().forEach((key, value) {
+      _navBarsItemList
+          .add(_navBarsItem(icon: _bottomNavBatIcon[key], title: value));
+    });
+    return _navBarsItemList;
   }
 
-  Widget _persistentTabView() {
+  PersistentBottomNavBarItem _navBarsItem({
+    required Icon icon,
+    required String title,
+  }) {
+    return PersistentBottomNavBarItem(
+      icon: icon,
+      title: title,
+      activeColorPrimary: context.accentColor,
+      inactiveColorPrimary: context.iconColor,
+    );
+  }
+
+  Widget get _persistentTabView {
     return PersistentTabView(
       context,
       controller: _controller,
-      screens: _buildScreens(),
-      items: _navBarsItems(),
+      screens: _buildScreens,
+      items: _navBarsItems,
       navBarHeight: 45.h,
       padding: NavBarPadding.only(left: 35.w, right: 35.w, bottom: 10.h),
       confineInSafeArea: true,
       // backgroundColor: ResourceColors.adaptiveBackgroundColor,
-      backgroundColor:context.canvasColor,
+      backgroundColor: context.canvasColor,
       // Default is Colors.white.
       handleAndroidBackButtonPress: true,
       // Default is true.
@@ -95,7 +83,7 @@ class _MainPage1State extends State<MainPage> {
       // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
       decoration: NavBarDecoration(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+              topLeft: Radius.circular(15), topRight: Radius.circular(15)),
           colorBehindNavBar: Colors.white,
           boxShadow: [
             BoxShadow(
@@ -104,7 +92,7 @@ class _MainPage1State extends State<MainPage> {
                 blurRadius: 1 //投影距离
                 )
           ]),
-      onWillPop: (context) => _isExit(),
+      onWillPop: (context) => _isExit,
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: ItemAnimationProperties(
@@ -125,27 +113,26 @@ class _MainPage1State extends State<MainPage> {
 
   DateTime? _lastTime;
 
-  Future<bool> _isExit() async {
-
-    if(_searchBarController.isClosed){
+  Future<bool> get _isExit async {
+    if (_searchBarController.isClosed) {
       if (_lastTime == null ||
-          DateTime.now().difference(_lastTime!) > Duration(milliseconds: 1000)) {
+          DateTime.now().difference(_lastTime!) >
+              Duration(milliseconds: 1000)) {
         _lastTime = DateTime.now();
         showToast("在按一次退出应用");
         return Future.value(false);
       } else {
         return Future.value(true);
       }
-    }else{
+    } else {
       _searchBarController.close();
       _searchBarController.hide();
       return Future.value(false);
     }
-
   }
 
   @override
   Widget build(BuildContext context) {
-    return _persistentTabView();
+    return _persistentTabView;
   }
 }
