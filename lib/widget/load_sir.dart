@@ -2,6 +2,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
+enum LoadState { LOADING, SUCCESS, FAILURE, DONE, NO_MORE, EMPTY }
+
 class LoadingState extends StatefulWidget {
   const LoadingState({
     Key? key,

@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:cookie_jar/cookie_jar.dart';
@@ -11,7 +10,6 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'dio_new.dart';
 
 class AppDio with DioMixin implements Dio {
-
   AppDio({BaseOptions? options, HttpConfig? dioConfig}) {
     options ??= BaseOptions(
       baseUrl: dioConfig?.baseUrl ?? "",
@@ -38,9 +36,9 @@ class AppDio with DioMixin implements Dio {
           PersistCookieJar(storage: FileStorage(dioConfig!.cookiesPath))));
     }
 
-    if (kDebugMode) {
+    if (kDebugMode && (dioConfig?.proxy?.isEmpty ?? false)) {
       interceptors.add((PrettyDioLogger(
-        request: true,
+          request: true,
           requestBody: true,
           requestHeader: true,
           responseBody: true,
@@ -68,7 +66,7 @@ class AppDio with DioMixin implements Dio {
         return "PROXY $proxy";
       };
 
-      client.badCertificateCallback=(cert, host, port){
+      client.badCertificateCallback = (cert, host, port) {
         return true;
       };
       // you can also create a HttpClient to dio

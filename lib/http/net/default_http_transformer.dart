@@ -17,27 +17,7 @@ class DefaultHttpTransformer extends HttpTransformer {
     } else {
       Log.e(res.errorMsg);
       getx.Get.showErrorSnackbar(res.errorMsg!);
-      if (res.errorCode == -1001) {
-        getx.Get.defaultDialog(
-          title: "登录失效",
-          content: Text("请重新登录"),
-          confirm: TextButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.teal),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-            onPressed: () => getx.Get.offNamed(Routes.LOGIN),
-            child: Text(
-              "确定",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        );
-      }
+
       return HttpResponse.failure(
           errorMsg: res.errorMsg, errorCode: res.errorCode);
     }

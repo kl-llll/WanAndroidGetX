@@ -17,7 +17,7 @@ class DependencyInjection {
     String cookiesPath = appDocDir.path + ".cookies/";
     HttpConfig dioConfig = HttpConfig(
         baseUrl: Apis.BaseUrl,
-        // proxy: "192.168.1.150:8866",
+        proxy: "192.168.1.150:8866",
         cookiesPath: cookiesPath);
     HttpClient client = HttpClient(dioConfig: dioConfig);
     // 网络请求

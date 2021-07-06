@@ -11,31 +11,31 @@ class HotApi {
 
   String _homeArticle(int index) => "/article/list/$index/json";
 
-  Future<HomeArticleModel> getHomeArticle(int index) async {
+  Future getHomeArticle(int index) async {
     HttpResponse appResponse = await _dio.get(_homeArticle(index));
 
     if (appResponse.ok) {
-      return HomeArticleModel.fromJson(appResponse.data);
+      return appResponse.data;
     } else {
       throw appResponse.error!.msg;
     }
   }
 
-  Future<HomeArticleModel> get getTopArticle async {
+  Future get getTopArticle async {
     HttpResponse appResponse = await _dio.get(_topArticle);
 
     if (appResponse.ok) {
-      return HomeArticleModel.fromJson(appResponse.data);
+      return appResponse.data;
     } else {
       throw appResponse.error!.msg;
     }
   }
 
-  Future<BannerModel> get getBanner async {
+  Future get getBanner async {
     HttpResponse appResponse = await _dio.get(_banner);
 
     if (appResponse.ok) {
-      return BannerModel.fromJson(appResponse.data);
+      return appResponse.data;
     } else {
       throw appResponse.error!.msg;
     }

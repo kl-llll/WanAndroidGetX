@@ -14,20 +14,11 @@ class _HotPageState extends State<HotPage> with AutomaticKeepAliveClientMixin {
   final controller = Get.put(HotController());
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    return GetX<HotController>(
-      init: controller,
-      initState: (_) {
-        controller.getData();
-      },
-      builder: (controller) {
+    return Obx(
+      () {
         return Scaffold(
           body: SmartRefresher(
             enablePullDown: true,
@@ -36,14 +27,14 @@ class _HotPageState extends State<HotPage> with AutomaticKeepAliveClientMixin {
             controller: controller.refreshController,
             onRefresh: controller.getData,
             // onLoading: controller.getData,
-            child: controller.homeArticleList!.isNotEmpty
+            child: controller.homeArticleList.isNotEmpty
                 ? ListView.builder(
                     itemBuilder: (c, i) => Card(
                         child: Center(
                             child: Text(
-                                "${controller.homeArticleList![i].chapterName}"))),
+                                "${controller.homeArticleList[i].chapterName}"))),
                     itemExtent: 100.0,
-                    itemCount: controller.homeArticleList!.length,
+                    itemCount: controller.homeArticleList.length,
                   )
                 : LoadingState(),
           ),
