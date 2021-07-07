@@ -10,13 +10,13 @@ T? asT<T>(dynamic value) {
 
 class HomeArticleModel {
   HomeArticleModel({
-    this.curPage,
-    this.datas,
-    this.offset,
-    this.over,
-    this.pageCount,
-    this.size,
-    this.total,
+    required this.curPage,
+     this.datas,
+    required this.offset,
+    required this.over,
+    required this.pageCount,
+    required this.size,
+    required this.total,
   });
 
   factory HomeArticleModel.fromJson(Map<String, dynamic> jsonRes) {
@@ -31,23 +31,23 @@ class HomeArticleModel {
       }
     }
     return HomeArticleModel(
-      curPage: asT<int?>(jsonRes['curPage']),
+      curPage: asT<int>(jsonRes['curPage'])!,
       datas: datas,
-      offset: asT<int?>(jsonRes['offset']),
-      over: asT<bool?>(jsonRes['over']),
-      pageCount: asT<int?>(jsonRes['pageCount']),
-      size: asT<int?>(jsonRes['size']),
-      total: asT<int?>(jsonRes['total']),
+      offset: asT<int>(jsonRes['offset'])!,
+      over: asT<bool>(jsonRes['over'])!,
+      pageCount: asT<int>(jsonRes['pageCount'])!,
+      size: asT<int>(jsonRes['size'])!,
+      total: asT<int>(jsonRes['total'])!,
     );
   }
 
-  int? curPage;
+  int curPage;
   List<HomeArticleDatas>? datas;
-  int? offset;
-  bool? over;
-  int? pageCount;
-  int? size;
-  int? total;
+  int offset;
+  bool over;
+  int pageCount;
+  int size;
+  int total;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
     'curPage': curPage,

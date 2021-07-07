@@ -48,8 +48,8 @@ dependencies:
   pretty_dio_logger: ^1.1.1
   # 屏幕适配方案 https://pub.flutter-io.cn/packages/flutter_screenutil
   flutter_screenutil: ^5.0.0+2
-  #  # flutter使用svg https://pub.flutter-io.cn/packages/flutter_svg
-  #  flutter_svg: ^0.22.0
+  # flutter使用svg https://pub.flutter-io.cn/packages/flutter_svg
+  flutter_svg: ^0.22.0
   # 方便使用的toast https://pub.flutter-io.cn/packages/oktoast
   oktoast: ^3.0.0
   # 持久化 多样式的底部导航栏 https://pub.flutter-io.cn/packages/persistent_bottom_nav_bar

@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart' as getx;
 import 'package:wan_android_getx/bean/response_data_model.dart';
-import 'package:wan_android_getx/routes/app_pages.dart';
-import 'package:wan_android_getx/utils/log_util.dart';
-import 'package:wan_android_getx/utils/extension/get_extension.dart';
 import 'package:wan_android_getx/utils/extension/extension.dart';
+import 'package:wan_android_getx/utils/extension/get_extension.dart';
+import 'package:wan_android_getx/utils/log_util.dart';
+
 import 'dio_new.dart';
 
 class DefaultHttpTransformer extends HttpTransformer {

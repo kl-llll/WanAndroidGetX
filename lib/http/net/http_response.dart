@@ -28,6 +28,4 @@ class HttpResponse {
   }
 }
 
-extension HttpExtension on HttpResponse{
 
-}

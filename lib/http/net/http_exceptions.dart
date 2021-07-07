@@ -9,7 +9,9 @@ class HttpException implements Exception {
 
   HttpException([this._msg, this._code]);
 
-
+  String toString() {
+    return "code:$code--msg=$msg";
+  }
 }
 
 /// 客户端请求错误

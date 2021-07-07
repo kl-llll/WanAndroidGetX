@@ -36,7 +36,7 @@ class AppDio with DioMixin implements Dio {
           PersistCookieJar(storage: FileStorage(dioConfig!.cookiesPath))));
     }
 
-    if (kDebugMode && (dioConfig?.proxy?.isEmpty ?? false)) {
+    if (kDebugMode && (dioConfig?.proxy?.isEmpty ?? true)) {
       interceptors.add((PrettyDioLogger(
           request: true,
           requestBody: true,

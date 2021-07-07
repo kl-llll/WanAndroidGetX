@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
 import 'controller.dart';
@@ -17,30 +16,25 @@ class _HotPageState extends State<HotPage> with AutomaticKeepAliveClientMixin {
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Obx(
-      () {
-        return Scaffold(
-          body: SmartRefresher(
-            enablePullDown: true,
-            enablePullUp: true,
-            header: WaterDropHeader(),
-            controller: controller.refreshController,
-            onRefresh: controller.getData,
-            // onLoading: controller.getData,
-            child: controller.homeArticleList.isNotEmpty
-                ? ListView.builder(
-                    itemBuilder: (c, i) => Card(
-                        child: Center(
-                            child: Text(
-                                "${controller.homeArticleList[i].chapterName}"))),
-                    itemExtent: 100.0,
-                    itemCount: controller.homeArticleList.length,
-                  )
-                : LoadingState(),
-          ),
-        );
-      },
-    );
+    return Obx(() {
+      // print(controller.loadState);
+
+      return StatePageWithViewController<HotController>(
+        controller: controller.refreshController,
+        model: controller,
+        onPressed: () => controller.getData(),
+        onRefresh: () => controller.getData(),
+        onLoading: () => controller.getData(),
+        child: ListView.builder(
+          itemBuilder: (c, i) => Card(
+              child: Center(
+                  child: Text("${controller.homeArticleList[i].chapterName}"))),
+          itemCount: controller.homeArticleList.length,
+        ),
+      );
+    });
+
+
   }
 
   @override

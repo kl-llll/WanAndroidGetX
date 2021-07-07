@@ -15,21 +15,35 @@ class HotController extends BaseGetXController {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
-  void getHomeArticle() async {
-    handleRequest(_api.getHomeArticle(0), true, (value) {
-
-      HomeArticleModel homeArticleModel=HomeArticleModel.fromJson(value);
+  int pageIndex = 0;
 
 
-      if (homeArticleModel.datas!.isEmpty) {
-        refreshController.refreshFailed();
-        return;
-      } else {
-        _homeArticleList.value = homeArticleModel.datas!;
+  void getHomeArticle()  {
+
+      handleRequest(_api.getHomeArticle(pageIndex), (value) {
+        HomeArticleModel data = HomeArticleModel.fromJson(value);
+        int curPage = data.curPage;
+        int pageCount = data.pageCount;
+
+        if (curPage == 1) {
+          _homeArticleList.clear();
+        }
+
+        if (curPage == 1 && data.datas!.isEmpty) {
+          loadState.value = LoadState.EMPTY;
+        } else if (curPage == pageCount) {
+          refreshController.loadNoData();
+        } else {
+          loadState.value = LoadState.SUCCESS;
+          _homeArticleList.addAll(data.datas!);
+          refreshController.loadComplete();
+        }
+
         refreshController.refreshCompleted();
-      }
-    });
-
+      }, failure: (e) {
+        refreshController.loadFailed();
+        refreshController.refreshFailed();
+      });
 
   }
 

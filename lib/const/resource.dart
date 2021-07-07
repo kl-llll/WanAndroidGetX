@@ -3,6 +3,12 @@
 class R {
   const R._();
 
-  /// ![preview](file://G:\9\wan_andorid_getx\assets\images\logo.png)
-  static const String ASSETS_IMAGES_LOGO_PNG = 'assets/images/logo.png';
+  /// ![preview](file://G:\9\wan_andorid_getx\assets\images\empty.svg)
+  static const String ASSETS_IMAGES_EMPTY_SVG = 'assets/images/empty.svg';
+
+  /// ![preview](file://G:\9\wan_andorid_getx\assets\images\error.svg)
+  static const String ASSETS_IMAGES_ERROR_SVG = 'assets/images/error.svg';
+
+  /// ![preview](file://G:\9\wan_andorid_getx\assets\images\loading.svg)
+  static const String ASSETS_IMAGES_LOADING_SVG = 'assets/images/loading.svg';
 }

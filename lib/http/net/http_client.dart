@@ -1,7 +1,6 @@
-
+import 'package:wan_android_getx/utils/log_util.dart';
 
 import 'dio_new.dart';
-
 
 /// Response 解析
 abstract class HttpTransformer {
@@ -14,9 +13,7 @@ class HttpClient {
   HttpClient({BaseOptions? options, HttpConfig? dioConfig})
       : _dio = AppDio(options: options, dioConfig: dioConfig);
 
-
-
-  Future<HttpResponse> get(String uri,
+  Future get(String uri,
       {Map<String, dynamic>? queryParameters,
       Options? options,
       CancelToken? cancelToken,
@@ -30,9 +27,16 @@ class HttpClient {
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
       );
-      return handleResponse(response, httpTransformer: httpTransformer);
+      HttpResponse appResponse =
+          handleResponse(response, httpTransformer: httpTransformer);
+      if (appResponse.ok) {
+        return appResponse.data;
+      } else {
+        throw HttpException(appResponse.error!.msg, appResponse.error!.code);
+      }
     } on Exception catch (e) {
-      return handleException(e);
+      HttpResponse a=handleException(e);
+      throw HttpException(a.error!.msg, a.error!.code);
     }
   }
 
@@ -151,4 +155,3 @@ class HttpClient {
     }
   }
 }
-

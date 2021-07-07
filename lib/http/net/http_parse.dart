@@ -45,12 +45,14 @@ bool _isRequestSuccess(int? statusCode) {
 }
 
 HttpException _parseException(Exception error) {
+
   if (error is DioError) {
+
     switch (error.type) {
       case DioErrorType.connectTimeout:
       case DioErrorType.receiveTimeout:
       case DioErrorType.sendTimeout:
-        return NetworkException(message: error.error.msg);
+        return NetworkException(message: error.error!.msg);
       case DioErrorType.cancel:
         return CancelException(error.error.msg);
       case DioErrorType.response:

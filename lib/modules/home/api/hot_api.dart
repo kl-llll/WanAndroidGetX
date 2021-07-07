@@ -9,17 +9,10 @@ class HotApi {
   final String _banner = "/banner/json";
   final String _topArticle = "/article/top/json";
 
-  String _homeArticle(int index) => "/article/list/$index/json";
+  String _homeArticle(int pageIndex) => "/article/list/$pageIndex/jsosn";
 
-  Future getHomeArticle(int index) async {
-    HttpResponse appResponse = await _dio.get(_homeArticle(index));
-
-    if (appResponse.ok) {
-      return appResponse.data;
-    } else {
-      throw appResponse.error!.msg;
-    }
-  }
+  Future getHomeArticle(int pageIndex) async =>
+      await _dio.get(_homeArticle(pageIndex));
 
   Future get getTopArticle async {
     HttpResponse appResponse = await _dio.get(_topArticle);
