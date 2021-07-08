@@ -6,7 +6,7 @@ class HttpResponse {
   dynamic data;
   HttpException? error;
 
-  HttpResponse._internal({this.ok = false});
+  // HttpResponse._internal({this.ok = false});
 
   HttpResponse.success(this.data) {
     this.ok = true;

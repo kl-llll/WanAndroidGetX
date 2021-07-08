@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:wan_android_getx/app/base/base_getx_controller.dart';
 import 'package:wan_android_getx/modules/home/api/hot_api.dart';
 
 import 'controller.dart';

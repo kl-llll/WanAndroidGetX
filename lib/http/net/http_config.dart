@@ -15,10 +15,9 @@ class HttpConfig {
     this.proxy,
     this.cookiesPath,
     this.interceptors,
-    this.connectTimeout = 5*1000,
+    this.connectTimeout = 15*1000,
     this.sendTimeout = 15*1000,
     this.receiveTimeout = 15*1000,
   });
 
-  // static DioConfig of() => Get.find<DioConfig>();
 }

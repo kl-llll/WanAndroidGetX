@@ -1,3 +1,4 @@
+
 class HttpException implements Exception {
   final String? _msg;
 
@@ -18,6 +19,7 @@ class HttpException implements Exception {
 class BadRequestException extends HttpException {
   BadRequestException({String? message, int? code}) : super(message, code);
 }
+
 /// 服务端响应错误
 class BadServiceException extends HttpException {
   BadServiceException({String? message, int? code}) : super(message, code);
@@ -40,7 +42,7 @@ class UnauthorisedException extends HttpException {
 }
 
 class BadResponseException extends HttpException {
-  dynamic? data;
+  dynamic data;
 
   BadResponseException([this.data]) : super();
 }

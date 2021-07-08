@@ -35,8 +35,9 @@ class HttpClient {
         throw HttpException(appResponse.error!.msg, appResponse.error!.code);
       }
     } on Exception catch (e) {
-      HttpResponse a=handleException(e);
-      throw HttpException(a.error!.msg, a.error!.code);
+      Log.e(e);
+      HttpResponse httpResponse=handleException(e);
+      throw HttpException(httpResponse.error!.msg, httpResponse.error!.code);
     }
   }
 
@@ -58,9 +59,17 @@ class HttpClient {
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
-      return handleResponse(response, httpTransformer: httpTransformer);
+      HttpResponse appResponse =
+      handleResponse(response, httpTransformer: httpTransformer);
+      if (appResponse.ok) {
+        return appResponse.data;
+      } else {
+        throw HttpException(appResponse.error!.msg, appResponse.error!.code);
+      }
     } on Exception catch (e) {
-      return handleException(e);
+      Log.e(e);
+      HttpResponse httpResponse=handleException(e);
+      throw HttpException(httpResponse.error!.msg, httpResponse.error!.code);
     }
   }
 
@@ -82,9 +91,17 @@ class HttpClient {
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
-      return handleResponse(response, httpTransformer: httpTransformer);
+      HttpResponse appResponse =
+      handleResponse(response, httpTransformer: httpTransformer);
+      if (appResponse.ok) {
+        return appResponse.data;
+      } else {
+        throw HttpException(appResponse.error!.msg, appResponse.error!.code);
+      }
     } on Exception catch (e) {
-      return handleException(e);
+      Log.e(e);
+      HttpResponse httpResponse=handleException(e);
+      throw HttpException(httpResponse.error!.msg, httpResponse.error!.code);
     }
   }
 
@@ -102,9 +119,17 @@ class HttpClient {
         options: options,
         cancelToken: cancelToken,
       );
-      return handleResponse(response, httpTransformer: httpTransformer);
+      HttpResponse appResponse =
+      handleResponse(response, httpTransformer: httpTransformer);
+      if (appResponse.ok) {
+        return appResponse.data;
+      } else {
+        throw HttpException(appResponse.error!.msg, appResponse.error!.code);
+      }
     } on Exception catch (e) {
-      return handleException(e);
+      Log.e(e);
+      HttpResponse httpResponse=handleException(e);
+      throw HttpException(httpResponse.error!.msg, httpResponse.error!.code);
     }
   }
 
@@ -122,9 +147,17 @@ class HttpClient {
         options: options,
         cancelToken: cancelToken,
       );
-      return handleResponse(response, httpTransformer: httpTransformer);
+      HttpResponse appResponse =
+      handleResponse(response, httpTransformer: httpTransformer);
+      if (appResponse.ok) {
+        return appResponse.data;
+      } else {
+        throw HttpException(appResponse.error!.msg, appResponse.error!.code);
+      }
     } on Exception catch (e) {
-      return handleException(e);
+      Log.e(e);
+      HttpResponse httpResponse=handleException(e);
+      throw HttpException(httpResponse.error!.msg, httpResponse.error!.code);
     }
   }
 

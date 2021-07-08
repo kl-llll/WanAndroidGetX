@@ -1,10 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wan_android_getx/app/base/base_getx_controller.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
-enum LoadState { LOADING, SUCCESS, FAILURE, DONE, NO_MORE, EMPTY }
+enum LoadState { LOADING, SUCCESS, FAILURE, EMPTY }
 
 class LoadingState extends StatefulWidget {
   const LoadingState({
@@ -126,58 +126,29 @@ class ErrorPage extends StatelessWidget {
   }
 }
 
-class StatePageWithViewController<T extends BaseGetXController>
-    extends StatefulWidget {
-  final T model;
-  final VoidCallback onPressed;
-  final VoidCallback onRefresh;
-  final VoidCallback onLoading;
+class LoadSir<T extends BaseGetXController> extends StatelessWidget {
+  final T controller;
   final Widget child;
-  final RefreshController controller;
-  final bool enablePullDown;
+  final VoidCallback onPressed;
 
-  StatePageWithViewController({
-    required this.controller,
-    required this.model,
-    required this.onPressed,
-    required this.onRefresh,
-    required this.onLoading,
-    required this.child,
-    this.enablePullDown = true,
-  });
+  LoadSir(
+      {required this.child, required this.onPressed, required this.controller});
 
-  @override
-  _StatePageWithViewControllerState createState() =>
-      _StatePageWithViewControllerState();
-}
-
-class _StatePageWithViewControllerState
-    extends State<StatePageWithViewController> {
   @override
   Widget build(BuildContext context) {
-
-    if (widget.model.loadState.value == LoadState.LOADING) {
-      return LoadingState();
-    } else if (widget.model.loadState.value == LoadState.EMPTY) {
-      return EmptyPage(
-        onPressed: widget.onPressed,
-      );
-    } else if (widget.model.loadState.value == LoadState.FAILURE) {
-      return ErrorPage(
-        onPressed: widget.onPressed,
-        errorMsg: widget.model.errorMessage.value,
-      );
-    }
-    return SmartRefresher(
-        controller: widget.controller,
-        enablePullDown: widget.enablePullDown,
-        enablePullUp: true,
-        onRefresh: widget.onRefresh,
-        onLoading: widget.onLoading,
-        header: ClassicHeader(),
-        footer: ClassicFooter(
-          failedText: widget.model.errorMessage.value,
-        ),
-        child: widget.child);
+    return Obx(() {
+      switch (controller.loadState.value) {
+        case LoadState.LOADING:
+          return LoadingState();
+        case LoadState.EMPTY:
+          return EmptyPage(onPressed: onPressed);
+        case LoadState.FAILURE:
+          return ErrorPage(
+              onPressed: onPressed, errorMsg: controller.errorMessage.value);
+        default:
+          return child;
+      }
+    });
   }
 }
+

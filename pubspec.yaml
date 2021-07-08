@@ -60,6 +60,10 @@ dependencies:
   material_floating_search_bar: ^0.3.4
   # 下拉刷新 https://pub.dev/packages/pull_to_refresh
   pull_to_refresh: ^2.0.0
+  # 支持空安全的swiper https://pub.dev/packages/flutter_swiper_null_safety
+  flutter_swiper_null_safety: ^1.0.2
+  #支持图片缓存的图片加载库 https://pub.dev/packages/cached_network_image
+  cached_network_image: ^3.0.0
 
 dev_dependencies:
   flutter_test:
