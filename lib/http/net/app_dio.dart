@@ -35,6 +35,7 @@ class AppDio with DioMixin implements Dio {
           PersistCookieJar(storage: FileStorage(dioConfig!.cookiesPath))));
     }
 
+    // debug下开启日志 有代理就关闭日志
     if (kDebugMode && (dioConfig?.proxy?.isEmpty ?? true)) {
       interceptors.add((PrettyDioLogger(
           request: true,

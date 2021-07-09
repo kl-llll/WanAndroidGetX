@@ -14,14 +14,18 @@ class BaseGetXController extends GetxController {
   var errorMessage = "加载失败".obs;
 
   Future handleRequest(Future<dynamic> future, Success success,
-      {Failure? failure}) async {
-    loadState.value = LoadState.LOADING;
+      {bool isLoading = false, Failure? failure}) async {
+    if (isLoading) {
+      loadState.value = LoadState.LOADING;
+    }
 
     await future.then((value) {
       success(value);
     }).onError<HttpException>((error, stackTrace) {
       againLogin(error);
-      loadState.value = LoadState.FAILURE;
+      if (isLoading) {
+        loadState.value = LoadState.FAILURE;
+      }
       if (failure != null) {
         failure(error.msg);
       }
@@ -52,8 +56,4 @@ class BaseGetXController extends GetxController {
       );
     }
   }
-
-  void initData(bool isShowLoading) {}
-
-  void refresh() {}
 }

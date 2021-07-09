@@ -64,6 +64,8 @@ dependencies:
   flutter_swiper_null_safety: ^1.0.2
   #支持图片缓存的图片加载库 https://pub.dev/packages/cached_network_image
   cached_network_image: ^3.0.0
+  # WebView https://pub.dev/packages/webview_flutter
+  webview_flutter: ^2.0.9
 
 dev_dependencies:
   flutter_test:

@@ -5,6 +5,7 @@ extension BuildContextExtension on BuildContext {
 
   Color get accentColor => theme.accentColor;
   Color get canvasColor => theme.canvasColor;
+  Color get primaryColor => theme.primaryColor;
   Color get shadowColor => theme.shadowColor;
 
 
