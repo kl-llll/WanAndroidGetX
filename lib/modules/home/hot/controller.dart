@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:wan_android_getx/api/hot_api.dart';
 import 'package:wan_android_getx/app/base/base_getx_controller.dart';
 import 'package:wan_android_getx/bean/banner_data_entity.dart';
 import 'package:wan_android_getx/bean/home_article_entity.dart';
 import 'package:wan_android_getx/const/constants.dart';
-import 'package:wan_android_getx/modules/home/api/hot_api.dart';
+
 
 class HotController extends BaseGetXController {
   var _api = Get.find<HotApi>();

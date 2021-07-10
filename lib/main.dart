@@ -10,6 +10,7 @@ import 'const/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await DependencyInjection.init();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(

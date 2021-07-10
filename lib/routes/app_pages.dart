@@ -5,6 +5,8 @@ import 'package:wan_android_getx/modules/home/square/binding.dart';
 import 'package:wan_android_getx/modules/login/binding.dart';
 import 'package:wan_android_getx/modules/main_page.dart';
 import 'package:wan_android_getx/modules/splash/page.dart';
+import 'package:wan_android_getx/modules/web/binding.dart';
+import 'package:wan_android_getx/modules/web/page.dart';
 
 part './app_routes.dart';
 
@@ -24,6 +26,10 @@ abstract class AppPages {
         LoginBinding()
       ],
     ),
-
+    GetPage(
+      name: Routes.WEB,
+      page: () => WebPage(),
+      binding: WebBinding(),
+    ),
   ];
 }
