@@ -1,14 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:wan_android_getx/const/colors.dart';
 
- const Color defaultLightColor = Color(0xff1e5b88);
- const Color defaultDarkColor = Color(0xff467AA9);
+
 class ThemeGroup {
-
-
   const ThemeGroup({
-    this.lightThemeColor = defaultLightColor,
+    this.lightThemeColor = AppColors.defaultLightColor,
     this.lightPrimaryColor = Colors.white,
     this.lightBackgroundColor = const Color(0xfff7f7f7),
     this.lightIconUnselectedColor = const Color(0xffc4c4c4),
@@ -16,7 +14,7 @@ class ThemeGroup {
     this.lightPrimaryTextColor = const Color(0xff212121),
     this.lightSecondaryTextColor = const Color(0xff757575),
     this.lightButtonTextColor = Colors.white,
-    this.darkThemeColor = defaultDarkColor,
+    this.darkThemeColor = AppColors.defaultLightColor,
     this.darkPrimaryColor = const Color(0xff212121),
     this.darkBackgroundColor = const Color(0xff151515),
     this.darkIconUnselectedColor = const Color(0xff616161),

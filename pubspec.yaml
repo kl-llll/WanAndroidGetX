@@ -66,6 +66,8 @@ dependencies:
   cached_network_image: ^3.0.0
   # 功能更丰富的webView https://pub.dev/packages/flutter_inappwebview
   flutter_inappwebview: ^5.3.2
+  # 仿掘金推特点赞按钮 https://pub.flutter-io.cn/packages?q=likebutton
+  like_button: ^2.0.2
 
 dev_dependencies:
   flutter_test:

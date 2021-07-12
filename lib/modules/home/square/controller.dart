@@ -17,7 +17,7 @@ class SquareController extends BaseGetXController {
   List<HomeArticleDatas> get getSquareList => _squareList;
 
   getSquare(bool isLoading) async {
-    await handleRequest(
+    await handlerStateRequest(
       _api.getSquareList(pageIndex),
       (value) {
         HomeArticleEntity data = HomeArticleEntity().fromJson(value);

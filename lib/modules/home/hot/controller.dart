@@ -6,7 +6,6 @@ import 'package:wan_android_getx/bean/banner_data_entity.dart';
 import 'package:wan_android_getx/bean/home_article_entity.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
-
 class HotController extends BaseGetXController {
   var _api = Get.find<HotApi>();
 
@@ -24,7 +23,7 @@ class HotController extends BaseGetXController {
   int pageIndex = 0;
 
   getHomeArticle(bool isLoading) async {
-    await handleRequest(
+    await handlerStateRequest(
         _api.getHomeArticle(pageIndex),
         (value) {
           HomeArticleEntity data = HomeArticleEntity().fromJson(value);
@@ -54,7 +53,7 @@ class HotController extends BaseGetXController {
   get getTopArticle async {
     List<HomeArticleDatas> list = [];
 
-    await handleRequest(_api.getTopArticle, (value) {
+    await handlerRequest(_api.getTopArticle, (value) {
       value.forEach((e) {
         list.add(HomeArticleDatas().fromJson(e));
       });
@@ -65,12 +64,30 @@ class HotController extends BaseGetXController {
   get getBanner async {
     List<BannerDataEntity> list = [];
 
-    await handleRequest(_api.getBanner, (value) {
+    await handlerRequest(_api.getBanner, (value) {
       value.forEach((e) {
         list.add(BannerDataEntity().fromJson(e));
       });
       _bannerList.value = list;
     });
+  }
+
+  collect(int id) async {
+    bool isSuccess = false;
+    await handlerRequest(_api.collect(id), (value) {
+      isSuccess = true;
+      Get.showCustomSnackbar("收藏成功!");
+    });
+    return isSuccess;
+  }
+
+  unCollect(int id) async {
+    bool isSuccess = false;
+    await handlerRequest(_api.unCollect(id), (value) {
+      isSuccess = true;
+      Get.showCustomSnackbar("取消收藏成功!");
+    });
+    return isSuccess;
   }
 
   initData() async {

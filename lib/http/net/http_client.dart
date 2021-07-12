@@ -41,7 +41,7 @@ class HttpClient {
     }
   }
 
-  Future<HttpResponse> post(String uri,
+  Future<HttpResponse?> post(String uri,
       {data,
       Map<String, dynamic>? queryParameters,
       Options? options,

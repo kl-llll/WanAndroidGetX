@@ -11,3 +11,4 @@ export '../app/base/base_getx_controller.dart';
 export '../widget/custom_text.dart';
 export '../routes/app_pages.dart';
 export 'resource.dart';
+export 'colors.dart';

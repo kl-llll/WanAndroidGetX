@@ -14,7 +14,6 @@ class DefaultHttpTransformer extends HttpTransformer {
     if (res.errorCode == 0) {
       return HttpResponse.success(res.data);
     } else {
-      Log.e("${res.errorMsg}---${res.errorCode}");
       return HttpResponse.failure(
           errorMsg: res.errorMsg, errorCode: res.errorCode);
     }
