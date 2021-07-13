@@ -4,6 +4,9 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wan_android_getx/bean/home_article_entity.dart';
 import 'package:wan_android_getx/const/constants.dart';
+import 'package:wan_android_getx/modules/home/hot/controller.dart';
+import 'package:wan_android_getx/modules/home/hot/page.dart';
+import 'package:wan_android_getx/widget/article_item.dart';
 
 import 'controller.dart';
 
@@ -15,6 +18,7 @@ class SquarePage extends StatefulWidget {
 class _SquarePageState extends State<SquarePage>
     with AutomaticKeepAliveClientMixin {
   final controller = Get.find<SquareController>();
+  final hotController = Get.put(HotController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +33,19 @@ class _SquarePageState extends State<SquarePage>
           enablePullUp: true,
           onRefresh: () => controller.refresh(),
           onLoading: () => controller.loadMore(),
-          header: ClassicHeader(),
-          footer: ClassicFooter(
-            failedText: "123",
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return ArticleItem(
+                  context: context,
+                  data: controller.getSquareList[index],
+                  controller: hotController);
+            },
+            itemCount: controller.getSquareList.length,
           ),
-          child:
         ),
       );
     });
   }
-
-
 
   @override
   void dispose() {

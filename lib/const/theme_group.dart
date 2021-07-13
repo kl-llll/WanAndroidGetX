@@ -1,14 +1,14 @@
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wan_android_getx/const/colors.dart';
-
 
 class ThemeGroup {
   const ThemeGroup({
     this.lightThemeColor = AppColors.defaultLightColor,
     this.lightPrimaryColor = Colors.white,
-    this.lightBackgroundColor = const Color(0xfff7f7f7),
+    this.lightBackgroundColor = const Color(0xfff2f2f7),
     this.lightIconUnselectedColor = const Color(0xffc4c4c4),
     this.lightDividerColor = const Color(0xffeaeaea),
     this.lightPrimaryTextColor = const Color(0xff212121),
@@ -41,6 +41,6 @@ class ThemeGroup {
   final Color darkPrimaryTextColor;
   final Color darkSecondaryTextColor;
   final Color darkButtonTextColor;
-
 }
+
 const ThemeGroup defaultThemeGroup = ThemeGroup();

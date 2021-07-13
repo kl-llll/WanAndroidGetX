@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wan_android_getx/bean/login_model.dart';
+import 'package:wan_android_getx/http/net/dio_new.dart';
 import 'package:wan_android_getx/modules/login/api/login_api.dart';
 import 'package:wan_android_getx/utils/extension/get_extension.dart';
 
@@ -12,7 +13,7 @@ class LoginController extends GetxController {
   var _api = Get.find<LoginApi>();
   SharedPreferences sp = Get.find<SharedPreferences>();
 
-  void login() async {
+   login() async {
     var userName = userNameController.value.text.trim();
     var userPwd = userPwdController.value.text.trim();
 
@@ -31,4 +32,7 @@ class LoginController extends GetxController {
       LoginModel model = await _api.login(userName, userPwd);
     } catch (e) {}
   }
+
+
+
 }

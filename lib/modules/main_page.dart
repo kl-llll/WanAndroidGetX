@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:wan_android_getx/const/constants.dart';
+import 'package:wan_android_getx/modules/mine/page.dart';
 
 import 'home/page.dart';
 import 'login/page.dart';
@@ -15,12 +16,12 @@ class _MainPage1State extends State<MainPage> {
   late PersistentTabController _controller;
   var _searchBarController = Get.find<FloatingSearchBarController>();
 
-  final List<String> _bottomNavBatTitle = ["首页", "公众号", "体系", "项目", "我的"];
+  final List<String> _bottomNavBatTitle = ["首页", "项目", "体系", "公众号", "我的"];
   final List<Icon> _bottomNavBatIcon = [
     Icon(CupertinoIcons.home, size: 20),
-    Icon(IconData(0xe64f, fontFamily: "IconFont"), size: 23),
-    Icon(CupertinoIcons.circle_grid_3x3, size: 20),
     Icon(CupertinoIcons.book, size: 20),
+    Icon(CupertinoIcons.circle_grid_3x3, size: 20),
+    Icon(IconData(0xe64f, fontFamily: "IconFont"), size: 23),
     Icon(CupertinoIcons.person, size: 20),
   ];
 
@@ -36,7 +37,7 @@ class _MainPage1State extends State<MainPage> {
       LoginPage(),
       LoginPage(),
       LoginPage(),
-      LoginPage(),
+      MinePage(),
     ];
   }
 

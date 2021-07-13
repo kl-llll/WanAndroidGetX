@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:wan_android_getx/const/resource.dart';
-import 'package:wan_android_getx/utils/log_util.dart';
 
 import 'controller.dart';
 

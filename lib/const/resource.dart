@@ -12,6 +12,9 @@ class R {
   /// ![preview](file://G:\9\wan_andorid_getx\assets\images\error.svg)
   static const String ASSETS_IMAGES_ERROR_SVG = 'assets/images/error.svg';
 
+  /// ![preview](file://G:\9\wan_andorid_getx\assets\images\level.svg)
+  static const String ASSETS_IMAGES_LEVEL_SVG = 'assets/images/level.svg';
+
   /// ![preview](file://G:\9\wan_andorid_getx\assets\images\loading.svg)
   static const String ASSETS_IMAGES_LOADING_SVG = 'assets/images/loading.svg';
 

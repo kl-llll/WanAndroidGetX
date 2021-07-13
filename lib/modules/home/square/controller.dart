@@ -7,7 +7,7 @@ import 'package:wan_android_getx/const/constants.dart';
 class SquareController extends BaseGetXController {
   var _api = Get.find<SquareApi>();
 
-  int pageIndex=0;
+  int pageIndex = 0;
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
@@ -31,7 +31,10 @@ class SquareController extends BaseGetXController {
           refreshController.loadNoData();
         } else {
           loadState.value = LoadState.SUCCESS;
-          _squareList.addAll(data.datas!);
+
+          pageIndex == 0
+              ? _squareList.value = data.datas!
+              : _squareList.addAll(data.datas!);
           refreshController.loadComplete();
           pageIndex++;
         }
@@ -51,7 +54,6 @@ class SquareController extends BaseGetXController {
 
   refresh() async {
     pageIndex = 0;
-    _squareList.clear();
     await getSquare(false);
   }
 
