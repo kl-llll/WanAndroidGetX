@@ -49,6 +49,7 @@ class QuestionController extends BaseGetXController {
     );
   }
 
+  @override
   initData() async {
     await getQuestion(true);
   }

@@ -1,11 +1,18 @@
+import 'package:get/get.dart';
 import 'package:wan_android_getx/http/net/dio_new.dart';
 
 class MineApi {
-  final String bindImg =
-      "https://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=2&mkt=zh-cn";
+  final HttpClient _dio = Get.find<HttpClient>();
 
-  Future getBingImage() async {
+  String bindImg(int index) =>
+      "https://www.bing.com/HPImageArchive.aspx?format=xml&idx=$index&n=2&mkt=zh-cn";
+
+  final String _userIntegral = "/lg/coin/userinfo/json";
+
+  Future get getIntegral async => await _dio.get(_userIntegral);
+
+  Future getBingImage(int index) async {
     Dio dio = Dio();
-    return await dio.get(bindImg);
+    return await dio.get(bindImg(index));
   }
 }

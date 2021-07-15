@@ -3,6 +3,7 @@ import 'package:wan_android_getx/modules/home/hot/binding.dart';
 import 'package:wan_android_getx/modules/home/question/binding.dart';
 import 'package:wan_android_getx/modules/home/square/binding.dart';
 import 'package:wan_android_getx/modules/login/binding.dart';
+import 'package:wan_android_getx/modules/login/page.dart';
 import 'package:wan_android_getx/modules/main_page.dart';
 import 'package:wan_android_getx/modules/mine/binding.dart';
 import 'package:wan_android_getx/modules/splash/page.dart';
@@ -27,6 +28,11 @@ abstract class AppPages {
         LoginBinding(),
         MineBinding(),
       ],
+    ),
+    GetPage(
+      name: Routes.LOGIN,
+      page: () => LoginPage(),
+      binding: LoginBinding(),
     ),
     GetPage(
       name: Routes.WEB,

@@ -38,7 +38,7 @@ homeArticleEntityFromJson(HomeArticleEntity data, Map<String, dynamic> json) {
 Map<String, dynamic> homeArticleEntityToJson(HomeArticleEntity entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['curPage'] = entity.curPage;
-	data['datas'] =  entity.datas?.map((v) => v.toJson()).toList();
+	data['datas'] =  entity.datas?.map((v) => v.toJson())?.toList();
 	data['offset'] = entity.offset;
 	data['over'] = entity.over;
 	data['pageCount'] = entity.pageCount;
@@ -205,7 +205,7 @@ Map<String, dynamic> homeArticleDatasToJson(HomeArticleDatas entity) {
 	data['shareUser'] = entity.shareUser;
 	data['superChapterId'] = entity.superChapterId;
 	data['superChapterName'] = entity.superChapterName;
-	data['tags'] =  entity.tags?.map((v) => v.toJson()).toList();
+	data['tags'] =  entity.tags?.map((v) => v.toJson())?.toList();
 	data['title'] = entity.title;
 	data['type'] = entity.type;
 	data['userId'] = entity.userId;

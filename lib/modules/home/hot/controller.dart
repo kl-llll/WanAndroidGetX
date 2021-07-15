@@ -1,9 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wan_android_getx/api/hot_api.dart';
-import 'package:wan_android_getx/app/base/base_getx_controller.dart';
-import 'package:wan_android_getx/bean/banner_data_entity.dart';
-import 'package:wan_android_getx/bean/home_article_entity.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
 class HotController extends BaseGetXController {
@@ -90,6 +87,7 @@ class HotController extends BaseGetXController {
     return isSuccess;
   }
 
+  @override
   initData() async {
     getBanner;
     await getTopArticle;

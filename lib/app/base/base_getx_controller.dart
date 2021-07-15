@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:wan_android_getx/const/constants.dart';
+import 'package:wan_android_getx/const/hive_boxes.dart';
 import 'package:wan_android_getx/http/net/dio_new.dart';
 import 'package:wan_android_getx/routes/app_pages.dart';
 
@@ -13,6 +15,14 @@ class BaseGetXController extends GetxController {
 
   var errorMessage = "加载失败".obs;
 
+  var _loginState = HiveBoxes.loginBox.get("isLogin").obs;
+
+  set changeLogin(bool isLogin) => _loginState.value.put("isLogin", isLogin);
+
+  get getIsLogin => _loginState.value.get("isLogin")??false;
+
+  void initData() {}
+
   Future handlerStateRequest(Future<dynamic> future, Success success,
       {bool isLoading = false, Failure? failure}) async {
     if (isLoading) {
@@ -22,7 +32,7 @@ class BaseGetXController extends GetxController {
     await future.then((value) {
       success(value);
     }).onError<HttpException>((error, stackTrace) {
-      againLogin(error);
+      checkLogin(error);
       if (isLoading) {
         loadState.value = LoadState.FAILURE;
       }
@@ -38,34 +48,16 @@ class BaseGetXController extends GetxController {
     await future.then((value) {
       success(value);
     }).onError<HttpException>((error, stackTrace) {
-      againLogin(error);
+      checkLogin(error);
       if (failure != null) {
         failure(error.msg);
       }
     });
   }
 
-  void againLogin(HttpException error) {
+  void checkLogin(HttpException error) {
     if (error.code == -1001) {
-      Get.defaultDialog(
-        title: "登录失效",
-        content: Text("请重新登录"),
-        confirm: TextButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.teal),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
-          onPressed: () => Get.offNamed(Routes.LOGIN),
-          child: Text(
-            "确定",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      );
+      Get.showCustomSnackbar("请重新登录", title: "登录失效");
     }
   }
 }

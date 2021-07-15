@@ -42,8 +42,11 @@ dependencies:
   path_provider: ^2.0.2
   # 好看的log https://pub.flutter-io.cn/packages/logger
   logger: ^1.0.0
-  # 数据存储 https://pub.flutter-io.cn/packages/shared_preferences
-  shared_preferences: ^2.0.6
+  # Dart 编写的轻量级且快速的键值数据库 https://pub.flutter-io.cn/packages/hive
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
+#  # 数据存储 https://pub.flutter-io.cn/packages/shared_preferences
+#  shared_preferences: ^2.0.6
   # 封装好的网络日志 https://pub.flutter-io.cn/packages/pretty_dio_logger
   pretty_dio_logger: ^1.1.1
   # 屏幕适配方案 https://pub.flutter-io.cn/packages/flutter_screenutil
@@ -70,10 +73,14 @@ dependencies:
   like_button: ^2.0.2
   # xml到json的解析包 https://pub.flutter-io.cn/packages/xml2json
   xml2json: ^5.3.1
+  # 微光效果 用来做骨架屏 https://pub.flutter-io.cn/packages/shimmer
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  hive_generator: ^1.1.0
+  build_runner: ^2.0.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

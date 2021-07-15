@@ -12,6 +12,13 @@ secondText(String text) {
       style: TextStyle(fontSize: 12.sp, color: Get.textTheme.bodyText1!.color));
 }
 
+thirdText(String text){
+  return Text(text,
+      style: TextStyle(fontSize: 11.sp, color: Get.textTheme.bodyText1!.color));
+}
+
 topText(String text) {
   return Text(text, style: TextStyle(fontSize: 12.sp, color: Colors.white));
 }
+
+

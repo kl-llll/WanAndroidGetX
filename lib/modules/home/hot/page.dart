@@ -34,6 +34,7 @@ class _HotPageState extends State<HotPage>
       return LoadSir(
         onPressed: () => controller.initData(),
         controller: controller,
+        isBanner: true,
         child: SmartRefresher(
           controller: controller.refreshController,
           enablePullDown: true,

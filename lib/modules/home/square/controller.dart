@@ -48,6 +48,7 @@ class SquareController extends BaseGetXController {
     );
   }
 
+  @override
   initData() async {
     await getSquare(true);
   }
