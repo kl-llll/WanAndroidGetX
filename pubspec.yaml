@@ -45,8 +45,6 @@ dependencies:
   # Dart 编写的轻量级且快速的键值数据库 https://pub.flutter-io.cn/packages/hive
   hive: ^2.0.4
   hive_flutter: ^1.1.0
-#  # 数据存储 https://pub.flutter-io.cn/packages/shared_preferences
-#  shared_preferences: ^2.0.6
   # 封装好的网络日志 https://pub.flutter-io.cn/packages/pretty_dio_logger
   pretty_dio_logger: ^1.1.1
   # 屏幕适配方案 https://pub.flutter-io.cn/packages/flutter_screenutil
@@ -75,6 +73,8 @@ dependencies:
   xml2json: ^5.3.1
   # 微光效果 用来做骨架屏 https://pub.flutter-io.cn/packages/shimmer
   shimmer: ^2.0.0
+  # 动画按钮 https://pub.dev/packages/argon_buttons_flutter
+  argon_buttons_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:

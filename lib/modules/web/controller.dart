@@ -4,8 +4,10 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
-class WebController extends GetxController {
+class WebController extends BaseGetXController {
   var url = "".obs;
+
+  var title="".obs;
 
   late InAppWebViewController _webViewController;
 
@@ -13,8 +15,6 @@ class WebController extends GetxController {
 
   set setInAppWebViewController(InAppWebViewController c) =>
       _webViewController = c;
-
-  var progress=0.0.obs;
 
 
   final GlobalKey webViewKey = GlobalKey();

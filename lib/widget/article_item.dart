@@ -17,31 +17,35 @@ class ArticleItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Neumorphic(
-          margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-          style: NeumorphicStyle(
-              shape: NeumorphicShape.concave,
-              boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
-              depth: 4,
-              lightSource: LightSource.topLeft,
-              color: context.primaryColor),
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: data.fresh!
-                    ? [
-                        AppColors.collocationColor.withAlpha(1),
-                        context.primaryColor
-                      ]
-                    : [
-                        context.primaryColor,
-                        context.primaryColor,
-                      ],
+        GestureDetector(
+          onTap: () => Get.toNamed(Routes.WEB, arguments: {"url": data.link}),
+          child: Neumorphic(
+            margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+            style: NeumorphicStyle(
+                shape: NeumorphicShape.concave,
+                boxShape:
+                    NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
+                depth: 4,
+                lightSource: LightSource.topLeft,
+                color: context.primaryColor),
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: data.fresh!
+                      ? [
+                          AppColors.collocationColor.withAlpha(1),
+                          context.primaryColor
+                        ]
+                      : [
+                          context.primaryColor,
+                          context.primaryColor,
+                        ],
+                ),
               ),
+              child: buildContent(data),
             ),
-            child: buildContent(data),
           ),
         ),
         Positioned(

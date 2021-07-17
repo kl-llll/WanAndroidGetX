@@ -74,7 +74,7 @@ class _HotPageState extends State<HotPage>
                 imageUrl: data.imagePath!,
                 placeholder: (context, url) => LoadingState(),
                 errorWidget: (context, url, error) => Icon(Icons.error),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
           );

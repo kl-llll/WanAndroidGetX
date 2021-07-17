@@ -34,19 +34,32 @@ class WebPage extends StatelessWidget {
 
     return Column(
       children: [
-        Container(
-          color: context.canvasColor,
-          padding: EdgeInsets.only(
-              top: context.mediaQueryPadding.top, left: 20.w, right: 20.w),
-          height: 60.h,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              icon(R.ASSETS_IMAGES_BACK_SVG, () => Get.back()),
-              icon(R.ASSETS_IMAGES_MORE_SVG, () {})
-            ],
-          ),
-        ),
+        Obx(() {
+          return Container(
+            color: context.canvasColor,
+            padding: EdgeInsets.only(
+                top: context.mediaQueryPadding.top, left: 20.w, right: 20.w),
+            height: 60.h,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                icon(R.ASSETS_IMAGES_BACK_SVG, () => Get.back()),
+                controller.loadState.value == LoadState.LOADING
+                    ? SizedBox(
+                        width: 24.0,
+                        height: 24.0,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.0,
+                        ),
+                      )
+                    : Text(
+                        controller.title.value,
+                      ),
+                icon(R.ASSETS_IMAGES_MORE_SVG, () {})
+              ],
+            ),
+          );
+        }),
         Divider(
           height: 1.h,
           thickness: 1.h,
@@ -61,16 +74,14 @@ class WebPage extends StatelessWidget {
           initialUrlRequest: URLRequest(url: Uri.parse(controller.url.value)),
           onLoadStart: (_, Uri? url) {
             Log.i('WebView onLoadStart: $url');
+            controller.loadState.value = LoadState.LOADING;
           },
-          onLoadStop: (controller, url) {
+          onLoadStop: (webController, url) {
             Log.i('WebView onLoadStop: $url');
-
-            controller.getTitle().then((value) {
-              Log.wtf(value);
+            webController.getTitle().then((value) {
+              controller.loadState.value = LoadState.SUCCESS;
+              controller.title.value = value!;
             });
-          },
-          onProgressChanged: (_, int progress) {
-            controller.progress.value = progress.toDouble();
           },
           onWebViewCreated: (InAppWebViewController c) {
             controller.setInAppWebViewController = c;
@@ -102,5 +113,3 @@ class WebPage extends StatelessWidget {
     );
   }
 }
-
-

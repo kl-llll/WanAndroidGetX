@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wan_android_getx/api/hot_api.dart';
+import 'package:wan_android_getx/app/local/local_login.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
 class HotController extends BaseGetXController {
@@ -107,7 +108,10 @@ class HotController extends BaseGetXController {
 
   @override
   void onInit() {
-    initData();
     super.onInit();
+    initData();
+    ever(Get.find<LocalLogin>().isLogin, (callBack) {
+      refresh();
+    });
   }
 }

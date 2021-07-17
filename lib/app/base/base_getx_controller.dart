@@ -9,17 +9,11 @@ typedef Success(dynamic value);
 typedef Failure(dynamic value);
 
 class BaseGetXController extends GetxController {
-  var loadState = LoadState.LOADING.obs;
+  var loadState = LoadState.DONE.obs;
 
   var exception = HttpException("", 0).obs;
 
   var errorMessage = "加载失败".obs;
-
-  var _loginState = HiveBoxes.loginBox.get("isLogin").obs;
-
-  set changeLogin(bool isLogin) => _loginState.value.put("isLogin", isLogin);
-
-  get getIsLogin => _loginState.value.get("isLogin")??false;
 
   void initData() {}
 
@@ -32,7 +26,7 @@ class BaseGetXController extends GetxController {
     await future.then((value) {
       success(value);
     }).onError<HttpException>((error, stackTrace) {
-      checkLogin(error);
+      _checkLogin(error);
       if (isLoading) {
         loadState.value = LoadState.FAILURE;
       }
@@ -48,14 +42,14 @@ class BaseGetXController extends GetxController {
     await future.then((value) {
       success(value);
     }).onError<HttpException>((error, stackTrace) {
-      checkLogin(error);
+      _checkLogin(error);
       if (failure != null) {
         failure(error.msg);
       }
     });
   }
 
-  void checkLogin(HttpException error) {
+  _checkLogin(HttpException error) {
     if (error.code == -1001) {
       Get.showCustomSnackbar("请重新登录", title: "登录失效");
     }

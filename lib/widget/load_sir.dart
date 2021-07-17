@@ -6,7 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:wan_android_getx/app/base/base_getx_controller.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
-enum LoadState { LOADING, SUCCESS, FAILURE, EMPTY }
+enum LoadState { LOADING, SUCCESS,DONE, FAILURE, EMPTY }
 
 class LoadingState extends StatefulWidget {
   const LoadingState({
@@ -168,7 +168,7 @@ class LoadingPage extends StatelessWidget {
                         height: 45.r,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.black, width: 1),
+                          border: Border.all(color: Colors.black, width: 2),
                         ),
                         child: Icon(
                           CupertinoIcons.heart_fill,

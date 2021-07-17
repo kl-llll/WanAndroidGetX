@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wan_android_getx/api/login_api.dart';
+import 'package:wan_android_getx/app/local/local_login.dart';
 import 'package:wan_android_getx/const/constants.dart';
+import 'package:wan_android_getx/const/hive_boxes.dart';
 import 'package:wan_android_getx/utils/extension/get_extension.dart';
 
 class LoginController extends BaseGetXController {
@@ -10,7 +12,9 @@ class LoginController extends BaseGetXController {
 
   var _api = Get.find<LoginApi>();
 
-  login() async {
+  var _isLogin = Get.find<LocalLogin>();
+
+  login(Function startLoading, Function stopLoading) async {
     var userName = userNameController.value.text.trim();
     var userPwd = userPwdController.value.text.trim();
 
@@ -24,16 +28,24 @@ class LoginController extends BaseGetXController {
       return;
     }
 
-    _api.login(userName, userPwd).then((value) {
+    startLoading();
+    handlerRequest(_api.login(userName, userPwd), (value) {
+      stopLoading();
+      Get.back();
       Get.showCustomSnackbar("登录成功!");
-      changeLogin = true;
+      _isLogin.isLogin.value = true;
+      HiveBoxes.loginBox.put("isLogin", true);
+    }, failure: (e) {
+      stopLoading();
+      Get.showErrorSnackbar(e);
     });
   }
 
   logout() async {
     _api.logout.then((value) {
       Get.showCustomSnackbar("退出登录成功!");
-      changeLogin = false;
+      _isLogin.isLogin.value = false;
+      HiveBoxes.loginBox.put("isLogin", false);
     });
   }
 }

@@ -3,10 +3,13 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:wan_android_getx/app/local/local_login.dart';
 import 'package:wan_android_getx/const/constants.dart';
+import 'package:wan_android_getx/modules/login/page.dart';
 
 import 'controller.dart';
 
@@ -19,7 +22,6 @@ class MinePage extends StatelessWidget {
       init: controller,
       initState: (_) {
         controller.initData();
-        Log.wtf("init");
       },
       builder: (controller) {
         return Stack(
@@ -74,6 +76,7 @@ class MinePage extends StatelessWidget {
       return Container(
         width: 100.w,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             titleText(content),
             Container(
@@ -105,15 +108,25 @@ class MinePage extends StatelessWidget {
           color: context.primaryColor,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            buildInfo("${controller.integralEntity.coinCount ?? "???"}", "积分"),
-            VerticalDivider(
-              color: Colors.grey,
-              width: 1,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                buildInfo(
+                    "${controller.integralEntity.coinCount ?? "???"}", "积分"),
+                VerticalDivider(
+                  color: Colors.grey,
+                  width: 1,
+                ),
+                buildInfo("${controller.integralEntity.rank ?? "???"}", "排名"),
+              ],
             ),
-            buildInfo("${controller.integralEntity.rank ?? "???"}", "排名"),
+            controller.loadState.value == LoadState.LOADING
+                ? LoadingState()
+                : Container(),
           ],
         ),
       ),
@@ -137,15 +150,17 @@ class MinePage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 child: BackdropFilter(
                   filter: ImageFilter.blur(
-                    sigmaX: 1,
-                    sigmaY: 1,
+                    sigmaX: 2,
+                    sigmaY: 2,
                   ),
                   child: Container(),
                 ),
               ),
             ),
             GestureDetector(
-              onTap: () => Get.toNamed(Routes.LOGIN),
+              onTap: Get.find<LocalLogin>().isLogin.value
+                  ? null
+                  : () => Get.bottomSheet(LoginPage()),
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 8.w),
                 child: Text(
@@ -207,7 +222,7 @@ class MinePage extends StatelessWidget {
     );
   }
 
-  /// 用背景部分高斯模糊的头像
+  /// 用背景部分高斯模糊来代替头像
   Widget _buildGaussianBlur(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 70.h, bottom: 5.h),

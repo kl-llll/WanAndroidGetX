@@ -8,9 +8,9 @@ class LoginApi {
 
   final String _logout = "/user/logout/json";
 
-  Future login(String username, String password) async =>
+  login(String username, String password) async =>
       await _dio.post(_login,
-          queryParameters: {"username": username, "password": password});
+          queryParameters: {"username": "718326384@qq.com", "password": "wan12138"});
 
 
   Future get logout async => await _dio.get(_logout);

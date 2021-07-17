@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:wan_android_getx/api/mine_api.dart';
 import 'package:wan_android_getx/app/base/base_getx_controller.dart';
+import 'package:wan_android_getx/app/local/local_login.dart';
 import 'package:wan_android_getx/const/constants.dart';
 import 'package:xml2json/xml2json.dart';
 
 class MineController extends BaseGetXController {
   var _api = Get.find<MineApi>();
-
 
   var index = -1;
   var _imageSrc = "".obs;
@@ -32,23 +32,31 @@ class MineController extends BaseGetXController {
     }
   }
 
-  get getIntegral async => await handlerRequest(_api.getIntegral, (value) {
-        _integralEntity.value = IntegralEntity().fromJson(value);
-      });
+  get getIntegral async {
+    loadState.value = LoadState.LOADING;
+    await handlerRequest(_api.getIntegral, (value) {
+      loadState.value = LoadState.SUCCESS;
+      _integralEntity.value = IntegralEntity().fromJson(value);
+    });
+  }
 
   @override
   void onInit() {
     super.onInit();
-    ever(getIsLogin, (call){
-
-      Log.i(call);
+    ever(Get.find<LocalLogin>().isLogin, (callBack) {
+      if (callBack as bool) {
+        getIntegral;
+      } else {
+        _integralEntity.value = IntegralEntity();
+      }
     });
-
   }
 
   @override
   void initData() {
     getBingImg();
-    // getIntegral;
+    if (Get.find<LocalLogin>().isLogin.value) {
+      getIntegral;
+    }
   }
 }

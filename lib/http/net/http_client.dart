@@ -40,7 +40,7 @@ class HttpClient {
     }
   }
 
-  Future<HttpResponse?> post(String uri,
+  Future post(String uri,
       {data,
       Map<String, dynamic>? queryParameters,
       Options? options,
@@ -71,7 +71,7 @@ class HttpClient {
     }
   }
 
-  Future<HttpResponse> patch(String uri,
+  Future patch(String uri,
       {data,
       Map<String, dynamic>? queryParameters,
       Options? options,
@@ -102,7 +102,7 @@ class HttpClient {
     }
   }
 
-  Future<HttpResponse> delete(String uri,
+  Future delete(String uri,
       {data,
       Map<String, dynamic>? queryParameters,
       Options? options,
@@ -129,7 +129,7 @@ class HttpClient {
     }
   }
 
-  Future<HttpResponse> put(String uri,
+  Future put(String uri,
       {data,
       Map<String, dynamic>? queryParameters,
       Options? options,
