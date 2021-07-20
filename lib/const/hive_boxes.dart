@@ -7,12 +7,17 @@ class HiveBoxes {
 
   static late Box<bool> loginBox;
 
+  static late Box<bool> darkBox;
+
   static Future<void> openBoxes() async {
     // Hive..registerAdapter(adapter);
 
     await Future.wait(<Future<void>>[
       () async {
         loginBox = await Hive.openBox("${boxPrefix}_login");
+      }(),
+      () async {
+        darkBox = await Hive.openBox("${boxPrefix}_dark");
       }(),
     ]);
   }

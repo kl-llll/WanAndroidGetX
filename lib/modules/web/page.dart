@@ -4,69 +4,11 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:wan_android_getx/const/constants.dart';
+import 'package:wan_android_getx/widget/app_bar_icon.dart';
 import 'controller.dart';
 
 class WebPage extends StatelessWidget {
   final controller = Get.find<WebController>();
-
-  Widget _appBar(BuildContext context) {
-    Widget icon(String assetName, VoidCallback onTap) {
-      return InkWell(
-        onTap: onTap,
-        child: Container(
-          height: 30.r,
-          width: 30.r,
-          padding: EdgeInsets.all(3.r),
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1,
-              color: context.accentColor,
-            ),
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SvgPicture.asset(
-            assetName,
-            color: context.accentColor,
-          ),
-        ),
-      );
-    }
-
-    return Column(
-      children: [
-        Obx(() {
-          return Container(
-            color: context.canvasColor,
-            padding: EdgeInsets.only(
-                top: context.mediaQueryPadding.top, left: 20.w, right: 20.w),
-            height: 60.h,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                icon(R.ASSETS_IMAGES_BACK_SVG, () => Get.back()),
-                controller.loadState.value == LoadState.LOADING
-                    ? SizedBox(
-                        width: 24.0,
-                        height: 24.0,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.0,
-                        ),
-                      )
-                    : Text(
-                        controller.title.value,
-                      ),
-                icon(R.ASSETS_IMAGES_MORE_SVG, () {})
-              ],
-            ),
-          );
-        }),
-        Divider(
-          height: 1.h,
-          thickness: 1.h,
-        ),
-      ],
-    );
-  }
 
   Widget _webView() => Obx(() {
         return InAppWebView(
@@ -91,23 +33,52 @@ class WebPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark,
-      child: WillPopScope(
-        onWillPop: () async {
-          if (await controller.getInAppWebViewController.canGoBack() == true) {
-            controller.getInAppWebViewController.goBack();
-            return false;
-          }
-          return true;
-        },
-        child: Scaffold(
-          body: Column(
-            children: <Widget>[
-              _appBar(context),
-              Expanded(child: _webView()),
-            ],
+    return WillPopScope(
+      onWillPop: () async {
+        if (await controller.getInAppWebViewController.canGoBack() == true) {
+          controller.getInAppWebViewController.goBack();
+          return false;
+        }
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 1,
+          backgroundColor: context.canvasColor,
+          leading: Container(
+            padding: EdgeInsets.all(12.r),
+            child: AppBarIcon(
+              assetName: R.ASSETS_IMAGES_BACK_SVG,
+              onTap: () => Get.back(),
+            ),
           ),
+          centerTitle: true,
+          title: Obx(() {
+            return controller.loadState.value == LoadState.LOADING
+                ? SizedBox(
+                    width: 24.0,
+                    height: 24.0,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.0,
+                    ),
+                  )
+                : appBarText(
+                    controller.title.value,
+                  );
+          }),
+          actions: [
+            Container(
+              padding: EdgeInsets.all(12.r),
+              child:
+                  AppBarIcon(assetName: R.ASSETS_IMAGES_MORE_SVG, onTap: () {}),
+            )
+          ],
+        ),
+        body: Column(
+          children: <Widget>[
+            // _appBar(context),
+            Expanded(child: _webView()),
+          ],
         ),
       ),
     );

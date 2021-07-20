@@ -50,17 +50,57 @@ class MinePage extends StatelessWidget {
                     ],
                   ),
                   Expanded(
-                    child: Stack(alignment: Alignment.topCenter, children: [
-                      _buildUserName(context),
-                      Container(
-                        margin: EdgeInsets.only(top: 80.h),
-                        decoration: BoxDecoration(
-                          color: context.canvasColor,
-                          borderRadius: BorderRadius.circular(30),
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: [
+                        _buildUserName(context),
+                        Container(
+                          margin: EdgeInsets.only(top: 80.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20.w, vertical: 25.h),
+                          decoration: BoxDecoration(
+                            color: context.canvasColor,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: ListView(
+                            children: [
+                              ListTile(
+                                title: Text(
+                                  "收藏",
+                                  style: TextStyle(color: context.shadowColor),
+                                ),
+                                leading: Icon(
+                                  CupertinoIcons.collections,
+                                  color: context.accentColor,
+                                ),
+                                trailing: Icon(
+                                  CupertinoIcons.right_chevron,
+                                  size: 20,
+                                ),
+                              ),
+                              Divider(height: 5.h),
+                              ListTile(
+                                enabled: true,
+                                onTap: () => Get.toNamed(Routes.SETTING),
+                                title: Text(
+                                  "设置",
+                                  style: TextStyle(color: context.shadowColor),
+                                ),
+                                leading: Icon(
+                                  CupertinoIcons.settings,
+                                  color: context.accentColor,
+                                ),
+                                trailing: Icon(
+                                  CupertinoIcons.right_chevron,
+                                  size: 20,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      _buildUserInfo(context),
-                    ]),
+                        _buildUserInfo(context),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -158,7 +198,7 @@ class MinePage extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: Get.find<LocalLogin>().isLogin.value
+              onTap: controller.localLogin.isLogin.value
                   ? null
                   : () => Get.bottomSheet(LoginPage()),
               child: Container(

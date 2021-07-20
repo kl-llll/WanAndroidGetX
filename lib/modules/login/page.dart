@@ -66,11 +66,7 @@ class LoginPage extends StatelessWidget {
       width: 55.r,
       onTap: (startLoading, stopLoading, btnState) {
         if (btnState == ButtonState.Idle) {
-          if (Get.find<LocalLogin>().isLogin.value) {
-            controller.logout();
-          } else {
-            controller.login(startLoading, stopLoading);
-          }
+          controller.login(startLoading, stopLoading);
         } else {
           stopLoading();
         }

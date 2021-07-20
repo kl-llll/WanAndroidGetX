@@ -9,10 +9,14 @@ class MineApi {
 
   final String _userIntegral = "/lg/coin/userinfo/json";
 
+  final String _logout = "/user/logout/json";
+
   Future get getIntegral async => await _dio.get(_userIntegral);
 
   Future getBingImage(int index) async {
     Dio dio = Dio();
     return await dio.get(bindImg(index));
   }
+
+  Future get logout async => await _dio.get(_logout);
 }

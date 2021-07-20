@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+appBarText(String text){
+  return Text(text,style: TextStyle(color: Get.theme.accentColor,fontSize:19.sp ));
+}
+
 titleText(String text) {
   return Text(text,
       style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold));

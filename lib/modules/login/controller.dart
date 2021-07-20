@@ -31,21 +31,13 @@ class LoginController extends BaseGetXController {
     startLoading();
     handlerRequest(_api.login(userName, userPwd), (value) {
       stopLoading();
-      Get.back();
-      Get.showCustomSnackbar("登录成功!");
       _isLogin.isLogin.value = true;
       HiveBoxes.loginBox.put("isLogin", true);
+      Get.back(closeOverlays: true);
+      Get.showCustomSnackbar("登录成功!");
     }, failure: (e) {
       stopLoading();
       Get.showErrorSnackbar(e);
-    });
-  }
-
-  logout() async {
-    _api.logout.then((value) {
-      Get.showCustomSnackbar("退出登录成功!");
-      _isLogin.isLogin.value = false;
-      HiveBoxes.loginBox.put("isLogin", false);
     });
   }
 }

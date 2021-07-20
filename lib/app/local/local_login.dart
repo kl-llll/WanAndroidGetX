@@ -4,7 +4,6 @@ import 'package:wan_android_getx/const/hive_boxes.dart';
 
 class LocalLogin extends BaseGetXController{
 
-  ///是否登录
   var isLogin = false.obs;
 
   @override

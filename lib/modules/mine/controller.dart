@@ -10,6 +10,8 @@ import 'package:xml2json/xml2json.dart';
 class MineController extends BaseGetXController {
   var _api = Get.find<MineApi>();
 
+  var localLogin=Get.find<LocalLogin>();
+
   var index = -1;
   var _imageSrc = "".obs;
 
@@ -18,6 +20,7 @@ class MineController extends BaseGetXController {
   var _integralEntity = IntegralEntity().obs;
 
   IntegralEntity get integralEntity => _integralEntity.value;
+
 
   getBingImg({bool isReset = false}) async {
     isReset ? index = 0 : index++;
