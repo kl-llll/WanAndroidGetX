@@ -6,4 +6,6 @@ abstract class Routes {
   static const MAIN = '/main';
   static const WEB = '/web';
   static const SETTING = '/setting';
+  static const INTEGRAL = '/integral';
+  static const RANK = '/rank';
 }

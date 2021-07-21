@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wan_android_getx/const/constants.dart';
 import 'package:wan_android_getx/const/hive_boxes.dart';
 import 'package:wan_android_getx/http/net/dio_new.dart';
@@ -36,6 +37,9 @@ class BaseGetXController extends GetxController {
       errorMessage.value = error.msg;
     });
   }
+
+
+
 
   Future handlerRequest(Future<dynamic> future, Success success,
       {Failure? failure}) async {

@@ -27,43 +27,38 @@ class SettingPage extends StatelessWidget {
           style: TextStyle(color: context.accentColor, fontSize: 19.sp),
         ),
       ),
-      body: ListView(
+      body: Column(
         children: [
-
-          Container(
-            child: Text("主题",style: TextStyle(color: context.accentColor,fontSize: 14.sp),),
-          ),
           Obx(
             () {
               return SwitchListTile(
                 value: controller.localDark.isDark.value,
-                title: Text("强制夜间模式"),
-                secondary: Icon(
-                  controller.localDark.isDark.value?CupertinoIcons.moon_circle:CupertinoIcons.sun_min_fill,
-                  color: context.accentColor,
-                ),
-                onChanged: (v) => controller.changeSwitchValue(),
-              );
-            },
-          ),
-          Obx(
-            () {
-              return SwitchListTile(
-                value: controller.localDark.isDark.value,
-                title: Text("跟随系统"),
-                secondary: Icon(
-                  CupertinoIcons.phone,
-                  color: context.accentColor,
+                title: Text("夜间模式"),
+                secondary: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 400),
+                  transitionBuilder: (child, animation) => ScaleTransition(
+                    scale: animation,
+                    child: child,
+                  ),
+                  child: Icon(
+                    controller.localDark.isDark.value
+                        ? CupertinoIcons.moon_fill
+                        : CupertinoIcons.sun_min_fill,
+                    key: ValueKey<bool>(controller.localDark.isDark.value),
+                    color: context.accentColor,
+                  ),
                 ),
                 onChanged: (v) => controller.changeSwitchValue(),
               );
             },
           ),
           ListTile(
-            leading: Icon(CupertinoIcons.square_arrow_left,color: context.accentColor,),
+            leading: Icon(
+              CupertinoIcons.square_arrow_left,
+              color: context.accentColor,
+            ),
             title: Text("退出登录"),
-            trailing: Icon(CupertinoIcons.right_chevron),
-            onTap: ()=>controller.logout(),
+            onTap: () => controller.logout(),
           )
         ],
       ),

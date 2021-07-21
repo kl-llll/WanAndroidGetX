@@ -7,6 +7,10 @@ import 'package:wan_android_getx/bean/banner_data_entity.dart';
 import 'package:wan_android_getx/generated/json/banner_data_entity_helper.dart';
 import 'package:wan_android_getx/bean/integral_entity.dart';
 import 'package:wan_android_getx/generated/json/integral_entity_helper.dart';
+import 'package:wan_android_getx/bean/rank_list_entity.dart';
+import 'package:wan_android_getx/generated/json/rank_list_entity_helper.dart';
+import 'package:wan_android_getx/bean/integral_list_entity.dart';
+import 'package:wan_android_getx/generated/json/integral_list_entity_helper.dart';
 import 'package:wan_android_getx/bean/home_article_entity.dart';
 import 'package:wan_android_getx/generated/json/home_article_entity_helper.dart';
 import 'package:wan_android_getx/bean/login_entity.dart';
@@ -27,6 +31,14 @@ class JsonConvert<T> {
 				return bannerDataEntityFromJson(data as BannerDataEntity, json) as T;
 			case IntegralEntity:
 				return integralEntityFromJson(data as IntegralEntity, json) as T;
+			case RankListEntity:
+				return rankListEntityFromJson(data as RankListEntity, json) as T;
+			case RankListDatas:
+				return rankListDatasFromJson(data as RankListDatas, json) as T;
+			case IntegralListEntity:
+				return integralListEntityFromJson(data as IntegralListEntity, json) as T;
+			case IntegralListDatas:
+				return integralListDatasFromJson(data as IntegralListDatas, json) as T;
 			case HomeArticleEntity:
 				return homeArticleEntityFromJson(data as HomeArticleEntity, json) as T;
 			case HomeArticleDatas:
@@ -44,6 +56,14 @@ class JsonConvert<T> {
 				return bannerDataEntityToJson(data as BannerDataEntity);
 			case IntegralEntity:
 				return integralEntityToJson(data as IntegralEntity);
+			case RankListEntity:
+				return rankListEntityToJson(data as RankListEntity);
+			case RankListDatas:
+				return rankListDatasToJson(data as RankListDatas);
+			case IntegralListEntity:
+				return integralListEntityToJson(data as IntegralListEntity);
+			case IntegralListDatas:
+				return integralListDatasToJson(data as IntegralListDatas);
 			case HomeArticleEntity:
 				return homeArticleEntityToJson(data as HomeArticleEntity);
 			case HomeArticleDatas:
@@ -63,6 +83,18 @@ class JsonConvert<T> {
 		}
 		if(type == (IntegralEntity).toString()){
 			return IntegralEntity().fromJson(json);
+		}
+		if(type == (RankListEntity).toString()){
+			return RankListEntity().fromJson(json);
+		}
+		if(type == (RankListDatas).toString()){
+			return RankListDatas().fromJson(json);
+		}
+		if(type == (IntegralListEntity).toString()){
+			return IntegralListEntity().fromJson(json);
+		}
+		if(type == (IntegralListDatas).toString()){
+			return IntegralListDatas().fromJson(json);
 		}
 		if(type == (HomeArticleEntity).toString()){
 			return HomeArticleEntity().fromJson(json);
@@ -87,6 +119,18 @@ class JsonConvert<T> {
 		}
 		if(<IntegralEntity>[] is M){
 			return data.map<IntegralEntity>((e) => IntegralEntity().fromJson(e)).toList() as M;
+		}
+		if(<RankListEntity>[] is M){
+			return data.map<RankListEntity>((e) => RankListEntity().fromJson(e)).toList() as M;
+		}
+		if(<RankListDatas>[] is M){
+			return data.map<RankListDatas>((e) => RankListDatas().fromJson(e)).toList() as M;
+		}
+		if(<IntegralListEntity>[] is M){
+			return data.map<IntegralListEntity>((e) => IntegralListEntity().fromJson(e)).toList() as M;
+		}
+		if(<IntegralListDatas>[] is M){
+			return data.map<IntegralListDatas>((e) => IntegralListDatas().fromJson(e)).toList() as M;
 		}
 		if(<HomeArticleEntity>[] is M){
 			return data.map<HomeArticleEntity>((e) => HomeArticleEntity().fromJson(e)).toList() as M;

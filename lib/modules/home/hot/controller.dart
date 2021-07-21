@@ -20,26 +20,26 @@ class HotController extends BaseGetXController {
 
   int pageIndex = 0;
 
-  getHomeArticle(bool isLoading) async {
+    getHomeArticle(bool isLoading) async {
     await handlerStateRequest(
         _api.getHomeArticle(pageIndex),
         (value) {
           HomeArticleEntity data = HomeArticleEntity().fromJson(value);
-          var curPage = data.curPage;
-          var pageCount = data.pageCount;
+            var curPage = data.curPage;
+            var pageCount = data.pageCount;
 
-          if (curPage == 1 && data.datas!.isEmpty) {
-            loadState.value = LoadState.EMPTY;
-          } else if (curPage == pageCount) {
-            loadState.value = LoadState.SUCCESS;
-            refreshController.loadNoData();
-          } else {
-            loadState.value = LoadState.SUCCESS;
-            _homeArticleList.addAll(data.datas!);
-            refreshController.loadComplete();
-            pageIndex++;
-          }
-          refreshController.refreshCompleted();
+            if (curPage == 1 && data.datas!.isEmpty) {
+              loadState.value = LoadState.EMPTY;
+            } else if (curPage == pageCount) {
+              loadState.value = LoadState.SUCCESS;
+              refreshController.loadNoData();
+            } else {
+              loadState.value = LoadState.SUCCESS;
+              _homeArticleList.addAll(data.datas!);
+              refreshController.loadComplete();
+              pageIndex++;
+            }
+            refreshController.refreshCompleted();
         },
         isLoading: isLoading,
         failure: (e) {

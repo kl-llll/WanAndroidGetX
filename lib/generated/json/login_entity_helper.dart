@@ -1,4 +1,5 @@
 import 'package:wan_android_getx/bean/login_entity.dart';
+import 'package:hive/hive.dart';
 
 loginEntityFromJson(LoginEntity data, Map<String, dynamic> json) {
 	if (json['coinCount'] != null) {

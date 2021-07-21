@@ -6,7 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:wan_android_getx/app/base/base_getx_controller.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
-enum LoadState { LOADING, SUCCESS,DONE, FAILURE, EMPTY }
+enum LoadState { LOADING, SUCCESS, DONE, FAILURE, EMPTY }
 
 class LoadingState extends StatefulWidget {
   const LoadingState({
@@ -125,7 +125,7 @@ class LoadingPage extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.black, width: 1),
+                        border: Border.all(color: Colors.black, width: 2),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,8 +209,6 @@ class LoadingPage extends StatelessWidget {
 
     return list;
   }
-
-
 }
 
 class EmptyPage extends StatelessWidget {
@@ -283,19 +281,22 @@ class LoadSir<T extends BaseGetXController> extends StatelessWidget {
   final Widget child;
   final VoidCallback onPressed;
   final bool isBanner;
+  final bool isSkeleton;
 
-  LoadSir(
-      {required this.child,
-      required this.onPressed,
-      required this.controller,
-      this.isBanner = false});
+  LoadSir({
+    required this.child,
+    required this.onPressed,
+    required this.controller,
+    this.isBanner = false,
+    this.isSkeleton = true,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Obx(() {
       switch (controller.loadState.value) {
         case LoadState.LOADING:
-          return LoadingPage(isBanner);
+          return isSkeleton ? LoadingPage(isBanner) : LoadingState();
         case LoadState.EMPTY:
           return EmptyPage(onPressed: onPressed);
         case LoadState.FAILURE:

@@ -6,6 +6,10 @@ import 'package:wan_android_getx/modules/login/binding.dart';
 import 'package:wan_android_getx/modules/login/page.dart';
 import 'package:wan_android_getx/modules/main_page.dart';
 import 'package:wan_android_getx/modules/mine/binding.dart';
+import 'package:wan_android_getx/modules/mine/integral/binding.dart';
+import 'package:wan_android_getx/modules/mine/integral/page.dart';
+import 'package:wan_android_getx/modules/mine/rank/binding.dart';
+import 'package:wan_android_getx/modules/mine/rank/page.dart';
 import 'package:wan_android_getx/modules/mine/setting/binding.dart';
 import 'package:wan_android_getx/modules/mine/setting/page.dart';
 import 'package:wan_android_getx/modules/splash/page.dart';
@@ -45,6 +49,16 @@ abstract class AppPages {
       name: Routes.SETTING,
       page: () => SettingPage(),
       binding: SettingBinding(),
+    ),
+    GetPage(
+      name: Routes.INTEGRAL,
+      page: () => IntegralPage(),
+      binding: IntegralBinding(),
+    ),
+    GetPage(
+      name: Routes.RANK,
+      page: () => RankPage(),
+      binding: RankBinding(),
     ),
   ];
 }

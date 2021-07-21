@@ -62,7 +62,7 @@ class MinePage extends StatelessWidget {
                             color: context.canvasColor,
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: ListView(
+                          child: Column(
                             children: [
                               ListTile(
                                 title: Text(
@@ -112,22 +112,25 @@ class MinePage extends StatelessWidget {
   }
 
   Neumorphic _buildUserInfo(BuildContext context) {
-    Container buildInfo(String content, String title) {
-      return Container(
-        width: 100.w,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            titleText(content),
-            Container(
-              width: 8.w,
-              height: 2.h,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                  color: AppColors.secondColor),
-            ),
-            thirdText(title),
-          ],
+    Widget buildInfo(String content, String title, GestureTapCallback onTap) {
+      return GestureDetector(
+        onTap: controller.localLogin.isLogin.value ? onTap : null,
+        child: Container(
+          width: 100.w,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              titleText(content),
+              Container(
+                width: 8.w,
+                height: 2.h,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(3),
+                    color: AppColors.secondColor),
+              ),
+              thirdText(title),
+            ],
+          ),
         ),
       );
     }
@@ -156,12 +159,19 @@ class MinePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 buildInfo(
-                    "${controller.integralEntity.coinCount ?? "???"}", "积分"),
+                  "${controller.integralEntity.coinCount ?? "???"}",
+                  "积分",
+                  () => Get.toNamed(Routes.INTEGRAL),
+                ),
                 VerticalDivider(
                   color: Colors.grey,
                   width: 1,
                 ),
-                buildInfo("${controller.integralEntity.rank ?? "???"}", "排名"),
+                buildInfo(
+                  "${controller.integralEntity.rank ?? "???"}",
+                  "排名",
+                  () => Get.toNamed(Routes.RANK),
+                ),
               ],
             ),
             controller.loadState.value == LoadState.LOADING

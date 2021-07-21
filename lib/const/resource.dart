@@ -20,4 +20,13 @@ class R {
 
   /// ![preview](file://G:\9\wan_andorid_getx\assets\images\more.svg)
   static const String ASSETS_IMAGES_MORE_SVG = 'assets/images/more.svg';
+
+  /// ![preview](file://G:\9\wan_andorid_getx\assets\images\rank1.svg)
+  static const String ASSETS_IMAGES_RANK1_SVG = 'assets/images/rank1.svg';
+
+  /// ![preview](file://G:\9\wan_andorid_getx\assets\images\rank2.svg)
+  static const String ASSETS_IMAGES_RANK2_SVG = 'assets/images/rank2.svg';
+
+  /// ![preview](file://G:\9\wan_andorid_getx\assets\images\rank3.svg)
+  static const String ASSETS_IMAGES_RANK3_SVG = 'assets/images/rank3.svg';
 }
