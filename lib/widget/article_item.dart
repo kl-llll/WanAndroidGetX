@@ -33,8 +33,7 @@ class ArticleItem extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
-                  colors: data.fresh!
-                      ? [
+                  colors: data.fresh??false? [
                           AppColors.collocationColor.withAlpha(1),
                           context.primaryColor
                         ]
@@ -59,6 +58,7 @@ class ArticleItem extends StatelessWidget {
 
   Stack transparentLikeButton(
       BuildContext context, HomeArticleDatas data, HotController controller) {
+
     Future<bool> onLikeButtonTapped(bool isLiked) async {
       final bool success;
       if (isLiked) {
@@ -170,7 +170,7 @@ class ArticleItem extends StatelessWidget {
           ),
         );
 
-    if (data.fresh!) {
+    if (data.fresh??false) {
       widgetList.add(topWidget(true));
     }
 
@@ -178,8 +178,8 @@ class ArticleItem extends StatelessWidget {
       widgetList.add(topWidget(false));
     }
 
-    var tagsList = data.tags;
-    if (tagsList!.isNotEmpty) {
+    var tagsList = data.tags??[];
+    if (tagsList.isNotEmpty) {
       tagsList.forEach((element) {
         widgetList.add(topWidget(false, text: element.name!));
       });

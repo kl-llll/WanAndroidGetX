@@ -125,7 +125,7 @@ class LoadingPage extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.black, width: 2),
+                        border: Border.all(color: Colors.black, width: 1),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,7 +168,7 @@ class LoadingPage extends StatelessWidget {
                         height: 45.r,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.black, width: 2),
+                          border: Border.all(color: Colors.black, width: 1),
                         ),
                         child: Icon(
                           CupertinoIcons.heart_fill,

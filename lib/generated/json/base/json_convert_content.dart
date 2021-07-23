@@ -9,6 +9,8 @@ import 'package:wan_android_getx/bean/integral_entity.dart';
 import 'package:wan_android_getx/generated/json/integral_entity_helper.dart';
 import 'package:wan_android_getx/bean/rank_list_entity.dart';
 import 'package:wan_android_getx/generated/json/rank_list_entity_helper.dart';
+import 'package:wan_android_getx/bean/collect_entity.dart';
+import 'package:wan_android_getx/generated/json/collect_entity_helper.dart';
 import 'package:wan_android_getx/bean/integral_list_entity.dart';
 import 'package:wan_android_getx/generated/json/integral_list_entity_helper.dart';
 import 'package:wan_android_getx/bean/home_article_entity.dart';
@@ -35,6 +37,10 @@ class JsonConvert<T> {
 				return rankListEntityFromJson(data as RankListEntity, json) as T;
 			case RankListDatas:
 				return rankListDatasFromJson(data as RankListDatas, json) as T;
+			case CollectEntity:
+				return collectEntityFromJson(data as CollectEntity, json) as T;
+			case CollectDatas:
+				return collectDatasFromJson(data as CollectDatas, json) as T;
 			case IntegralListEntity:
 				return integralListEntityFromJson(data as IntegralListEntity, json) as T;
 			case IntegralListDatas:
@@ -60,6 +66,10 @@ class JsonConvert<T> {
 				return rankListEntityToJson(data as RankListEntity);
 			case RankListDatas:
 				return rankListDatasToJson(data as RankListDatas);
+			case CollectEntity:
+				return collectEntityToJson(data as CollectEntity);
+			case CollectDatas:
+				return collectDatasToJson(data as CollectDatas);
 			case IntegralListEntity:
 				return integralListEntityToJson(data as IntegralListEntity);
 			case IntegralListDatas:
@@ -89,6 +99,12 @@ class JsonConvert<T> {
 		}
 		if(type == (RankListDatas).toString()){
 			return RankListDatas().fromJson(json);
+		}
+		if(type == (CollectEntity).toString()){
+			return CollectEntity().fromJson(json);
+		}
+		if(type == (CollectDatas).toString()){
+			return CollectDatas().fromJson(json);
 		}
 		if(type == (IntegralListEntity).toString()){
 			return IntegralListEntity().fromJson(json);
@@ -125,6 +141,12 @@ class JsonConvert<T> {
 		}
 		if(<RankListDatas>[] is M){
 			return data.map<RankListDatas>((e) => RankListDatas().fromJson(e)).toList() as M;
+		}
+		if(<CollectEntity>[] is M){
+			return data.map<CollectEntity>((e) => CollectEntity().fromJson(e)).toList() as M;
+		}
+		if(<CollectDatas>[] is M){
+			return data.map<CollectDatas>((e) => CollectDatas().fromJson(e)).toList() as M;
 		}
 		if(<IntegralListEntity>[] is M){
 			return data.map<IntegralListEntity>((e) => IntegralListEntity().fromJson(e)).toList() as M;

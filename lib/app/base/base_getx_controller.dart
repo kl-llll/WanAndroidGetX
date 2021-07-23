@@ -10,7 +10,7 @@ typedef Success(dynamic value);
 typedef Failure(dynamic value);
 
 class BaseGetXController extends GetxController {
-  var loadState = LoadState.DONE.obs;
+  var loadState = LoadState.LOADING.obs;
 
   var exception = HttpException("", 0).obs;
 
@@ -37,9 +37,6 @@ class BaseGetXController extends GetxController {
       errorMessage.value = error.msg;
     });
   }
-
-
-
 
   Future handlerRequest(Future<dynamic> future, Success success,
       {Failure? failure}) async {

@@ -65,6 +65,7 @@ class MinePage extends StatelessWidget {
                           child: Column(
                             children: [
                               ListTile(
+                                onTap: () => Get.toNamed(Routes.COLLECT),
                                 title: Text(
                                   "收藏",
                                   style: TextStyle(color: context.shadowColor),
@@ -80,7 +81,6 @@ class MinePage extends StatelessWidget {
                               ),
                               Divider(height: 5.h),
                               ListTile(
-                                enabled: true,
                                 onTap: () => Get.toNamed(Routes.SETTING),
                                 title: Text(
                                   "设置",
@@ -140,7 +140,7 @@ class MinePage extends StatelessWidget {
       style: NeumorphicStyle(
           shape: NeumorphicShape.concave,
           boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
-          depth: 4,
+          depth: 2,
           shadowDarkColor: context.accentColor,
           lightSource: LightSource.topLeft,
           color: context.primaryColor),

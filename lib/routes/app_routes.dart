@@ -8,4 +8,5 @@ abstract class Routes {
   static const SETTING = '/setting';
   static const INTEGRAL = '/integral';
   static const RANK = '/rank';
+  static const COLLECT = '/collect';
 }

@@ -7,6 +7,7 @@ class MineApi {
   // 用户积分 排名 等级
   final String _userIntegral = "/lg/coin/userinfo/json";
 
+  // 退出登录
   final String _logout = "/user/logout/json";
 
   // 获取必应的每日一图
@@ -18,6 +19,9 @@ class MineApi {
 
   // 排行榜列表
   String _userRankList(int index) => "/coin/rank/$index/json";
+
+  // 收藏文章列表
+  String _collectList(int index) => "/lg/collect/list/$index/json";
 
   Future get getIntegral async => await _dio.get(_userIntegral);
 
@@ -34,5 +38,9 @@ class MineApi {
 
   Future getRankList(int index) async {
     return await _dio.get(_userRankList(index));
+  }
+
+  Future getCollectList(int index) async {
+    return await _dio.get(_collectList(index));
   }
 }

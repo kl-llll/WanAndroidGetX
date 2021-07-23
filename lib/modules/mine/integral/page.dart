@@ -13,24 +13,24 @@ class IntegralPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Scaffold(
-        appBar: customAppBar(title: "积分列表", elevation: 1),
-        body: LoadSir(
-          onPressed: () => controller.initData(),
-          controller: controller,
-          isSkeleton: false,
-          child: SmartRefresher(
-            controller: controller.refreshController,
-            enablePullDown: true,
-            enablePullUp: true,
-            onRefresh: () => controller.refresh(),
-            onLoading: () => controller.loadMore(),
-            child: ListView.builder(
+    return Scaffold(
+      appBar: customAppBar(title: "积分列表", elevation: 1),
+      body: LoadSir(
+        onPressed: () => controller.initData(),
+        controller: controller,
+        isSkeleton: false,
+        child: SmartRefresher(
+          controller: controller.refreshController,
+          enablePullDown: true,
+          enablePullUp: true,
+          onRefresh: () => controller.refresh(),
+          onLoading: () => controller.loadMore(),
+          child: Obx(() {
+            return ListView.builder(
               itemBuilder: (c, i) {
                 return Container(
                   padding:
-                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
+                  EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -52,10 +52,10 @@ class IntegralPage extends StatelessWidget {
                 );
               },
               itemCount: controller.getIntegralList.length,
-            ),
-          ),
+            );
+          }),
         ),
-      );
-    });
+      ),
+    );
   }
 }
