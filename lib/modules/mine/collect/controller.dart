@@ -18,7 +18,7 @@ class CollectController extends BaseGetXController {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
-  _getCollectList(bool isLoading) {
+  _getCollectList(bool isLoading) =>
     handlerStateRequest(
         _api.getCollectList(pageIndex),
         (value) {
@@ -28,14 +28,17 @@ class CollectController extends BaseGetXController {
 
           if (curPage == 1 && data.datas!.isEmpty) {
             loadState.value = LoadState.EMPTY;
-          } else if (curPage == pageCount) {
+          } else if (curPage!=1&&curPage == pageCount) {
             loadState.value = LoadState.SUCCESS;
-            _collectList.addAll(data.datas!);
-
+            pageIndex == 0
+                ? _collectList.value = data.datas!
+                : _collectList.addAll(data.datas!);
             refreshController.loadNoData();
           } else {
             loadState.value = LoadState.SUCCESS;
-            _collectList.addAll(data.datas!);
+            pageIndex == 0
+                ? _collectList.value = data.datas!
+                : _collectList.addAll(data.datas!);
             refreshController.loadComplete();
             pageIndex++;
           }
@@ -46,6 +49,17 @@ class CollectController extends BaseGetXController {
           refreshController.loadFailed();
           refreshController.refreshFailed();
         });
+
+
+  @override
+  unCollect(int id, int? originId) async {
+    bool isSuccess = false;
+    await handlerRequest(_api.unCollect(id, originId), (value) {
+      isSuccess = true;
+      Get.showCustomSnackbar("取消收藏成功!");
+      refresh();
+    });
+    return isSuccess;
   }
 
   @override

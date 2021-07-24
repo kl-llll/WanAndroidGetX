@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:wan_android_getx/bean/home_article_entity.dart';
 import 'package:wan_android_getx/const/constants.dart';
 import 'package:wan_android_getx/modules/home/hot/controller.dart';
-import 'package:wan_android_getx/modules/home/hot/page.dart';
 import 'package:wan_android_getx/widget/article_item.dart';
 
 import 'controller.dart';
@@ -23,11 +21,11 @@ class _SquarePageState extends State<SquarePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Obx(() {
-      return LoadSir(
-        onPressed: () => controller.initData(),
-        controller: controller,
-        child: SmartRefresher(
+    return LoadSir(
+      onPressed: () => controller.initData(),
+      controller: controller,
+      child: Obx(() {
+        return SmartRefresher(
           controller: controller.refreshController,
           enablePullDown: true,
           enablePullUp: true,
@@ -42,9 +40,9 @@ class _SquarePageState extends State<SquarePage>
             },
             itemCount: controller.getSquareList.length,
           ),
-        ),
-      );
-    });
+        );
+      }),
+    );
   }
 
   @override

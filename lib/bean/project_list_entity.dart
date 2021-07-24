@@ -1,8 +1,8 @@
 import 'package:wan_android_getx/generated/json/base/json_convert_content.dart';
 
-class HomeArticleEntity with JsonConvert<HomeArticleEntity> {
+class ProjectListEntity with JsonConvert<ProjectListEntity> {
 	int? curPage;
-	List<HomeArticleDatas>? datas;
+	List<ProjectListDatas>? datas;
 	int? offset;
 	bool? over;
 	int? pageCount;
@@ -10,7 +10,7 @@ class HomeArticleEntity with JsonConvert<HomeArticleEntity> {
 	int? total;
 }
 
-class HomeArticleDatas with JsonConvert<HomeArticleDatas> {
+class ProjectListDatas with JsonConvert<ProjectListDatas> {
 	String? apkLink;
 	int? audit;
 	String? author;
@@ -29,7 +29,6 @@ class HomeArticleDatas with JsonConvert<HomeArticleDatas> {
 	String? niceDate;
 	String? niceShareDate;
 	String? origin;
-	int? originId;
 	String? prefix;
 	String? projectLink;
 	int? publishTime;
@@ -39,16 +38,15 @@ class HomeArticleDatas with JsonConvert<HomeArticleDatas> {
 	String? shareUser;
 	int? superChapterId;
 	String? superChapterName;
-	List<HomeArticleDatasTags>? tags;
+	List<ProjectListDatasTags>? tags;
 	String? title;
 	int? type;
 	int? userId;
 	int? visible;
 	int? zan;
-
 }
 
-class HomeArticleDatasTags with JsonConvert<HomeArticleDatasTags> {
+class ProjectListDatasTags with JsonConvert<ProjectListDatasTags> {
 	String? name;
 	String? url;
 }

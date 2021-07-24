@@ -28,7 +28,9 @@ class SquareController extends BaseGetXController {
           loadState.value = LoadState.EMPTY;
         } else if (curPage == pageCount) {
           loadState.value = LoadState.SUCCESS;
-          refreshController.loadNoData();
+          pageIndex == 0
+              ? _squareList.value = data.datas!
+              : _squareList.addAll(data.datas!);          refreshController.loadNoData();
         } else {
           loadState.value = LoadState.SUCCESS;
 

@@ -13,7 +13,7 @@ class DioClientController extends GetxService {
     String cookiesPath = join(appDocDir.path, ".cookies/");
     HttpConfig dioConfig = HttpConfig(
         baseUrl: Apis.BaseUrl,
-        proxy: "192.168.1.150:8866",
+        // proxy: "192.168.1.150:8866",
         cookiesPath: cookiesPath);
     HttpClient client = HttpClient(dioConfig: dioConfig);
     return client;

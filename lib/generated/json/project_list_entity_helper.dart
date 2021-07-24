@@ -1,13 +1,13 @@
-import 'package:wan_android_getx/bean/home_article_entity.dart';
+import 'package:wan_android_getx/bean/project_list_entity.dart';
 
-homeArticleEntityFromJson(HomeArticleEntity data, Map<String, dynamic> json) {
+projectListEntityFromJson(ProjectListEntity data, Map<String, dynamic> json) {
 	if (json['curPage'] != null) {
 		data.curPage = json['curPage'] is String
 				? int.tryParse(json['curPage'])
 				: json['curPage'].toInt();
 	}
 	if (json['datas'] != null) {
-		data.datas = (json['datas'] as List).map((v) => HomeArticleDatas().fromJson(v)).toList();
+		data.datas = (json['datas'] as List).map((v) => ProjectListDatas().fromJson(v)).toList();
 	}
 	if (json['offset'] != null) {
 		data.offset = json['offset'] is String
@@ -35,7 +35,7 @@ homeArticleEntityFromJson(HomeArticleEntity data, Map<String, dynamic> json) {
 	return data;
 }
 
-Map<String, dynamic> homeArticleEntityToJson(HomeArticleEntity entity) {
+Map<String, dynamic> projectListEntityToJson(ProjectListEntity entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['curPage'] = entity.curPage;
 	data['datas'] =  entity.datas?.map((v) => v.toJson())?.toList();
@@ -47,7 +47,7 @@ Map<String, dynamic> homeArticleEntityToJson(HomeArticleEntity entity) {
 	return data;
 }
 
-homeArticleDatasFromJson(HomeArticleDatas data, Map<String, dynamic> json) {
+projectListDatasFromJson(ProjectListDatas data, Map<String, dynamic> json) {
 	if (json['apkLink'] != null) {
 		data.apkLink = json['apkLink'].toString();
 	}
@@ -110,11 +110,6 @@ homeArticleDatasFromJson(HomeArticleDatas data, Map<String, dynamic> json) {
 	if (json['origin'] != null) {
 		data.origin = json['origin'].toString();
 	}
-	if (json['originId'] != null) {
-		data.originId = json['originId'] is String
-				? int.tryParse(json['originId'])
-				: json['originId'].toInt();
-	}
 	if (json['prefix'] != null) {
 		data.prefix = json['prefix'].toString();
 	}
@@ -153,7 +148,7 @@ homeArticleDatasFromJson(HomeArticleDatas data, Map<String, dynamic> json) {
 		data.superChapterName = json['superChapterName'].toString();
 	}
 	if (json['tags'] != null) {
-		data.tags = (json['tags'] as List).map((v) => HomeArticleDatasTags().fromJson(v)).toList();
+		data.tags = (json['tags'] as List).map((v) => ProjectListDatasTags().fromJson(v)).toList();
 	}
 	if (json['title'] != null) {
 		data.title = json['title'].toString();
@@ -181,7 +176,7 @@ homeArticleDatasFromJson(HomeArticleDatas data, Map<String, dynamic> json) {
 	return data;
 }
 
-Map<String, dynamic> homeArticleDatasToJson(HomeArticleDatas entity) {
+Map<String, dynamic> projectListDatasToJson(ProjectListDatas entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['apkLink'] = entity.apkLink;
 	data['audit'] = entity.audit;
@@ -201,7 +196,6 @@ Map<String, dynamic> homeArticleDatasToJson(HomeArticleDatas entity) {
 	data['niceDate'] = entity.niceDate;
 	data['niceShareDate'] = entity.niceShareDate;
 	data['origin'] = entity.origin;
-	data['originId'] = entity.originId;
 	data['prefix'] = entity.prefix;
 	data['projectLink'] = entity.projectLink;
 	data['publishTime'] = entity.publishTime;
@@ -220,7 +214,7 @@ Map<String, dynamic> homeArticleDatasToJson(HomeArticleDatas entity) {
 	return data;
 }
 
-homeArticleDatasTagsFromJson(HomeArticleDatasTags data, Map<String, dynamic> json) {
+projectListDatasTagsFromJson(ProjectListDatasTags data, Map<String, dynamic> json) {
 	if (json['name'] != null) {
 		data.name = json['name'].toString();
 	}
@@ -230,7 +224,7 @@ homeArticleDatasTagsFromJson(HomeArticleDatasTags data, Map<String, dynamic> jso
 	return data;
 }
 
-Map<String, dynamic> homeArticleDatasTagsToJson(HomeArticleDatasTags entity) {
+Map<String, dynamic> projectListDatasTagsToJson(ProjectListDatasTags entity) {
 	final Map<String, dynamic> data = new Map<String, dynamic>();
 	data['name'] = entity.name;
 	data['url'] = entity.url;

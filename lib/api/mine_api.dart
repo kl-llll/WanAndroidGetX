@@ -23,6 +23,9 @@ class MineApi {
   // 收藏文章列表
   String _collectList(int index) => "/lg/collect/list/$index/json";
 
+  // 收藏列表取消收藏
+  String _unCollect(int id) => "/lg/uncollect/$id/json";
+
   Future get getIntegral async => await _dio.get(_userIntegral);
 
   Future get logout async => await _dio.get(_logout);
@@ -43,4 +46,7 @@ class MineApi {
   Future getCollectList(int index) async {
     return await _dio.get(_collectList(index));
   }
+
+  Future unCollect(int id, int? originId) async =>
+      await _dio.postFormData(_unCollect(id), data: {"originId": originId ?? -1});
 }

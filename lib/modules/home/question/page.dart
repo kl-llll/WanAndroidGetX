@@ -21,11 +21,11 @@ class _QuestionPageState extends State<QuestionPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Obx(() {
-      return LoadSir(
-        onPressed: () => controller.initData(),
-        controller: controller,
-        child: SmartRefresher(
+    return LoadSir(
+      onPressed: () => controller.initData(),
+      controller: controller,
+      child: Obx(() {
+        return SmartRefresher(
           controller: controller.refreshController,
           enablePullDown: true,
           enablePullUp: true,
@@ -40,9 +40,9 @@ class _QuestionPageState extends State<QuestionPage>
             },
             itemCount: controller.getSquareList.length,
           ),
-        ),
-      );
-    });
+        );
+      }),
+    );
   }
 
   @override

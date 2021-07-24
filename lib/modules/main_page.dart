@@ -3,6 +3,7 @@ import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:wan_android_getx/const/constants.dart';
 import 'package:wan_android_getx/modules/mine/page.dart';
+import 'package:wan_android_getx/modules/project/page.dart';
 
 import 'home/page.dart';
 import 'login/page.dart';
@@ -34,7 +35,7 @@ class _MainPage1State extends State<MainPage> {
   List<Widget> get _buildScreens {
     return [
       HomePage(),
-      LoginPage(),
+      ProjectPage(),
       LoginPage(),
       LoginPage(),
       MinePage(),

@@ -11,7 +11,6 @@ import 'controller.dart';
 
 class CollectPage extends StatelessWidget {
   final controller = Get.find<CollectController>();
-  final hotController = Get.find<HotController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,25 +19,24 @@ class CollectPage extends StatelessWidget {
       body: LoadSir(
         onPressed: () => controller.initData(),
         controller: controller,
-        child: SmartRefresher(
-          controller: controller.refreshController,
-          enablePullDown: true,
-          enablePullUp: true,
-          onRefresh: () => controller.refresh(),
-          onLoading: () => controller.loadMore(),
-          child: Obx(() {
-            return ListView.builder(
+        child: Obx(() {
+          return SmartRefresher(
+            controller: controller.refreshController,
+            enablePullDown: true,
+            enablePullUp: true,
+            onRefresh: () => controller.refresh(),
+            onLoading: () => controller.loadMore(),
+            child: ListView.builder(
               itemBuilder: (c, i) {
                 return ArticleItem(
                     context: context,
                     data: controller.getCollectList[i],
-                    controller: hotController);
+                    controller: controller);
               },
               itemCount: controller.getCollectList.length,
-            );
-          }),
-
-        ),
+            ),
+          );
+        }),
       ),
     );
   }

@@ -27,32 +27,25 @@ class _HomePageState extends State<HomePage>
         TabController(length: _titleList.length, vsync: this, initialIndex: 1);
   }
 
-  PreferredSizeWidget get _buildTabBar {
-    return PreferredSize(
-      child: Container(
-        height: 80.h,
-        color: context.accentColor,
-        padding: EdgeInsets.only(
-            top: context.mediaQueryPadding.top + 10.h,
-            bottom: 10.h,
-            left: 15.w,
-            right: 15.w),
-        child: Row(
-          children: [
-            Container(
-              width: 230.w,
-              child: Stack(
-                children: [
-                  _neumorphic,
-                  _topTabBar,
-                ],
-              ),
+  AppBar get _buildTabBar {
+    return AppBar(
+      brightness: Brightness.dark,
+      backgroundColor: context.accentColor,
+      title: Row(
+        children: [
+          Container(
+            height: 35.h,
+            width: 230.w,
+            child: Stack(
+              children: [
+                _neumorphic,
+                _topTabBar,
+              ],
             ),
-            _openSearch,
-          ],
-        ),
+          ),
+          _openSearch,
+        ],
       ),
-      preferredSize: Size(100.w, 80.h),
     );
   }
 
@@ -65,7 +58,7 @@ class _HomePageState extends State<HomePage>
         }
       },
       child: Neumorphic(
-        margin: EdgeInsets.only(left: 15.w),
+        margin: EdgeInsets.only(left: 13.w),
         style: NeumorphicStyle(
             shape: NeumorphicShape.convex,
             boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(15)),
@@ -77,7 +70,7 @@ class _HomePageState extends State<HomePage>
         child: Container(
           alignment: Alignment.center,
           width: 85.w,
-          height: 80.h,
+          height: 35.h,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

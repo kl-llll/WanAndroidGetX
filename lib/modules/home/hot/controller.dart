@@ -20,26 +20,27 @@ class HotController extends BaseGetXController {
 
   int pageIndex = 0;
 
-    getHomeArticle(bool isLoading) async {
+  getHomeArticle(bool isLoading) async {
     await handlerStateRequest(
         _api.getHomeArticle(pageIndex),
         (value) {
           HomeArticleEntity data = HomeArticleEntity().fromJson(value);
-            var curPage = data.curPage;
-            var pageCount = data.pageCount;
+          var curPage = data.curPage;
+          var pageCount = data.pageCount;
 
-            if (curPage == 1 && data.datas!.isEmpty) {
-              loadState.value = LoadState.EMPTY;
-            } else if (curPage == pageCount) {
-              loadState.value = LoadState.SUCCESS;
-              refreshController.loadNoData();
-            } else {
-              loadState.value = LoadState.SUCCESS;
-              _homeArticleList.addAll(data.datas!);
-              refreshController.loadComplete();
-              pageIndex++;
-            }
-            refreshController.refreshCompleted();
+          if (curPage == 1 && data.datas!.isEmpty) {
+            loadState.value = LoadState.EMPTY;
+          } else if (curPage == pageCount) {
+            loadState.value = LoadState.SUCCESS;
+            _homeArticleList.addAll(data.datas!);
+            refreshController.loadNoData();
+          } else {
+            loadState.value = LoadState.SUCCESS;
+            _homeArticleList.addAll(data.datas!);
+            refreshController.loadComplete();
+            pageIndex++;
+          }
+          refreshController.refreshCompleted();
         },
         isLoading: isLoading,
         failure: (e) {
@@ -70,6 +71,7 @@ class HotController extends BaseGetXController {
     });
   }
 
+  @override
   collect(int id) async {
     bool isSuccess = false;
     await handlerRequest(_api.collect(id), (value) {
@@ -79,7 +81,8 @@ class HotController extends BaseGetXController {
     return isSuccess;
   }
 
-  unCollect(int id) async {
+  @override
+  unCollect(int id,int? originId) async {
     bool isSuccess = false;
     await handlerRequest(_api.unCollect(id), (value) {
       isSuccess = true;

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:wan_android_getx/const/colors.dart';
 import 'package:wan_android_getx/routes/app_pages.dart';
 import 'package:wan_android_getx/utils/dependency_injection.dart';
 
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         designSize: Size(360, 690),
         builder: () => RefreshConfiguration(
-          headerBuilder: () => WaterDropHeader(),
+          headerBuilder: () => MaterialClassicHeader(color: AppColors.defaultDarkColor,),
           // 配置默认头部指示器,假如你每个页面的头部指示器都一样的话,你需要设置这个
           footerBuilder: () => ClassicFooter(),
           // 配置默认底部指示器

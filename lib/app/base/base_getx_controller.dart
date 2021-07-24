@@ -50,6 +50,10 @@ class BaseGetXController extends GetxController {
     });
   }
 
+  collect(int id) async {}
+
+  unCollect(int id,int? originId) async {}
+
   _checkLogin(HttpException error) {
     if (error.code == -1001) {
       Get.showCustomSnackbar("请重新登录", title: "登录失效");

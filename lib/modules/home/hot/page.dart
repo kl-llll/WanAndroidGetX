@@ -30,12 +30,12 @@ class _HotPageState extends State<HotPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Obx(() {
-      return LoadSir(
-        onPressed: () => controller.initData(),
-        controller: controller,
-        isBanner: true,
-        child: SmartRefresher(
+    return LoadSir(
+      onPressed: () => controller.initData(),
+      controller: controller,
+      isBanner: true,
+      child: Obx(() {
+        return SmartRefresher(
           controller: controller.refreshController,
           enablePullDown: true,
           enablePullUp: true,
@@ -54,9 +54,9 @@ class _HotPageState extends State<HotPage>
               ),
             ],
           ),
-        ),
-      );
-    });
+        );
+      }),
+    );
   }
 
   Widget _buildSwiper(List<BannerDataEntity> list) {

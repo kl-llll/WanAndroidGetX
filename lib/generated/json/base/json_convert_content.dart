@@ -9,12 +9,16 @@ import 'package:wan_android_getx/bean/integral_entity.dart';
 import 'package:wan_android_getx/generated/json/integral_entity_helper.dart';
 import 'package:wan_android_getx/bean/rank_list_entity.dart';
 import 'package:wan_android_getx/generated/json/rank_list_entity_helper.dart';
+import 'package:wan_android_getx/bean/project_tree_entity.dart';
+import 'package:wan_android_getx/generated/json/project_tree_entity_helper.dart';
 import 'package:wan_android_getx/bean/collect_entity.dart';
 import 'package:wan_android_getx/generated/json/collect_entity_helper.dart';
 import 'package:wan_android_getx/bean/integral_list_entity.dart';
 import 'package:wan_android_getx/generated/json/integral_list_entity_helper.dart';
 import 'package:wan_android_getx/bean/home_article_entity.dart';
 import 'package:wan_android_getx/generated/json/home_article_entity_helper.dart';
+import 'package:wan_android_getx/bean/project_list_entity.dart';
+import 'package:wan_android_getx/generated/json/project_list_entity_helper.dart';
 import 'package:wan_android_getx/bean/login_entity.dart';
 import 'package:wan_android_getx/generated/json/login_entity_helper.dart';
 
@@ -37,6 +41,8 @@ class JsonConvert<T> {
 				return rankListEntityFromJson(data as RankListEntity, json) as T;
 			case RankListDatas:
 				return rankListDatasFromJson(data as RankListDatas, json) as T;
+			case ProjectTreeEntity:
+				return projectTreeEntityFromJson(data as ProjectTreeEntity, json) as T;
 			case CollectEntity:
 				return collectEntityFromJson(data as CollectEntity, json) as T;
 			case CollectDatas:
@@ -51,6 +57,12 @@ class JsonConvert<T> {
 				return homeArticleDatasFromJson(data as HomeArticleDatas, json) as T;
 			case HomeArticleDatasTags:
 				return homeArticleDatasTagsFromJson(data as HomeArticleDatasTags, json) as T;
+			case ProjectListEntity:
+				return projectListEntityFromJson(data as ProjectListEntity, json) as T;
+			case ProjectListDatas:
+				return projectListDatasFromJson(data as ProjectListDatas, json) as T;
+			case ProjectListDatasTags:
+				return projectListDatasTagsFromJson(data as ProjectListDatasTags, json) as T;
 			case LoginEntity:
 				return loginEntityFromJson(data as LoginEntity, json) as T;    }
 		return data as T;
@@ -66,6 +78,8 @@ class JsonConvert<T> {
 				return rankListEntityToJson(data as RankListEntity);
 			case RankListDatas:
 				return rankListDatasToJson(data as RankListDatas);
+			case ProjectTreeEntity:
+				return projectTreeEntityToJson(data as ProjectTreeEntity);
 			case CollectEntity:
 				return collectEntityToJson(data as CollectEntity);
 			case CollectDatas:
@@ -80,6 +94,12 @@ class JsonConvert<T> {
 				return homeArticleDatasToJson(data as HomeArticleDatas);
 			case HomeArticleDatasTags:
 				return homeArticleDatasTagsToJson(data as HomeArticleDatasTags);
+			case ProjectListEntity:
+				return projectListEntityToJson(data as ProjectListEntity);
+			case ProjectListDatas:
+				return projectListDatasToJson(data as ProjectListDatas);
+			case ProjectListDatasTags:
+				return projectListDatasTagsToJson(data as ProjectListDatasTags);
 			case LoginEntity:
 				return loginEntityToJson(data as LoginEntity);
 			}
@@ -99,6 +119,9 @@ class JsonConvert<T> {
 		}
 		if(type == (RankListDatas).toString()){
 			return RankListDatas().fromJson(json);
+		}
+		if(type == (ProjectTreeEntity).toString()){
+			return ProjectTreeEntity().fromJson(json);
 		}
 		if(type == (CollectEntity).toString()){
 			return CollectEntity().fromJson(json);
@@ -121,6 +144,15 @@ class JsonConvert<T> {
 		if(type == (HomeArticleDatasTags).toString()){
 			return HomeArticleDatasTags().fromJson(json);
 		}
+		if(type == (ProjectListEntity).toString()){
+			return ProjectListEntity().fromJson(json);
+		}
+		if(type == (ProjectListDatas).toString()){
+			return ProjectListDatas().fromJson(json);
+		}
+		if(type == (ProjectListDatasTags).toString()){
+			return ProjectListDatasTags().fromJson(json);
+		}
 		if(type == (LoginEntity).toString()){
 			return LoginEntity().fromJson(json);
 		}
@@ -142,6 +174,9 @@ class JsonConvert<T> {
 		if(<RankListDatas>[] is M){
 			return data.map<RankListDatas>((e) => RankListDatas().fromJson(e)).toList() as M;
 		}
+		if(<ProjectTreeEntity>[] is M){
+			return data.map<ProjectTreeEntity>((e) => ProjectTreeEntity().fromJson(e)).toList() as M;
+		}
 		if(<CollectEntity>[] is M){
 			return data.map<CollectEntity>((e) => CollectEntity().fromJson(e)).toList() as M;
 		}
@@ -162,6 +197,15 @@ class JsonConvert<T> {
 		}
 		if(<HomeArticleDatasTags>[] is M){
 			return data.map<HomeArticleDatasTags>((e) => HomeArticleDatasTags().fromJson(e)).toList() as M;
+		}
+		if(<ProjectListEntity>[] is M){
+			return data.map<ProjectListEntity>((e) => ProjectListEntity().fromJson(e)).toList() as M;
+		}
+		if(<ProjectListDatas>[] is M){
+			return data.map<ProjectListDatas>((e) => ProjectListDatas().fromJson(e)).toList() as M;
+		}
+		if(<ProjectListDatasTags>[] is M){
+			return data.map<ProjectListDatasTags>((e) => ProjectListDatasTags().fromJson(e)).toList() as M;
 		}
 		if(<LoginEntity>[] is M){
 			return data.map<LoginEntity>((e) => LoginEntity().fromJson(e)).toList() as M;

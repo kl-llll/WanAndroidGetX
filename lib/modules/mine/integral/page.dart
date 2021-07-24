@@ -19,14 +19,14 @@ class IntegralPage extends StatelessWidget {
         onPressed: () => controller.initData(),
         controller: controller,
         isSkeleton: false,
-        child: SmartRefresher(
-          controller: controller.refreshController,
-          enablePullDown: true,
-          enablePullUp: true,
-          onRefresh: () => controller.refresh(),
-          onLoading: () => controller.loadMore(),
-          child: Obx(() {
-            return ListView.builder(
+        child: Obx(() {
+          return SmartRefresher(
+            controller: controller.refreshController,
+            enablePullDown: true,
+            enablePullUp: true,
+            onRefresh: () => controller.refresh(),
+            onLoading: () => controller.loadMore(),
+            child: ListView.builder(
               itemBuilder: (c, i) {
                 return Container(
                   padding:
@@ -52,9 +52,9 @@ class IntegralPage extends StatelessWidget {
                 );
               },
               itemCount: controller.getIntegralList.length,
-            );
-          }),
-        ),
+            ),
+          );
+        }),
       ),
     );
   }

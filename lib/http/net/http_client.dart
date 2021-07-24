@@ -71,6 +71,37 @@ class HttpClient {
     }
   }
 
+  Future postFormData(String uri,
+      {data,
+      Map<String, dynamic>? queryParameters,
+      Options? options,
+      CancelToken? cancelToken,
+      ProgressCallback? onSendProgress,
+      ProgressCallback? onReceiveProgress,
+      HttpTransformer? httpTransformer}) async {
+    try {
+      var response = await _dio.post(
+        uri,
+        data: FormData.fromMap(data),
+        queryParameters: queryParameters,
+        options: options,
+        cancelToken: cancelToken,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+      );
+      HttpResponse appResponse =
+          handleResponse(response, httpTransformer: httpTransformer);
+      if (appResponse.ok) {
+        return appResponse.data;
+      } else {
+        throw HttpException(appResponse.error!.msg, appResponse.error!.code);
+      }
+    } on HttpException catch (e) {
+      Log.e(e);
+      throw e;
+    }
+  }
+
   Future patch(String uri,
       {data,
       Map<String, dynamic>? queryParameters,

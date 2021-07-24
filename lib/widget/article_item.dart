@@ -5,10 +5,10 @@ import 'package:like_button/like_button.dart';
 import 'package:wan_android_getx/const/constants.dart';
 import 'package:wan_android_getx/modules/home/hot/controller.dart';
 
-class ArticleItem extends StatelessWidget {
+class ArticleItem<T extends BaseGetXController> extends StatelessWidget {
   final BuildContext context;
   final HomeArticleDatas data;
-  final HotController controller;
+  final T controller;
 
   const ArticleItem(
       {required this.context, required this.data, required this.controller});
@@ -57,12 +57,12 @@ class ArticleItem extends StatelessWidget {
   }
 
   Stack transparentLikeButton(
-      BuildContext context, HomeArticleDatas data, HotController controller) {
+      BuildContext context, HomeArticleDatas data, T controller) {
 
     Future<bool> onLikeButtonTapped(bool isLiked) async {
       final bool success;
       if (isLiked) {
-        success = await controller.unCollect(data.id!);
+        success = await controller.unCollect(data.id!,data.originId);
       } else {
         success = await controller.collect(data.id!);
       }
