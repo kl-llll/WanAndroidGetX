@@ -11,8 +11,8 @@ projectTreeEntityFromJson(ProjectTreeEntity data, Map<String, dynamic> json) {
 	}
 	if (json['id'] != null) {
 		data.id = json['id'] is String
-				? double.tryParse(json['id'])
-				: json['id'].toDouble();
+				? int.tryParse(json['id'])
+				: json['id'].toInt();
 	}
 	if (json['name'] != null) {
 		data.name = json['name'].toString();

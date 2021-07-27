@@ -1,8 +1,6 @@
 // 成功回调
 import 'dart:io';
 
-import 'package:wan_android_getx/utils/log_util.dart';
-
 import 'dio_new.dart';
 
 HttpResponse handleResponse(Response? response,
@@ -52,7 +50,7 @@ HttpException _parseException(Exception error) {
       case DioErrorType.connectTimeout:
       case DioErrorType.receiveTimeout:
       case DioErrorType.sendTimeout:
-        return NetworkException(message: error.error!.msg);
+        return NetworkException(message: "请求超时");
       case DioErrorType.cancel:
         return CancelException(error.error.msg);
       case DioErrorType.response:

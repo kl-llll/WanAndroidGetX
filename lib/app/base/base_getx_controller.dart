@@ -16,7 +16,15 @@ class BaseGetXController extends GetxController {
 
   var errorMessage = "加载失败".obs;
 
-  void initData() {}
+  initData() {}
+
+  refresh() {}
+
+  loadMore() {}
+
+  collect(int id) async {}
+
+  unCollect(int id, int? originId) async {}
 
   Future handlerStateRequest(Future<dynamic> future, Success success,
       {bool isLoading = false, Failure? failure}) async {
@@ -49,10 +57,6 @@ class BaseGetXController extends GetxController {
       }
     });
   }
-
-  collect(int id) async {}
-
-  unCollect(int id,int? originId) async {}
 
   _checkLogin(HttpException error) {
     if (error.code == -1001) {

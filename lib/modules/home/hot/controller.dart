@@ -94,15 +94,15 @@ class HotController extends BaseGetXController {
   @override
   initData() async {
     getBanner;
-    await getTopArticle;
-    await getHomeArticle(true);
+     getTopArticle;
+     getHomeArticle(true);
   }
 
   refresh() async {
     pageIndex = 0;
     getBanner;
-    await getTopArticle;
-    await getHomeArticle(false);
+     getTopArticle;
+     getHomeArticle(false);
   }
 
   loadMore() {

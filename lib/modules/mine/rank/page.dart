@@ -45,7 +45,7 @@ class RankPage extends StatelessWidget {
                             ),
                             ListTile(
                               title: titleText(e.username.toString()),
-                              subtitle: secondText(e.coinCount.toString()),
+                              subtitle: secondText("积分:${e.coinCount.toString()}"),
                               leading: Padding(
                                 padding: EdgeInsets.all(10.r),
                                 child: Text(
@@ -148,10 +148,10 @@ class RankPage extends StatelessWidget {
               ),
               Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 8.w),
+                padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 5.w),
                 child: Text(
                   userName,
-                  style: TextStyle(color: context.textTheme.bodyText1!.color),
+                  style: TextStyle(color:Get.theme.accentColor,fontSize: 18.sp,fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -169,8 +169,8 @@ class RankPage extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 svg,
-                width: isFirst ? 130.r : 100.r,
-                height: isFirst ? 130.r : 100.r,
+                width: isFirst ? 140.r : 100.r,
+                height: isFirst ? 140.r : 100.r,
               ),
               Positioned(
                 bottom: isFirst ? 20.h : 15.h,
@@ -189,6 +189,7 @@ class RankPage extends StatelessWidget {
         child: Obx(() {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               _rank123(
                   context,

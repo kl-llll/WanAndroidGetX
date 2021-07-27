@@ -34,9 +34,9 @@ class HttpClient {
       } else {
         throw HttpException(appResponse.error!.msg, appResponse.error!.code);
       }
-    } on HttpException catch (e) {
+    } on Exception catch (e) {
       Log.e(e);
-      throw e;
+      throw handleException(e).error!;
     }
   }
 
@@ -65,9 +65,9 @@ class HttpClient {
       } else {
         throw HttpException(appResponse.error!.msg, appResponse.error!.code);
       }
-    } on HttpException catch (e) {
+    } on Exception catch (e) {
       Log.e(e);
-      throw e;
+      throw handleException(e).error!;
     }
   }
 
@@ -96,9 +96,9 @@ class HttpClient {
       } else {
         throw HttpException(appResponse.error!.msg, appResponse.error!.code);
       }
-    } on HttpException catch (e) {
+    } on Exception catch (e) {
       Log.e(e);
-      throw e;
+      throw handleException(e).error!;
     }
   }
 
@@ -127,9 +127,9 @@ class HttpClient {
       } else {
         throw HttpException(appResponse.error!.msg, appResponse.error!.code);
       }
-    } on HttpException catch (e) {
+    } on Exception catch (e) {
       Log.e(e);
-      throw e;
+      throw handleException(e).error!;
     }
   }
 
@@ -154,9 +154,9 @@ class HttpClient {
       } else {
         throw HttpException(appResponse.error!.msg, appResponse.error!.code);
       }
-    } on HttpException catch (e) {
+    } on Exception catch (e) {
       Log.e(e);
-      throw e;
+      throw handleException(e).error!;
     }
   }
 
@@ -181,9 +181,9 @@ class HttpClient {
       } else {
         throw HttpException(appResponse.error!.msg, appResponse.error!.code);
       }
-    } on HttpException catch (e) {
+    } on Exception catch (e) {
       Log.e(e);
-      throw e;
+      throw handleException(e).error!;
     }
   }
 
