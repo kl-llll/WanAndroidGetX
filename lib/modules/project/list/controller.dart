@@ -6,19 +6,22 @@ import 'package:wan_android_getx/bean/project_list_entity.dart';
 import 'package:wan_android_getx/widget/load_sir.dart';
 
 class ListController extends BaseGetXController {
+  final int cId;
+
+  ListController(this.cId);
+
   var _api = Get.find<ProjectApi>();
 
   var _projectList = <ProjectListDatas>[].obs;
 
   List<ProjectListDatas> get getProjectList => _projectList;
 
-  late RefreshController refreshController;
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
 
-  var pageIndex = 0;
+  var pageIndex = 1;
 
-  var cId = 0;
-
-  requestProjectList(bool isLoading, int cId) => handlerStateRequest(
+  requestProjectList(bool isLoading) => handlerStateRequest(
         _api.getProjectList(pageIndex, cId),
         (value) {
           ProjectListEntity data = ProjectListEntity().fromJson(value);
@@ -29,13 +32,13 @@ class ListController extends BaseGetXController {
             loadState.value = LoadState.EMPTY;
           } else if (curPage != 1 && curPage == pageCount) {
             loadState.value = LoadState.SUCCESS;
-            pageIndex == 0
+            pageIndex == 1
                 ? _projectList.value = data.datas!
                 : _projectList.addAll(data.datas!);
             refreshController.loadNoData();
           } else {
             loadState.value = LoadState.SUCCESS;
-            pageIndex == 0
+            pageIndex == 1
                 ? _projectList.value = data.datas!
                 : _projectList.addAll(data.datas!);
             refreshController.loadComplete();
@@ -52,20 +55,24 @@ class ListController extends BaseGetXController {
 
   @override
   initData() {
-    requestProjectList(true, cId);
+    requestProjectList(true);
   }
 
   @override
   refresh() {
-    requestProjectList(false, cId);
+    pageIndex=1;
+    requestProjectList(false);
   }
 
 
+  @override
+  loadMore() {
+    requestProjectList(false);
+  }
 
   @override
   void onInit() {
     super.onInit();
     initData();
-    refreshController = new RefreshController(initialRefresh: false);
   }
 }

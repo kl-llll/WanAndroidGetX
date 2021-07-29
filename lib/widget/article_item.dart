@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:like_button/like_button.dart';
 import 'package:wan_android_getx/const/constants.dart';
-import 'package:wan_android_getx/modules/home/hot/controller.dart';
 
 class ArticleItem<T extends BaseGetXController> extends StatelessWidget {
   final BuildContext context;
@@ -56,7 +55,7 @@ class ArticleItem<T extends BaseGetXController> extends StatelessWidget {
     );
   }
 
-  Stack transparentLikeButton(
+  Widget transparentLikeButton(
       BuildContext context, HomeArticleDatas data, T controller) {
 
     Future<bool> onLikeButtonTapped(bool isLiked) async {

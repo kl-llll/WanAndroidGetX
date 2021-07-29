@@ -6,6 +6,7 @@ import 'package:wan_android_getx/modules/project/list/page.dart';
 import 'package:wan_android_getx/widget/circle_tab_indicator.dart';
 
 import 'controller.dart';
+import 'list/controller.dart';
 
 class ProjectPage extends StatefulWidget {
   const ProjectPage({Key? key}) : super(key: key);
@@ -41,7 +42,9 @@ class _ProjectPageState extends State<ProjectPage>
           return TabBarView(
             controller: controller.tabController,
             children: controller.getTreeList.map((e) {
-              return new ListPage(cId: e.id!);
+              int cId = e.id!;
+              Get.lazyPut(() => ListController(cId), tag: cId.toString());
+              return ListPage(cId: cId);
             }).toList(),
           );
         }),

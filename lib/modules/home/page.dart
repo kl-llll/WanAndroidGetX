@@ -72,12 +72,13 @@ class _HomePageState extends State<HomePage>
           width: 85.w,
           height: 35.h,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text("123"),
+              Text("搜索"),
               Icon(
                 CupertinoIcons.search,
                 color: context.accentColor,
+                size: 22.0,
               ),
             ],
           ),

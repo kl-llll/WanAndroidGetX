@@ -13,5 +13,5 @@ class ProjectApi {
   Future get getProjectTree => _dio.get(_projectTree);
 
   Future getProjectList(int pageIndex, int cId) =>
-      _dio.get(_getProjectList(pageIndex), queryParameters: {"cId": cId});
+      _dio.get(_getProjectList(pageIndex), queryParameters: {"cid": cId});
 }

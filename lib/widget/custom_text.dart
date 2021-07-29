@@ -8,7 +8,7 @@ appBarText(String text){
 
 titleText(String text) {
   return Text(text,
-      style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold));
+      style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),maxLines: 10,);
 }
 
 secondText(String text) {
