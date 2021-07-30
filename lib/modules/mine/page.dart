@@ -7,7 +7,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:wan_android_getx/app/local/local_login.dart';
 import 'package:wan_android_getx/const/constants.dart';
 import 'package:wan_android_getx/modules/login/page.dart';
 
@@ -15,6 +14,7 @@ import 'controller.dart';
 
 class MinePage extends StatelessWidget {
   final MineController controller = Get.put(MineController());
+
 
   @override
   Widget build(BuildContext context) {
