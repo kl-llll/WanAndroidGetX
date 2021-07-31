@@ -23,7 +23,8 @@ class ListController extends BaseGetXController {
 
   requestProjectList(bool isLoading) => handlerStateRequest(
         _api.getProjectList(pageIndex, cId),
-        (value) {
+        (value)  {
+
           ProjectListEntity data = ProjectListEntity().fromJson(value);
           var curPage = data.curPage;
           var pageCount = data.pageCount;

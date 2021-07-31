@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:wan_android_getx/const/constants.dart';
+import 'package:wan_android_getx/utils/extension/string_extension.dart';
 import 'package:wan_android_getx/widget/app_bar_icon.dart';
 import 'controller.dart';
 
@@ -15,11 +14,9 @@ class WebPage extends StatelessWidget {
           key: controller.webViewKey,
           initialUrlRequest: URLRequest(url: Uri.parse(controller.url.value)),
           onLoadStart: (_, Uri? url) {
-            Log.i('WebView onLoadStart: $url');
             controller.loadState.value = LoadState.LOADING;
           },
           onLoadStop: (webController, url) {
-            Log.i('WebView onLoadStop: $url');
             webController.getTitle().then((value) {
               controller.loadState.value = LoadState.SUCCESS;
               controller.title.value = value!;
@@ -63,7 +60,7 @@ class WebPage extends StatelessWidget {
                     ),
                   )
                 : appBarText(
-                    controller.title.value,
+                    controller.title.value.overflow,
                   );
           }),
           actions: [

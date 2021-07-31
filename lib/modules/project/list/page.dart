@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +39,7 @@ class _ListPageState extends State<ListPage>
     return LoadSir(
       onPressed: () => controller.initData(),
       controller: controller,
+      loadType: LoadType.PROJECT,
       child: Obx(() {
         return SmartRefresher(
             controller: controller.refreshController,
@@ -49,82 +52,75 @@ class _ListPageState extends State<ListPage>
               itemCount: controller.getProjectList.length,
               itemBuilder: (BuildContext context, int index) {
                 ProjectListDatas data = controller.getProjectList[index];
-                return Neumorphic(
-                  margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
-                  style: NeumorphicStyle(
-                      shape: NeumorphicShape.concave,
-                      boxShape: NeumorphicBoxShape.roundRect(
-                          BorderRadius.circular(10)),
-                      depth: 4,
-                      lightSource: LightSource.topLeft,
-                      color: context.primaryColor),
-                  child: Container(
-                    color: Get.theme.primaryColor,
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          width: double.maxFinite,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 5.w, vertical: 3.h),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                stops: [
-                                  0,
-                                  0.4
-                                ],
-                                colors: [
-                                  AppColors.secondColor.withAlpha(200),
-                                  context.accentColor
-                                ]),
-                          ),
-                          child: Text(data.niceDate!,
-                              style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: Get.theme.primaryColor)),
-                        ),
-                        Stack(children: [
-                          CachedNetworkImage(
-                            height: 150.h,
-                            width: double.maxFinite,
-                            imageUrl: data.envelopePic!,
-                            placeholder: (context, url) => LoadingState(),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
-                            fit: BoxFit.fitWidth,
-                          ),
-                          Positioned(
-                            bottom: 5,
-                            right: 5,
-                            child: transparentLikeButton(context, data, controller),
-                          ),
-                        ]),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 5.h, horizontal: 5.w),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              titleText(data.title!),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              secondText(data.desc!),
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              secondText(data.shareUser!.isEmpty
-                                  ? "作者:${data.author!}"
-                                  : "分享人:${data.shareUser!}"),
-                            ],
-                          ),
-                        )
-                      ],
+                return GestureDetector(
+                  onTap: ()=>Get.toNamed(Routes.WEB, arguments: {"url": data.link}),
+                  child: Neumorphic(
+                    margin: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+                    style: NeumorphicStyle(
+                        shape: NeumorphicShape.concave,
+                        boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.circular(10)),
+                        depth: 4,
+                        lightSource: LightSource.topLeft,
+                        color: context.primaryColor),
+                    child: Container(
+                      color: Get.theme.primaryColor,
+                      child: Column(
+                        children: [
+                          Stack(children: [
+                            CachedNetworkImage(
+                              height: 150.h,
+                              width: double.maxFinite,
+                              imageUrl: data.envelopePic!,
+                              placeholder: (context, url) => LoadingState(),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                              fit: BoxFit.fitWidth,
+                            ),
+                            Positioned(
+                              bottom: 5,
+                              right: 5,
+                              child: transparentLikeButton(
+                                  context, data, controller),
+                            ),
+                            Positioned(
+                              child: _buildNiceDate(data),
+                            )
+                          ]),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5.h, horizontal: 5.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                titleText(data.title!),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                secondText(data.desc!),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    secondText(data.shareUser!.isEmpty
+                                        ? "作者:${data.author!}"
+                                        : "分享人:${data.shareUser!}"),
+                                    Row(
+                                      children: buildTagWidget(data),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -134,6 +130,25 @@ class _ListPageState extends State<ListPage>
               crossAxisSpacing: 2.0,
             ));
       }),
+    );
+  }
+
+  Container _buildNiceDate(ProjectListDatas data) {
+    return Container(
+      alignment: Alignment.center,
+      // width: double.maxFinite,
+      padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Get.theme.accentColor, Colors.transparent]),
+      ),
+      child: Text(data.niceDate!,
+          style: TextStyle(
+              fontSize: 14.sp,
+              color: Get.theme.primaryColor,
+              fontWeight: FontWeight.w500)),
     );
   }
 
@@ -159,9 +174,25 @@ class _ListPageState extends State<ListPage>
               depth: 2,
               lightSource: LightSource.topLeft,
               color: Colors.transparent),
-          child: Container(
-            width: 45.r,
-            height: 45.r,
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 4,
+                      sigmaY: 4,
+                    ),
+                    child: Container(),
+                  ),
+                ),
+              ),
+              Container(
+                width: 45.r,
+                height: 45.r,
+              ),
+            ],
           ),
         ),
         LikeButton(
@@ -186,6 +217,33 @@ class _ListPageState extends State<ListPage>
         )
       ],
     );
+  }
+
+  List<Widget> buildTagWidget(ProjectListDatas data) {
+    List<Widget> widgetList = [];
+
+    tagWidget(String text) => Neumorphic(
+          style: NeumorphicStyle(
+            shape: NeumorphicShape.concave,
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(5)),
+            depth: 1,
+            lightSource: LightSource.topLeft,
+            color: text.isNotEmpty
+                ? AppColors.secondColor
+                : AppColors.collocationColor,
+          ),
+          margin: EdgeInsets.symmetric(horizontal: 5.w),
+          padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 5.w),
+          child: Container(
+            child: topText(text),
+          ),
+        );
+
+    data.tags!.forEach((element) {
+      widgetList.add(tagWidget(element.name!));
+    });
+
+    return widgetList;
   }
 
   @override
