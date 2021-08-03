@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:wan_android_getx/api/collect_api.dart';
 import 'package:wan_android_getx/api/project_api.dart';
 
 import 'controller.dart';
@@ -8,6 +9,7 @@ class ProjectBinding extends Bindings {
   void dependencies() {
     Get.lazyPut(() => ProjectController());
     Get.lazyPut(() => ProjectApi());
+    Get.lazyPut(() => CollectApi());
 
   }
 }

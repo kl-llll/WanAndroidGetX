@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:wan_android_getx/api/collect_api.dart';
 import 'package:wan_android_getx/api/hot_api.dart';
 import 'package:wan_android_getx/app/local/local_login.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
 class HotController extends BaseGetXController {
   var _api = Get.find<HotApi>();
+  var _collectApi = Get.find<CollectApi>();
 
   var _homeArticleList = <HomeArticleDatas>[].obs;
 
@@ -74,7 +76,7 @@ class HotController extends BaseGetXController {
   @override
   collect(int id) async {
     bool isSuccess = false;
-    await handlerRequest(_api.collect(id), (value) {
+    await handlerRequest(_collectApi.collect(id), (value) {
       isSuccess = true;
       Get.showCustomSnackbar("收藏成功!");
     });
@@ -82,9 +84,9 @@ class HotController extends BaseGetXController {
   }
 
   @override
-  unCollect(int id,int? originId) async {
+  unCollect(int id, int? originId) async {
     bool isSuccess = false;
-    await handlerRequest(_api.unCollect(id), (value) {
+    await handlerRequest(_collectApi.unCollect(id), (value) {
       isSuccess = true;
       Get.showCustomSnackbar("取消收藏成功!");
     });
