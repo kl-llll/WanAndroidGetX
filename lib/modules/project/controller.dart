@@ -33,7 +33,6 @@ class ProjectController extends BaseGetXController {
 
 
 
-
   initController(int length, TickerProvider vsync) {
     tabController = TabController(length: length, vsync: vsync);
   }

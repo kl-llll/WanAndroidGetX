@@ -4,6 +4,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:wan_android_getx/const/constants.dart';
 import 'package:wan_android_getx/modules/mine/page.dart';
 import 'package:wan_android_getx/modules/project/page.dart';
+import 'package:wan_android_getx/modules/system/page.dart';
 
 import 'home/page.dart';
 import 'login/page.dart';
@@ -36,7 +37,7 @@ class _MainPage1State extends State<MainPage> {
     return [
       HomePage(),
       ProjectPage(),
-      LoginPage(),
+      SystemPage(),
       LoginPage(),
       MinePage(),
     ];

@@ -3,7 +3,7 @@ import 'package:wan_android_getx/const/constants.dart';
 
 import 'app_bar_icon.dart';
 
-AppBar customAppBar({required String title,double elevation=0}) {
+AppBar customAppBar({required String title, double elevation = 0}) {
   return AppBar(
     backgroundColor: Get.theme.canvasColor,
     elevation: elevation,
@@ -18,3 +18,4 @@ AppBar customAppBar({required String title,double elevation=0}) {
     ),
   );
 }
+

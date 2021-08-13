@@ -16,6 +16,7 @@ import 'package:wan_android_getx/modules/mine/setting/binding.dart';
 import 'package:wan_android_getx/modules/mine/setting/page.dart';
 import 'package:wan_android_getx/modules/project/binding.dart';
 import 'package:wan_android_getx/modules/splash/page.dart';
+import 'package:wan_android_getx/modules/system/binding.dart';
 import 'package:wan_android_getx/modules/web/binding.dart';
 import 'package:wan_android_getx/modules/web/page.dart';
 
@@ -36,7 +37,8 @@ abstract class AppPages {
         SquareBinding(),
         LoginBinding(),
         MineBinding(),
-        ProjectBinding()
+        ProjectBinding(),
+        SystemBinding()
       ],
     ),
     GetPage(

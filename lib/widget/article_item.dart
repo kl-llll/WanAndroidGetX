@@ -123,7 +123,7 @@ class ArticleItem<T extends BaseGetXController> extends StatelessWidget {
           ),
           titleText(data.title.toString()),
           SizedBox(
-            height: 5.h,
+            height: 8.h,
           ),
           Wrap(
             children: [

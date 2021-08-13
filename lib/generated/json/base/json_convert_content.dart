@@ -17,6 +17,8 @@ import 'package:wan_android_getx/bean/integral_list_entity.dart';
 import 'package:wan_android_getx/generated/json/integral_list_entity_helper.dart';
 import 'package:wan_android_getx/bean/home_article_entity.dart';
 import 'package:wan_android_getx/generated/json/home_article_entity_helper.dart';
+import 'package:wan_android_getx/bean/system_tree_entity.dart';
+import 'package:wan_android_getx/generated/json/system_tree_entity_helper.dart';
 import 'package:wan_android_getx/bean/project_list_entity.dart';
 import 'package:wan_android_getx/generated/json/project_list_entity_helper.dart';
 import 'package:wan_android_getx/bean/login_entity.dart';
@@ -57,6 +59,10 @@ class JsonConvert<T> {
 				return homeArticleDatasFromJson(data as HomeArticleDatas, json) as T;
 			case HomeArticleDatasTags:
 				return homeArticleDatasTagsFromJson(data as HomeArticleDatasTags, json) as T;
+			case SystemTreeEntity:
+				return systemTreeEntityFromJson(data as SystemTreeEntity, json) as T;
+			case SystemTreeChildren:
+				return systemTreeChildrenFromJson(data as SystemTreeChildren, json) as T;
 			case ProjectListEntity:
 				return projectListEntityFromJson(data as ProjectListEntity, json) as T;
 			case ProjectListDatas:
@@ -94,6 +100,10 @@ class JsonConvert<T> {
 				return homeArticleDatasToJson(data as HomeArticleDatas);
 			case HomeArticleDatasTags:
 				return homeArticleDatasTagsToJson(data as HomeArticleDatasTags);
+			case SystemTreeEntity:
+				return systemTreeEntityToJson(data as SystemTreeEntity);
+			case SystemTreeChildren:
+				return systemTreeChildrenToJson(data as SystemTreeChildren);
 			case ProjectListEntity:
 				return projectListEntityToJson(data as ProjectListEntity);
 			case ProjectListDatas:
@@ -143,6 +153,12 @@ class JsonConvert<T> {
 		}
 		if(type == (HomeArticleDatasTags).toString()){
 			return HomeArticleDatasTags().fromJson(json);
+		}
+		if(type == (SystemTreeEntity).toString()){
+			return SystemTreeEntity().fromJson(json);
+		}
+		if(type == (SystemTreeChildren).toString()){
+			return SystemTreeChildren().fromJson(json);
 		}
 		if(type == (ProjectListEntity).toString()){
 			return ProjectListEntity().fromJson(json);
@@ -197,6 +213,12 @@ class JsonConvert<T> {
 		}
 		if(<HomeArticleDatasTags>[] is M){
 			return data.map<HomeArticleDatasTags>((e) => HomeArticleDatasTags().fromJson(e)).toList() as M;
+		}
+		if(<SystemTreeEntity>[] is M){
+			return data.map<SystemTreeEntity>((e) => SystemTreeEntity().fromJson(e)).toList() as M;
+		}
+		if(<SystemTreeChildren>[] is M){
+			return data.map<SystemTreeChildren>((e) => SystemTreeChildren().fromJson(e)).toList() as M;
 		}
 		if(<ProjectListEntity>[] is M){
 			return data.map<ProjectListEntity>((e) => ProjectListEntity().fromJson(e)).toList() as M;
