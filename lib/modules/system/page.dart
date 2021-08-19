@@ -22,12 +22,12 @@ class SystemPage extends StatelessWidget {
       },
       builder: (controller) {
         return LoadSir(
+            isSkeleton: false,
             child: ListView(
               children: controller.getTreeList
                   .asMap()
                   .map((key, value) {
                     SystemTreeEntity data = controller.getTreeList[key];
-
                     return MapEntry(
                         key,
                         Padding(
@@ -62,7 +62,11 @@ class SystemPage extends StatelessWidget {
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
-                                          child: Text(e.name.toString(), style: TextStyle(fontSize: 13.sp, color: Colors.white,height: 1.1)),
+                                          child: Text(e.name.toString(),
+                                              style: TextStyle(
+                                                  fontSize: 13.sp,
+                                                  color: Colors.white,
+                                                  height: 1.1)),
                                         )),
                                   );
                                 }).toList(),
@@ -80,56 +84,54 @@ class SystemPage extends StatelessWidget {
     );
   }
 
-  Container leadingIcon(int key) {
+  Widget leadingIcon(int key) {
     return Container(
       width: 45.w,
-      child: Obx(() {
-        return Stack(
-          alignment: Alignment.centerRight,
-          children: [
-            AnimatedPositionedDirectional(
-              duration: Duration(milliseconds: 300),
-              end: key == controller.key.value ? controller.end.value : 15,
-              child: CustomNeumorphic(
-                boxShape: NeumorphicBoxShape.circle(),
-                child: Container(
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: AppColors.secondColor),
-                  width: 30.r,
-                  height: 30.r,
-                ),
+      child: Stack(
+        alignment: Alignment.centerRight,
+        children: [
+          AnimatedPositionedDirectional(
+            duration: Duration(milliseconds: 300),
+            end: controller.getOpenList[key] ? 0 : 15,
+            child: CustomNeumorphic(
+              boxShape: NeumorphicBoxShape.circle(),
+              child: Container(
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle, color: AppColors.secondColor),
+                width: 30.r,
+                height: 30.r,
               ),
             ),
-            AnimatedPositionedDirectional(
-              duration: Duration(milliseconds: 300),
-              end: key == controller.key.value ? 15 - controller.end.value : 1,
-              child: CustomNeumorphic(
-                boxShape: NeumorphicBoxShape.circle(),
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: ClipOval(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(
-                            sigmaX: 3,
-                            sigmaY: 3,
-                          ),
-                          child: Container(),
+          ),
+          AnimatedPositionedDirectional(
+            duration: Duration(milliseconds: 300),
+            end: controller.getOpenList[key] ? 15 : 0,
+            child: CustomNeumorphic(
+              boxShape: NeumorphicBoxShape.circle(),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: ClipOval(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(
+                          sigmaX: 3,
+                          sigmaY: 3,
                         ),
+                        child: Container(),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(shape: BoxShape.circle),
-                      width: 30.r,
-                      height: 30.r,
-                    ),
-                  ],
-                ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(shape: BoxShape.circle),
+                    width: 30.r,
+                    height: 30.r,
+                  ),
+                ],
               ),
             ),
-          ],
-        );
-      }),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -10,18 +10,17 @@ class SystemController extends BaseGetXController {
 
   var _treeList = <SystemTreeEntity>[].obs;
 
-  var isExpansion = false.obs;
+  var _openList = <bool>[].obs;
 
   List<GlobalKey> iconKeys = <GlobalKey>[].obs;
 
   List<SystemTreeEntity> get getTreeList => _treeList;
 
-  var end = 1.0.obs;
-  var key = 999.obs;
+  List<bool> get getOpenList => _openList;
 
-  changePosition(bool isOpen, int iconKey) {
-    key.value = iconKey;
-    end.value = isOpen ? 1 : 15;
+
+  changePosition(bool isOpen, int key) {
+    _openList[key]=isOpen;
   }
 
   requestSystem(bool isLoading) {
@@ -34,6 +33,9 @@ class SystemController extends BaseGetXController {
           list.add(SystemTreeEntity().fromJson(e));
         });
         _treeList.value = list;
+        _treeList.forEach((element) {
+          _openList.add(false);
+        });
         loadState.value = list.isNotEmpty ? LoadState.SUCCESS : LoadState.EMPTY;
       },
       isLoading: isLoading,
