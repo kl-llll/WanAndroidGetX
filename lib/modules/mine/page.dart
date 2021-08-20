@@ -112,6 +112,7 @@ class MinePage extends StatelessWidget {
   }
 
   Neumorphic _buildUserInfo(BuildContext context) {
+
     Widget buildInfo(String content, String title, GestureTapCallback onTap) {
       return GestureDetector(
         onTap: controller.localLogin.isLogin.value ? onTap : null,

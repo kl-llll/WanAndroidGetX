@@ -12,9 +12,8 @@ systemTreeEntityFromJson(SystemTreeEntity data, Map<String, dynamic> json) {
         : json['courseId'].toDouble();
   }
   if (json['id'] != null) {
-    data.id = json['id'] is String
-        ? double.tryParse(json['id'])
-        : json['id'].toDouble();
+    data.id =
+        json['id'] is String ? int.tryParse(json['id']) : json['id'].toInt();
   }
   if (json['name'] != null) {
     data.name = json['name'].toString();
@@ -65,9 +64,8 @@ systemTreeChildrenFromJson(SystemTreeChildren data, Map<String, dynamic> json) {
         : json['courseId'].toDouble();
   }
   if (json['id'] != null) {
-    data.id = json['id'] is String
-        ? double.tryParse(json['id'])
-        : json['id'].toDouble();
+    data.id =
+        json['id'] is String ? int.tryParse(json['id']) : json['id'].toInt();
   }
   if (json['name'] != null) {
     data.name = json['name'].toString();

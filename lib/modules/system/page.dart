@@ -23,60 +23,76 @@ class SystemPage extends StatelessWidget {
       builder: (controller) {
         return LoadSir(
             isSkeleton: false,
-            child: ListView(
-              children: controller.getTreeList
-                  .asMap()
-                  .map((key, value) {
-                    SystemTreeEntity data = controller.getTreeList[key];
-                    return MapEntry(
-                        key,
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.w, vertical: 5.h),
-                          child: ExpansionTileCard(
-                            expandedTextColor: AppColors.secondColor,
-                            baseColor: Get.theme.primaryColor,
-                            initialElevation: 1.0,
-                            leading: leadingIcon(key),
-                            title: titleText(data.name.toString()),
-                            onExpansionChanged: (isOpen) {
-                              controller.changePosition(isOpen, key);
-                            },
-                            children: <Widget>[
-                              Divider(
-                                thickness: 4.0,
-                                height: 1.0,
-                              ),
-                              Wrap(
-                                alignment: WrapAlignment.start,
-                                children: data.children!.map((e) {
-                                  return Container(
-                                    margin: EdgeInsets.all(7),
-                                    child: CustomNeumorphic(
-                                        boxShape: NeumorphicBoxShape.roundRect(
-                                            BorderRadius.circular(5)),
-                                        child: Container(
-                                          padding: EdgeInsets.all(7),
-                                          decoration: BoxDecoration(
-                                            color: AppColors.secondColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: Text(e.name.toString(),
-                                              style: TextStyle(
-                                                  fontSize: 13.sp,
-                                                  color: Colors.white,
-                                                  height: 1.1)),
-                                        )),
-                                  );
-                                }).toList(),
-                              ),
-                            ],
-                          ),
-                        ));
-                  })
-                  .values
-                  .toList(),
+            child: Scaffold(
+              appBar: AppBar(
+                brightness: Brightness.dark,
+                backgroundColor: context.accentColor,
+                title: Text("体系"),
+              ),
+              body: ListView(
+                children: controller.getTreeList
+                    .asMap()
+                    .map((key, value) {
+                      SystemTreeEntity data = controller.getTreeList[key];
+                      return MapEntry(
+                          key,
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.w, vertical: 5.h),
+                            child: ExpansionTileCard(
+                              expandedTextColor: AppColors.secondColor,
+                              baseColor: Get.theme.primaryColor,
+                              initialElevation: 1.0,
+                              leading: leadingIcon(key),
+                              title: titleText(data.name.toString()),
+                              onExpansionChanged: (isOpen) {
+                                controller.changePosition(isOpen, key);
+                              },
+                              children: <Widget>[
+                                Divider(
+                                  thickness: 4.0,
+                                  height: 1.0,
+                                ),
+                                Wrap(
+                                  alignment: WrapAlignment.start,
+                                  children: data.children!.map((e) {
+                                    return GestureDetector(
+                                      onTap: () => Get.toNamed(
+                                          Routes.SYSTEM_LIST,
+                                          arguments: {
+                                            "cid": e.id,
+                                            "title": e.name
+                                          }),
+                                      child: Container(
+                                        margin: EdgeInsets.all(7),
+                                        child: CustomNeumorphic(
+                                            boxShape:
+                                                NeumorphicBoxShape.roundRect(
+                                                    BorderRadius.circular(5)),
+                                            child: Container(
+                                              padding: EdgeInsets.all(7),
+                                              decoration: BoxDecoration(
+                                                color: AppColors.secondColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: Text(e.name.toString(),
+                                                  style: TextStyle(
+                                                      fontSize: 13.sp,
+                                                      color: Colors.white,
+                                                      height: 1.1)),
+                                            )),
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ],
+                            ),
+                          ));
+                    })
+                    .values
+                    .toList(),
+              ),
             ),
             onPressed: () {},
             controller: controller);
@@ -93,11 +109,19 @@ class SystemPage extends StatelessWidget {
           AnimatedPositionedDirectional(
             duration: Duration(milliseconds: 300),
             end: controller.getOpenList[key] ? 0 : 15,
-            child: CustomNeumorphic(
-              boxShape: NeumorphicBoxShape.circle(),
+            child: Neumorphic(
+              style: NeumorphicStyle(
+                  shape: NeumorphicShape.concave,
+                  boxShape: NeumorphicBoxShape.circle(),
+                  depth:  controller.getOpenList[key]?9:2,
+                  lightSource: controller.getOpenList[key]?LightSource.left:LightSource.topLeft,
+                  shadowDarkColor: AppColors.secondColor,
+                  color:Colors.transparent),
               child: Container(
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle, color: AppColors.secondColor),
+                  shape: BoxShape.circle,
+                  color: AppColors.secondColor,
+                ),
                 width: 30.r,
                 height: 30.r,
               ),

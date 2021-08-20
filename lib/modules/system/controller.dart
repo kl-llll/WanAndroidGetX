@@ -25,6 +25,7 @@ class SystemController extends BaseGetXController {
 
   requestSystem(bool isLoading) {
     List<SystemTreeEntity> list = [];
+    _openList.clear();
 
     handlerStateRequest(
       _api.getSystemTree,

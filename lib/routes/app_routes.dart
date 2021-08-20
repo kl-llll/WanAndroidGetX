@@ -9,4 +9,5 @@ abstract class Routes {
   static const INTEGRAL = '/integral';
   static const RANK = '/rank';
   static const COLLECT = '/collect';
+  static const SYSTEM_LIST = '/system/list';
 }
