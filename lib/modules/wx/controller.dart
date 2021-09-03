@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:wan_android_getx/api/project_api.dart';
+import 'package:wan_android_getx/api/wx_api.dart';
 import 'package:wan_android_getx/app/base/base_getx_controller.dart';
 import 'package:wan_android_getx/bean/project_tree_entity.dart';
-import 'package:wan_android_getx/widget/load_sir.dart';
+import 'package:wan_android_getx/const/constants.dart';
 
-class ProjectController extends BaseGetXController {
-  var _api = Get.find<ProjectApi>();
+class WXController extends BaseGetXController {
+
+
+  var _api = Get.find<WXApi>();
 
   var _treeList = <ProjectTreeEntity>[].obs;
 
@@ -20,7 +21,7 @@ class ProjectController extends BaseGetXController {
   requestProjectTree(TickerProvider vsync) {
     List<ProjectTreeEntity> list = [];
 
-    handlerStateRequest(_api.getProjectTree, (value) {
+    handlerStateRequest(_api.getWXTree, (value) {
       value.forEach((e) {
         list.add(ProjectTreeEntity().fromJson(e));
       });
@@ -35,5 +36,6 @@ class ProjectController extends BaseGetXController {
   initController(int length, TickerProvider vsync) {
     tabController = TabController(length: length, vsync: vsync);
   }
+
 
 }

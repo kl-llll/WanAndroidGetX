@@ -8,7 +8,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:wan_android_getx/bean/project_list_entity.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
 import 'controller.dart';
@@ -51,7 +50,7 @@ class _ListPageState extends State<ListPage>
               crossAxisCount: 4,
               itemCount: controller.getProjectList.length,
               itemBuilder: (BuildContext context, int index) {
-                ProjectListDatas data = controller.getProjectList[index];
+                HomeArticleDatas data = controller.getProjectList[index];
                 return GestureDetector(
                   onTap: ()=>Get.toNamed(Routes.WEB, arguments: {"url": data.link}),
                   child: Neumorphic(
@@ -133,7 +132,7 @@ class _ListPageState extends State<ListPage>
     );
   }
 
-  Container _buildNiceDate(ProjectListDatas data) {
+  Container _buildNiceDate(HomeArticleDatas data) {
     return Container(
       alignment: Alignment.center,
       // width: double.maxFinite,
@@ -152,7 +151,7 @@ class _ListPageState extends State<ListPage>
     );
   }
 
-  Widget transparentLikeButton(BuildContext context, ProjectListDatas data,
+  Widget transparentLikeButton(BuildContext context, HomeArticleDatas data,
       BaseGetXController controller) {
     Future<bool> onLikeButtonTapped(bool isLiked) async {
       final bool success;
@@ -219,7 +218,7 @@ class _ListPageState extends State<ListPage>
     );
   }
 
-  List<Widget> buildTagWidget(ProjectListDatas data) {
+  List<Widget> buildTagWidget(HomeArticleDatas data) {
     List<Widget> widgetList = [];
 
     tagWidget(String text) => Neumorphic(

@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wan_android_getx/const/constants.dart';
-import 'package:wan_android_getx/modules/project/list/page.dart';
+import 'package:wan_android_getx/modules/wx/list/page.dart';
+import 'package:wan_android_getx/modules/wx/list/controller.dart';
 import 'package:wan_android_getx/widget/circle_tab_indicator.dart';
 
 import 'controller.dart';
-import 'list/controller.dart';
 
-class ProjectPage extends StatefulWidget {
-  const ProjectPage({Key? key}) : super(key: key);
+class WXPage extends StatefulWidget {
+  const WXPage({Key? key}) : super(key: key);
 
   @override
-  _ProjectPageState createState() => _ProjectPageState();
+  _WXPageState createState() => _WXPageState();
 }
 
-class _ProjectPageState extends State<ProjectPage>
-    with SingleTickerProviderStateMixin {
-  final controller = Get.find<ProjectController>();
+class _WXPageState extends State<WXPage> with SingleTickerProviderStateMixin {
+  final controller = Get.find<WXController>();
 
   @override
   void initState() {

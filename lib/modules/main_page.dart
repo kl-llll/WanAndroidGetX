@@ -5,6 +5,7 @@ import 'package:wan_android_getx/const/constants.dart';
 import 'package:wan_android_getx/modules/mine/page.dart';
 import 'package:wan_android_getx/modules/project/page.dart';
 import 'package:wan_android_getx/modules/system/page.dart';
+import 'package:wan_android_getx/modules/wx/page.dart';
 
 import 'home/page.dart';
 import 'login/page.dart';
@@ -38,7 +39,7 @@ class _MainPage1State extends State<MainPage> {
       HomePage(),
       ProjectPage(),
       SystemPage(),
-      LoginPage(),
+      WXPage(),
       MinePage(),
     ];
   }

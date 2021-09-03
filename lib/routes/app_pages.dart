@@ -21,6 +21,7 @@ import 'package:wan_android_getx/modules/system/list/binding.dart';
 import 'package:wan_android_getx/modules/system/list/page.dart';
 import 'package:wan_android_getx/modules/web/binding.dart';
 import 'package:wan_android_getx/modules/web/page.dart';
+import 'package:wan_android_getx/modules/wx/binding.dart';
 
 part './app_routes.dart';
 
@@ -40,6 +41,7 @@ abstract class AppPages {
         LoginBinding(),
         MineBinding(),
         ProjectBinding(),
+        WXBinding(),
         SystemBinding()
       ],
     ),

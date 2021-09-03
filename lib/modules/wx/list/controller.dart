@@ -1,17 +1,17 @@
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:wan_android_getx/api/collect_api.dart';
-import 'package:wan_android_getx/api/project_api.dart';
+import 'package:wan_android_getx/api/wx_api.dart';
 import 'package:wan_android_getx/app/base/base_getx_controller.dart';
 import 'package:wan_android_getx/widget/load_sir.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
 class ListController extends BaseGetXController {
-  final int cId;
+  final int id;
 
-  ListController(this.cId);
+  ListController(this.id);
 
-  var _api = Get.find<ProjectApi>();
+  var _api = Get.find<WXApi>();
   var _collectApi = Get.find<CollectApi>();
 
   var _projectList = <HomeArticleDatas>[].obs;
@@ -24,7 +24,7 @@ class ListController extends BaseGetXController {
   var pageIndex = 1;
 
   requestProjectList(bool isLoading) => handlerStateRequest(
-        _api.getProjectList(pageIndex, cId),
+        _api.getWXList(pageIndex, id),
         (value) {
           HomeArticleEntity data = HomeArticleEntity().fromJson(value);
           var curPage = data.curPage;
