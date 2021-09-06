@@ -9,6 +9,8 @@ class HiveBoxes {
 
   static late Box<bool> darkBox;
 
+  static late Box<String> searchBox;
+
   static Future<void> openBoxes() async {
     // Hive..registerAdapter(adapter);
 
@@ -18,6 +20,9 @@ class HiveBoxes {
       }(),
       () async {
         darkBox = await Hive.openBox("${boxPrefix}_dark");
+      }(),
+      () async {
+        searchBox = await Hive.openBox("${boxPrefix}_search");
       }(),
     ]);
   }

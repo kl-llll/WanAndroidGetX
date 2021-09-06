@@ -63,26 +63,7 @@ class SystemPage extends StatelessWidget {
                                             "cid": e.id,
                                             "title": e.name
                                           }),
-                                      child: Container(
-                                        margin: EdgeInsets.all(7),
-                                        child: CustomNeumorphic(
-                                            boxShape:
-                                                NeumorphicBoxShape.roundRect(
-                                                    BorderRadius.circular(5)),
-                                            child: Container(
-                                              padding: EdgeInsets.all(7),
-                                              decoration: BoxDecoration(
-                                                color: AppColors.secondColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: Text(e.name.toString(),
-                                                  style: TextStyle(
-                                                      fontSize: 13.sp,
-                                                      color: Colors.white,
-                                                      height: 1.1)),
-                                            )),
-                                      ),
+                                      child: systemItem(e),
                                     );
                                   }).toList(),
                                 ),
@@ -100,6 +81,24 @@ class SystemPage extends StatelessWidget {
     );
   }
 
+  Container systemItem(SystemTreeChildren e) {
+    return Container(
+      margin: EdgeInsets.all(7),
+      child: CustomNeumorphic(
+          boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(5)),
+          child: Container(
+            padding: EdgeInsets.all(7),
+            decoration: BoxDecoration(
+              color: AppColors.secondColor,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Text(e.name.toString(),
+                style: TextStyle(
+                    fontSize: 13.sp, color: Colors.white, height: 1.1)),
+          )),
+    );
+  }
+
   Widget leadingIcon(int key) {
     return Container(
       width: 45.w,
@@ -113,10 +112,12 @@ class SystemPage extends StatelessWidget {
               style: NeumorphicStyle(
                   shape: NeumorphicShape.concave,
                   boxShape: NeumorphicBoxShape.circle(),
-                  depth:  controller.getOpenList[key]?9:2,
-                  lightSource: controller.getOpenList[key]?LightSource.left:LightSource.topLeft,
+                  depth: controller.getOpenList[key] ? 9 : 2,
+                  lightSource: controller.getOpenList[key]
+                      ? LightSource.left
+                      : LightSource.topLeft,
                   shadowDarkColor: AppColors.secondColor,
-                  color:Colors.transparent),
+                  color: Colors.transparent),
               child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,

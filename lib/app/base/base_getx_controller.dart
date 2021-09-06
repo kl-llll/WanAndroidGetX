@@ -52,6 +52,7 @@ class BaseGetXController extends GetxController {
       success(value);
     }).onError<HttpException>((error, stackTrace) {
       _checkLogin(error);
+      loadState.value = LoadState.FAILURE;
       if (failure != null) {
         failure(error.msg);
       }

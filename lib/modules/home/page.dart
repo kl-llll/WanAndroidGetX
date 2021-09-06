@@ -2,10 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:wan_android_getx/const/constants.dart';
+import 'package:wan_android_getx/const/hive_boxes.dart';
 import 'package:wan_android_getx/modules/home/hot/page.dart';
 import 'package:wan_android_getx/modules/home/question/page.dart';
 import 'package:wan_android_getx/modules/home/square/page.dart';
-import 'package:wan_android_getx/const/constants.dart';
+import 'package:wan_android_getx/modules/search/controller.dart';
+import 'package:wan_android_getx/modules/search/page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,6 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   var searchBarController = Get.find<FloatingSearchBarController>();
+  var searchController = Get.find<SearchController>();
 
   late TabController _tabController;
   final List<String> _titleList = ["广场", "热门", "问答"];
@@ -133,70 +137,69 @@ class _HomePageState extends State<HomePage>
   }
 
   Widget get buildFloatingSearchBar {
-    return FloatingSearchBar(
-      hint: 'Search...',
-      scrollPadding: EdgeInsets.only(top: 16.h, bottom: 35.h),
-      transitionDuration: const Duration(milliseconds: 800),
-      transitionCurve: Curves.easeInOut,
-      physics: const BouncingScrollPhysics(),
-      openAxisAlignment: 0.0,
-      debounceDelay: const Duration(milliseconds: 500),
-      borderRadius: BorderRadius.circular(15),
-      showAfter: Duration(days: 999),
-      controller: searchBarController,
-      onQueryChanged: (query) {
-        // Call your model, bloc, controller here.
-      },
-      onFocusChanged: (focus) {
-        if (!focus) {
-          searchBarController.close();
-          searchBarController.hide();
-        }
-      },
-      // Specify a custom transition to be used for
-      // animating between opened and closed stated.
-      transition: CircularFloatingSearchBarTransition(),
-      actions: [
-        FloatingSearchBarAction(
-          showIfOpened: true,
-          child: CircularButton(
-            icon: Icon(
-              CupertinoIcons.search,
-              color: context.accentColor,
-            ),
-            onPressed: () {},
-          ),
-        ),
-        FloatingSearchBarAction(
-          showIfOpened: true,
-          child: CircularButton(
-            icon: Icon(
-              CupertinoIcons.clear,
-              color: context.accentColor,
-            ),
-            onPressed: () {
-              searchBarController.close();
-              searchBarController.hide();
-            },
-          ),
-        ),
-      ],
-      builder: (context, transition) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Material(
-            color: Colors.white,
-            elevation: 4.0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: Colors.accents.map((color) {
-                return Container(height: 112, color: color);
-              }).toList(),
+    return Obx(() {
+      return FloatingSearchBar(
+        hint:
+            "${String.fromCharCode(128293)}搜索热词:${searchController.hotKey.toString()}",
+        scrollPadding: EdgeInsets.only(top: 16.h, bottom: 35.h),
+        transitionDuration: const Duration(milliseconds: 800),
+        transitionCurve: Curves.easeInOut,
+        physics: const BouncingScrollPhysics(),
+        openAxisAlignment: 0.0,
+        debounceDelay: const Duration(milliseconds: 500),
+        borderRadius: BorderRadius.circular(15),
+        showAfter: Duration(days: 999),
+        controller: searchBarController,
+        onQueryChanged: (query) {
+          // Call your model, bloc, controller here.
+          searchController.searchKey.value = query;
+        },
+        onFocusChanged: (focus) {
+          if (!focus) {
+            searchBarController.close();
+            searchBarController.hide();
+            searchController.getSearchList.clear();
+          }
+        },
+        // Specify a custom transition to be used for
+        // animating between opened and closed stated.
+        transition: CircularFloatingSearchBarTransition(),
+        actions: [
+          FloatingSearchBarAction(
+            showIfOpened: true,
+            child: CircularButton(
+              icon: Icon(
+                CupertinoIcons.search,
+                color: context.accentColor,
+              ),
+              onPressed: () {
+                HiveBoxes.searchBox.add(searchController.searchKey.value);
+                searchController.getSearch(true);
+              },
             ),
           ),
-        );
-      },
-    );
+          FloatingSearchBarAction(
+            showIfOpened: true,
+            child: CircularButton(
+              icon: Icon(
+                CupertinoIcons.clear,
+                color: context.accentColor,
+              ),
+              onPressed: () {
+                searchBarController.close();
+                searchBarController.hide();
+              },
+            ),
+          ),
+        ],
+        builder: (context, transition) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: SearchPage(),
+          );
+        },
+      );
+    });
   }
 
   @override
