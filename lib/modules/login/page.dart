@@ -1,10 +1,12 @@
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:wan_android_getx/app/local/local_login.dart';
 import 'package:wan_android_getx/const/constants.dart';
+import 'package:wan_android_getx/widget/custom_neumorphic.dart';
 import 'controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -24,7 +26,8 @@ class LoginPage extends StatelessWidget {
               color: context.canvasColor,
               height: 250.h,
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 30.w),
+                padding:
+                    EdgeInsets.symmetric(vertical: 10.h, horizontal: 30.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -51,7 +54,7 @@ class LoginPage extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 0,
+          top: 10,
           right: 50,
           child: _buildArgonButton(context),
         ),
@@ -59,7 +62,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  ArgonButton _buildArgonButton(BuildContext context) {
+  Widget _buildArgonButton(BuildContext context) {
     return ArgonButton(
       height: 55.r,
       roundLoadingShape: true,

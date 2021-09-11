@@ -67,6 +67,7 @@ class HttpClient {
       }
     } on Exception catch (e) {
       Log.e(e);
+
       throw handleException(e).error!;
     }
   }

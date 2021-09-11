@@ -58,7 +58,10 @@ dependencies:
   # 拟态  https://pub.dev/packages/flutter_neumorphic
   flutter_neumorphic: ^3.1.0
   # 浮动搜索栏 https://pub.flutter-io.cn/packages/material_floating_search_bar
-  material_floating_search_bar: ^0.3.4
+  material_floating_search_bar:
+    git:
+      url: https://gitee.com/wjianhang/material_floating_search_bar
+      ref: a13127c645c77d7ab56beaa50c9b679c5c476083
   # 下拉刷新 https://pub.dev/packages/pull_to_refresh
   pull_to_refresh: ^2.0.0
   # 支持空安全的swiper https://pub.dev/packages/flutter_swiper_null_safety

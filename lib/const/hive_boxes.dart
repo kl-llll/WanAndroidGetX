@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:wan_android_getx/bean/history_search_entity.dart';
 
 const String boxPrefix = 'wanAndroid';
 
@@ -9,10 +10,10 @@ class HiveBoxes {
 
   static late Box<bool> darkBox;
 
-  static late Box<String> searchBox;
+  static late Box<List<String>> searchBox;
 
   static Future<void> openBoxes() async {
-    // Hive..registerAdapter(adapter);
+    // Hive..registerAdapter(HistorySearchAdapter());
 
     await Future.wait(<Future<void>>[
       () async {

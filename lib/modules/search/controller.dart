@@ -4,6 +4,7 @@ import 'package:wan_android_getx/api/search_api.dart';
 import 'package:wan_android_getx/app/base/base_getx_controller.dart';
 import 'package:wan_android_getx/bean/home_article_entity.dart';
 import 'package:wan_android_getx/const/constants.dart';
+import 'package:wan_android_getx/const/hive_boxes.dart';
 
 class SearchController extends BaseGetXController {
   var _api = Get.find<SearchApi>();
@@ -14,6 +15,8 @@ class SearchController extends BaseGetXController {
   var searchKey = "".obs;
 
   var _searchList = <HomeArticleDatas>[].obs;
+
+  var historyList = <String>[].obs;
 
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
@@ -66,11 +69,12 @@ class SearchController extends BaseGetXController {
     getSearch(false);
   }
 
+  updateHistory() =>
+      historyList.value = HiveBoxes.searchBox.get("history") ?? [];
+
   @override
   void onInit() {
     super.onInit();
-    loadState.value = LoadState.DONE;
-
     handlerRequest(
       _api.getHotKey,
       (value) {
@@ -79,5 +83,6 @@ class SearchController extends BaseGetXController {
         });
       },
     );
+    updateHistory();
   }
 }

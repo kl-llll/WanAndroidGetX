@@ -11,5 +11,4 @@ class LocalLogin extends BaseGetXController{
     super.onInit();
     isLogin.value=HiveBoxes.loginBox.get("isLogin")??false;
   }
-
 }

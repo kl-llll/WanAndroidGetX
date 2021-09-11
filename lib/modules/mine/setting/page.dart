@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:wan_android_getx/widget/app_bar_icon.dart';
 import 'package:wan_android_getx/const/constants.dart';
 
@@ -11,6 +12,7 @@ class SettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: context.canvasColor,

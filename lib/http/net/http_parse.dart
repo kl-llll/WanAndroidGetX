@@ -1,6 +1,8 @@
 // 成功回调
 import 'dart:io';
 
+import 'package:wan_android_getx/utils/log_util.dart';
+
 import 'dio_new.dart';
 
 HttpResponse handleResponse(Response? response,
@@ -45,7 +47,7 @@ bool _isRequestSuccess(int? statusCode) {
 HttpException _parseException(Exception error) {
 
   if (error is DioError) {
-
+    int? errCode = error.response?.statusCode;
     switch (error.type) {
       case DioErrorType.connectTimeout:
       case DioErrorType.receiveTimeout:
@@ -55,8 +57,6 @@ HttpException _parseException(Exception error) {
         return CancelException(error.error.msg);
       case DioErrorType.response:
         try {
-          int? errCode = error.response?.statusCode;
-
           switch (errCode) {
             case 400:
               return BadRequestException(message: "请求语法错误", code: errCode);
@@ -78,22 +78,23 @@ HttpException _parseException(Exception error) {
               return UnauthorisedException(
                   message: "不支持HTTP协议请求", code: errCode);
             default:
-              return UnknownException(error.error.msg);
+              return UnknownException(error.error.msg,errCode);
           }
         } on Exception catch (_) {
-          return UnknownException(error.error.msg);
+          return UnknownException(error.error.msg,errCode);
         }
 
       case DioErrorType.other:
         if (error.error is SocketException) {
           return NetworkException(message: error.message);
         } else {
-          return UnknownException(error.message);
+          return UnknownException(error.message,errCode);
         }
       default:
-        return UnknownException(error.message);
+        return UnknownException(error.message,errCode);
     }
   } else {
-    return UnknownException(error.toString());
+
+    return UnknownException((error as HttpException).msg,(error).code);
   }
 }

@@ -5,7 +5,7 @@ extension GetExtension on GetInterface {
     Get.snackbar(title, msg,
         colorText: context!.accentColor,
         snackPosition: SnackPosition.BOTTOM,
-        margin: EdgeInsets.only(left: 10.w, right: 10.w,bottom: 45.h));
+        margin: EdgeInsets.only(left: 10.w, right: 10.w, bottom: 45.h));
   }
 
   void showErrorSnackbar(String msg, {String title = "错误提示"}) {

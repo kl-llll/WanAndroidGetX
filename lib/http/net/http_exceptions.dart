@@ -1,5 +1,6 @@
 
 class HttpException implements Exception {
+
   final String? _msg;
 
   String get msg => _msg ?? this.runtimeType.toString();
@@ -11,7 +12,7 @@ class HttpException implements Exception {
   HttpException([this._msg, this._code]);
 
   String toString() {
-    return "code:$code--msg=$msg";
+    return "{msg=$msg,code=$code}";
   }
 }
 
@@ -26,7 +27,7 @@ class BadServiceException extends HttpException {
 }
 
 class UnknownException extends HttpException {
-  UnknownException([String? message]) : super(message);
+  UnknownException([String? message,int? code]) : super(message,code);
 }
 
 class CancelException extends HttpException {

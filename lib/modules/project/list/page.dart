@@ -86,6 +86,7 @@ class _ListPageState extends State<ListPage>
                               child: _buildNiceDate(data),
                             )
                           ]),
+                          Divider(height: 1,color: AppColors.secondColor,),
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: 5.h, horizontal: 5.w),

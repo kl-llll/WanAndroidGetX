@@ -9,6 +9,7 @@ import 'package:wan_android_getx/modules/home/question/page.dart';
 import 'package:wan_android_getx/modules/home/square/page.dart';
 import 'package:wan_android_getx/modules/search/controller.dart';
 import 'package:wan_android_getx/modules/search/page.dart';
+import 'package:wan_android_getx/bean/history_search_entity.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -139,9 +140,7 @@ class _HomePageState extends State<HomePage>
   Widget get buildFloatingSearchBar {
     return Obx(() {
       return FloatingSearchBar(
-        hint:
-            "${String.fromCharCode(128293)}搜索热词:${searchController.hotKey.toString()}",
-        scrollPadding: EdgeInsets.only(top: 16.h, bottom: 35.h),
+        hint: "${String.fromCharCode(128293)}搜索热词:${searchController.hotKey.toString()}",
         transitionDuration: const Duration(milliseconds: 800),
         transitionCurve: Curves.easeInOut,
         physics: const BouncingScrollPhysics(),
@@ -150,6 +149,7 @@ class _HomePageState extends State<HomePage>
         borderRadius: BorderRadius.circular(15),
         showAfter: Duration(days: 999),
         controller: searchBarController,
+        isScrollControlled: true,
         onQueryChanged: (query) {
           // Call your model, bloc, controller here.
           searchController.searchKey.value = query;
@@ -159,6 +159,7 @@ class _HomePageState extends State<HomePage>
             searchBarController.close();
             searchBarController.hide();
             searchController.getSearchList.clear();
+            searchController.loadState.value = LoadState.DONE;
           }
         },
         // Specify a custom transition to be used for
@@ -173,8 +174,14 @@ class _HomePageState extends State<HomePage>
                 color: context.accentColor,
               ),
               onPressed: () {
-                HiveBoxes.searchBox.add(searchController.searchKey.value);
                 searchController.getSearch(true);
+                List<String> searchList = searchController.historyList;
+
+                var key = searchController.searchKey.value;
+                if (!searchList.contains(key) && key.isNotEmpty) {
+                  searchList.add(searchController.searchKey.value);
+                  HiveBoxes.searchBox.put("history", searchList);
+                }
               },
             ),
           ),
@@ -193,9 +200,12 @@ class _HomePageState extends State<HomePage>
           ),
         ],
         builder: (context, transition) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: SearchPage(),
+          return Container(
+            margin: EdgeInsets.symmetric(vertical: 15),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Container(color: context.canvasColor, child: SearchPage()),
+            ),
           );
         },
       );

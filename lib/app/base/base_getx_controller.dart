@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:wan_android_getx/app/local/local_login.dart';
 import 'package:wan_android_getx/const/constants.dart';
 import 'package:wan_android_getx/const/hive_boxes.dart';
 import 'package:wan_android_getx/http/net/dio_new.dart';
@@ -52,7 +53,6 @@ class BaseGetXController extends GetxController {
       success(value);
     }).onError<HttpException>((error, stackTrace) {
       _checkLogin(error);
-      loadState.value = LoadState.FAILURE;
       if (failure != null) {
         failure(error.msg);
       }
@@ -61,7 +61,10 @@ class BaseGetXController extends GetxController {
 
   _checkLogin(HttpException error) {
     if (error.code == -1001) {
-      Get.showCustomSnackbar("请重新登录", title: "登录失效");
+      Get.showCustomSnackbar("请重新登录", title: "获取登录信息失败");
+      var localLogin = Get.find<LocalLogin>();
+      HiveBoxes.loginBox.put("isLogin", false);
+      localLogin.isLogin.value = false;
     }
   }
 }
