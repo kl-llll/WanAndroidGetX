@@ -140,7 +140,8 @@ class _HomePageState extends State<HomePage>
   Widget get buildFloatingSearchBar {
     return Obx(() {
       return FloatingSearchBar(
-        hint: "${String.fromCharCode(128293)}搜索热词:${searchController.hotKey.toString()}",
+        hint:
+            "${String.fromCharCode(128293)}搜索热词:${searchController.hotKey.toString()}",
         transitionDuration: const Duration(milliseconds: 800),
         transitionCurve: Curves.easeInOut,
         physics: const BouncingScrollPhysics(),
@@ -174,6 +175,7 @@ class _HomePageState extends State<HomePage>
                 color: context.accentColor,
               ),
               onPressed: () {
+                FocusScope.of(context).requestFocus(FocusNode());
                 searchController.getSearch(true);
                 List<String> searchList = searchController.historyList;
 

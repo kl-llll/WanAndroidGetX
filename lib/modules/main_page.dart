@@ -24,7 +24,7 @@ class _MainPage1State extends State<MainPage> {
     Icon(CupertinoIcons.home, size: 20),
     Icon(CupertinoIcons.book, size: 20),
     Icon(CupertinoIcons.circle_grid_3x3, size: 20),
-    Icon(IconData(0xe64f, fontFamily: "IconFont"), size: 23),
+    const Icon(IconData(0xe64f, fontFamily: "IconFont"), size: 23),
     Icon(CupertinoIcons.person, size: 20),
   ];
 

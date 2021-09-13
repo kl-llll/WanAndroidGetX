@@ -26,8 +26,7 @@ class LoginPage extends StatelessWidget {
               color: context.canvasColor,
               height: 250.h,
               child: Padding(
-                padding:
-                    EdgeInsets.symmetric(vertical: 10.h, horizontal: 30.w),
+                padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 30.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -94,6 +93,7 @@ class LoginPage extends StatelessWidget {
       height: 50.h,
       child: TextField(
         controller: controller,
+        obscureText: labelText == "密码" ? true : false,
         decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           labelText: labelText,
