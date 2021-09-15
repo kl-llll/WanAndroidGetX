@@ -1,5 +1,4 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:wan_android_getx/bean/history_search_entity.dart';
 
 const String boxPrefix = 'wanAndroid';
 

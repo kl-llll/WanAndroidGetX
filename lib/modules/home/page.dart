@@ -9,7 +9,6 @@ import 'package:wan_android_getx/modules/home/question/page.dart';
 import 'package:wan_android_getx/modules/home/square/page.dart';
 import 'package:wan_android_getx/modules/search/controller.dart';
 import 'package:wan_android_getx/modules/search/page.dart';
-import 'package:wan_android_getx/bean/history_search_entity.dart';
 
 class HomePage extends StatefulWidget {
   @override
