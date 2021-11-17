@@ -186,8 +186,6 @@ class MinePage extends StatelessWidget {
 
   Padding _buildUserName(BuildContext context) {
 
-    Log.wtf(controller.localLogin.isLogin.value);
-
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 15.h),
       child: Neumorphic(

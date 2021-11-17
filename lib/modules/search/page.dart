@@ -21,9 +21,6 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      Log.wtf(controller.historyList);
-      Log.wtf(controller.loadState.value);
-
       if (controller.loadState.value != LoadState.SUCCESS) {
         return historySearch();
       } else {

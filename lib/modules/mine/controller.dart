@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:get/get.dart';
 import 'package:wan_android_getx/api/mine_api.dart';
@@ -39,7 +40,7 @@ class MineController extends BaseGetXController {
     await handlerStateRequest(_api.getIntegral, (value) {
       loadState.value = LoadState.SUCCESS;
       _integralEntity.value = IntegralEntity().fromJson(value);
-    });
+    },isLoading: true);
   }
 
   @override

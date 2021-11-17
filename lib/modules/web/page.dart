@@ -44,7 +44,7 @@ class WebPage extends StatelessWidget {
           backgroundColor: context.canvasColor,
           leading: Container(
             padding: EdgeInsets.all(12.r),
-            width: 55.r,
+            // width: 55.r,
             child: AppBarIcon(
               assetName: R.ASSETS_IMAGES_BACK_SVG,
               onTap: () => Get.back(),
@@ -66,7 +66,7 @@ class WebPage extends StatelessWidget {
           }),
           actions: [
             Container(
-              width: 55.r,
+              width: 500.r,
               padding: EdgeInsets.all(12.r),
               child:
                   AppBarIcon(assetName: R.ASSETS_IMAGES_MORE_SVG, onTap: () {}),

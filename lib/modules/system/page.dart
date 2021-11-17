@@ -33,7 +33,6 @@ class SystemPage extends StatelessWidget {
                 children: controller.getTreeList
                     .asMap()
                     .map((key, value) {
-                      SystemTreeEntity data = controller.getTreeList[key];
                       return MapEntry(
                           key,
                           Padding(
@@ -44,7 +43,7 @@ class SystemPage extends StatelessWidget {
                               baseColor: Get.theme.primaryColor,
                               initialElevation: 1.0,
                               leading: leadingIcon(key),
-                              title: titleText(data.name.toString()),
+                              title: titleText(value.name.toString()),
                               onExpansionChanged: (isOpen) {
                                 controller.changePosition(isOpen, key);
                               },
@@ -55,7 +54,7 @@ class SystemPage extends StatelessWidget {
                                 ),
                                 Wrap(
                                   alignment: WrapAlignment.start,
-                                  children: data.children!.map((e) {
+                                  children: value.children!.map((e) {
                                     return GestureDetector(
                                       onTap: () => Get.toNamed(
                                           Routes.SYSTEM_LIST,
