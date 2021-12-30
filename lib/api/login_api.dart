@@ -9,7 +9,7 @@ class LoginApi {
 
   login(String username, String password) async =>
       await _dio.post(_login,
-          queryParameters: {"username": "718326384@qq.com", "password": "wan12138"});
+          queryParameters: {"username": username, "password": password});
 
 
 }
